@@ -1,0 +1,46 @@
+@charset "utf-8";
+.titulos_css_login_biblos {
+	font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-family: "Times New Roman", Times, serif;
+}
+.links_css_login_biblos {
+font-family: Arial, Helvetica, sans-serif; color: #0000FF; font-size: 14px; 
+}
+.links_css_biblos {font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #0000FF;
+}
+
+.nombre_usuario_logeado_css_biblos {
+font-size: 14px;
+	color: #0000FF;
+}
+.titulos_css_biblos {
+font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-family: "Times New Roman", Times, serif;
+}
+
+table{
+	background-color:#C63;
+	border-color:#C00;
+}
+#filaExtra{
+	background-color:#006;
+}
+#login{
+	position: absolute;
+
+
+	margin-left::400px;
+	right: 18px;
+	top: 19px;
+	height: 76px;
+}
+body{
+	background-color:#F00;
+	
+}

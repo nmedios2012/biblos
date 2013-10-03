@@ -1,0 +1,47 @@
+<html>
+	<head>
+	</head>
+	<title>BIBLOS - BAJA DE SOCIOS</title>
+	<body>
+	<p>ADMINISTRACI&Oacute;N DE SOCIOS - BAJA DE SOCIOS</p>
+		<form name="input" action="baja_socios.php" method="post">
+		<p>Documento <input type="text" name="documento" size="11" maxlength="11">
+		&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" value="Buscar"></p>
+		<p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
+		&nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15"></p>
+		<p>Fecha de baja &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
+			  <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+			  </select>
+		   &nbsp;&nbsp;Mes <select name="mes" id="mes">
+			  <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+			  </select>
+		   &nbsp;&nbsp;A&ntilde;o <select name="anio" id="anio">
+			  <option>2013</option>
+              <option>2012</option>
+              <option>2011</option>
+              <option>2010</option>
+              <option>2009</option>
+              <option>2008</option>
+              <option>2007</option>
+			  </select></p>
+		Estado L&oacute;gico <select name="estado_logico" id="estado_logico">
+			  <option>NO</option>
+			  </select></p>
+		&nbsp;&nbsp; <input type="submit" value="Aceptar"> 
+		&nbsp;&nbsp; <input type="reset" value="Limpiar"> <!--Borra el formulario pero no la base de datos-->
+        &nbsp;&nbsp; <input type="button" value="Cancelar">		
+	    </form>
+	</body>
+</html>
