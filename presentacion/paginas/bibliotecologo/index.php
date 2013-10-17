@@ -1,10 +1,10 @@
 <?php
 	session_start();
 	if(!isset($_SESSION["tipo"]))
-		header("Location:../index.php");
+		header("Location:../../index.php");
 	else
-		if($_SESSION["tipo"]!="administrador")
-			header("Location:../index.php");
+		if($_SESSION["tipo"]!="bibliotecologo")
+			header("Location:../../index.php");
 ?>
 
 <!doctype html>
@@ -15,20 +15,23 @@
 <link 
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<link href="../css/admin.css" rel="stylesheet" type="text/css">
+<link href="../../css/admin.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/bibliotecologo.js"></script>
+
 </head>
 
 <body>
 
 <div class="container">
   <header>
-    <a href="#"><img src="" alt="Insertar logotipo aquí" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
+    <a href="#"><img src="../../../presentacion/imagenes/logo.jpg" alt="" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
   </header>
   <div class="sidebar1">
     <ul class="nav">
-        <li><a href="administrador.php?pag=a_s">Alta socio</a></li>
-        <li><a href="administrador.php?pag=b_s">Baja socio</a></li>
-        <li><a href="../_php/desloguearse.php">Cerrar session</a></li>
+        <li><a href="index.php?pag=a_s">Alta socio</a></li>
+        <li><a href="index.php?pag=b_s">Baja socio</a></li>
+        <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Vínculo cuatro</a></li>
     </ul>
     <aside>
@@ -40,7 +43,7 @@
     <?php
 	if(isset($_GET["pag"])){
 		
-			include($_GET["pag"].".html");
+			include($_GET["pag"].".php");
 
 
 	}

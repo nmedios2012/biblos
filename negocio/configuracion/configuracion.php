@@ -11,8 +11,10 @@
 
         define("USUARIO_ADMINISTRATIVO","administrador");
         define("PASS_ADMINISTRATIVO","administrador");
-        
-        
+        define("USUARIO_BIBLIOTECOLOGO","bibliotecologo");
+        define("PASS_BIBLIOTECOLOGO","bibliotecologo");
+        define("USUARIO_PASANTE","pasante");
+        define("PASS_PASANTE","pasante");
         
         define("USUARIO_SALA","usuari");
 ?>
