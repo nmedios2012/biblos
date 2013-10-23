@@ -15,14 +15,35 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
-    public function agregarEjemplar($titulo,$editorial,$autores,$isbn,$anio,$estado,$materia,$tema,$idioma,$id_ejemplar,$cod_ejem){
-        $this->consultar("INSERT INTO ejemplar_material (titulo,editorial,autores,isbn,anio,estado,
-                                materia,tema,idioma,id_ejemplar,codigo_ejem)
-                                VALUES ($ci,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
-                                ");
-        
+    public function agregarLibro($cod_mat,$titulo,$isbn,$edicion,$anio,$com_gral,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,fecha_alta,estado_logico) VALUES ($cod_mat,$isbn,             				$edicion,'$fec_alta','$est_log')");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 				($cod_mat,'$titulo',$anio,'$com_gral','$fec_alta','$est_log')");
+       
         return true;
         
+    }
+    public function agregarRevista($cod_mat,$titulo,$nro_revista,$anio,$com_gral,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO revista (codigo_material,numrevista,estado_logico) VALUES ($cod_mat,$nro_revista,'$est_log')");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 			($cod_mat,'$titulo',$anio,'$com_gral','$fec_alta','$est_log')");
+       
+        return true;
+        
+    }
+    public function agregarFotocopia($cod_mat,$titulo,$cant_pag,$anio,$com_gral,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO fotocopia (codigo_material,cantidadpag,estado_logico) VALUES ($cod_mat,$cant_pag,$est_log)");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES
+			($cod_mat,'$titulo',$anio,'$com_gral','$fec_alta','$est_log')");
+
+        return true;
+    
+    }
+    public function agregarOtro($cod_mat,$titulo,$cod_otro,$tipo,$anio,$com_gral,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO otro (codigo_material,codigo_otro,tipo,estado_logico) VALUES 					  				($cod_mat,$cod_otro,'$tipo','$est_log')");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES
+                        ($cod_mat,'$titulo',$anio,'$com_gral','$fec_alta','$est_log')");
+
+        return true;
+    
     }
     public function buscar($ci)
     {

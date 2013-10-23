@@ -46,9 +46,8 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     &nbsp; Apellido : <label><?php echo $apellido; ?></label>
     <br />
     &nbsp;&nbsp; <input type="submit" value="Editar"> 
-<form name="eliminar" method="post" action="../../../negocio/bibliotecologo/eliminado.php"
-      <input type="hidden" name="ci" value="<?php echo $ci; ?>" />
-    &nbsp;&nbsp; <input type="submit" <?php echo $activar; ?> value="Eliminar"> <!--Borra el formulario pero no la base de datos-->
+<form name="eliminar" method="post" action="../../../negocio/bibliotecologo/eliminado.php">
+      <input type="hidden" name="documento" value="<?php echo $ci; ?>" />
+    &nbsp;&nbsp; <input type="submit" <?php echo $activar; ?> value="Eliminar"/> 
 </form>
-&nbsp;&nbsp; <input type="button" value="Cancelar">		
-
+&nbsp;&nbsp; <input type="button" value="Cancelar">

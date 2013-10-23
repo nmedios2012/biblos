@@ -31,6 +31,10 @@
     <ul class="nav">
         <li><a href="index.php?pag=a_s">Alta socio</a></li>
         <li><a href="index.php?pag=b_s">Baja socio</a></li>
+        <li><a href="index.php?pag=a_l">Alta libros</a></li>
+        <li><a href="index.php?pag=a_r">Alta revistas</a></li>
+        <li><a href="index.php?pag=a_f">Alta fotocopias</a></li>
+        <li><a href="index.php?pag=a_o">Alta otros</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Vínculo cuatro</a></li>
     </ul>
