@@ -45,6 +45,15 @@ class Bibliotecologo extends Conexion{
         return true;
     
     }
+    public function agregarEditorial($cod_emp,$nom_edit,$id_rol,$rol,$id_pais,$ciudad,$calle,$nro_puerta,
+                $nro_apto,$tel1_emp,$tel2_emp,$interno,$mail,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO  (estado_logico) VALUES 					  				($cod_mat,$cod_otro,'$tipo','$est_log')");
+        $this->consultar("INSERT INTO  (fecha_alta,estado_logico) VALUES
+                        ('$fec_alta','$est_log')");
+
+        return true;
+    
+    }
     public function buscar($ci)
     {
         $stmt=$this->consultar("SELECT ci,nombre, apellido FROM usuario WHERE ci='$ci' AND estado_logico='si'");
