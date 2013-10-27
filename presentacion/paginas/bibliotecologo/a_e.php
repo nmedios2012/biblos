@@ -1,18 +1,18 @@
 <p>ADMINISTRACI&Oacute;N DE EDITORIALES Y EMPRESAS - ALTA DE EDITORIALES Y EMPRESAS</p>
 		<form name="input" action="../../../negocio/bibliotecologo/altaeditorial.php" method="post">
-                <p>C&oacute;digo Editorial/Empresa <input type="text" name="cod_edit" size="15" maxlength="15">
-		&nbsp; Editorial/Empresa <input type="text" name="edi_emp" size="20" maxlength="20"></p></br>
+                <p>C&oacute;digo Edit/Emp <input type="text" name="cod_edit" size="15" maxlength="15">
+		&nbsp; Edit/Emp <input type="text" name="edi_emp" size="20" maxlength="20"></p></br>
 		<p>Nro Rol <input type="text" name="nro_rol" size="10" maxlength="10">
                 &nbsp;&nbsp;Rol <input type="text" name="rol" size="15" maxlength="15"></p></br>
-		<p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60">
-		&nbsp; Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4">
+		<p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60"></p></br>
+		<p>Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4">
 		&nbsp; Nro Apartamento <input type="text" name="nro_apto" size="4" maxlength="4"></p></br>
 		<p>Nro Pa&iacute;s <input type="text" name="block" size="3" maxlength="3">
 		&nbsp;Ciudad <input type="text" name="ciudad" size="20" maxlength="20"></p></br>
 		<p>Tel&eacute;fono 1 <input type="text" name="telefono_1" size="11" maxlength="11">
                 &nbsp;Tel&eacute;fono 2 <input type="text" name="telefono_2" size="11" maxlength="11">
-		&nbsp; Interno <input type="text" name="interno" size="5" maxlength="5">
-		&nbsp; Mail <input type="text" name="mail" size="30" maxlength="30"></p><br/>
+		&nbsp; Interno <input type="text" name="interno" size="5" maxlength="5"></p></br>
+		<p>Mail <input type="text" name="mail" size="30" maxlength="30"></p><br/>
 		<p>Fecha de alta &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
 			  <option></option>
               <option>1</option>
@@ -90,6 +90,6 @@
               <option>1990</option>
 			  </select></p></br>
 		
-		<p><input type="submit" value="Aceptar"></p> 
+		<p><input type="submit" value="Aceptar"> 
 		&nbsp;&nbsp;<input type="reset" value="Limpiar"> <!--Borra el formulario pero no la base de datos-->
 		</form>
