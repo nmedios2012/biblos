@@ -1,7 +1,7 @@
 <?php
 
 class Bibliotecologo extends Conexion{
-   
+    
     public function __construct(){
         parent::__construct(SERVIDOR,PUERTO,USUARIO_BIBLIOTECOLOGO,PASS_BIBLIOTECOLOGO);
     }
@@ -15,15 +15,18 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
-    public function agregarLibro($cod_mat,$titulo,$isbn,$edicion,$anio,$com_gral,$fec_alta,$est_log){
-        $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,fecha_alta,estado_logico) VALUES 
-                         ($cod_mat,$isbn,$edicion,'$fec_alta','$est_log')");
-        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 
-                         ($cod_mat,'$titulo',$anio,'$com_gral','$fec_alta','$est_log')");
-       
+    public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
+        $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
+                         ($cod_mat,$isbn,$edicion,'$est_log')");
         return true;
-        
     }
+    
+    public function agregarMaterial($cod_mat,$titulo,$anio,$com_gral,$est_log){    
+        $this->enviar1("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 
+                         ($cod_mat,'$titulo',$anio,'$com_gral','27/12/2013','$est_log')");
+        return true;
+    }
+   
     public function agregarRevista($cod_mat,$titulo,$nro_revista,$anio,$com_gral,$fec_alta,$est_log){
         $this->consultar("INSERT INTO revista (codigo_material,numrevista,estado_logico) VALUES 
                          ($cod_mat,$nro_revista,'$est_log')");
