@@ -2,7 +2,7 @@
 	<p>ADMINISTRACI&Oacute;N DE MATERIALES - ALTA DE LIBROS</p>
 		<form name="input" action="../../../negocio/bibliotecologo/altalibro.php" method="post">
                     <p>C&oacute;digo Material <input type="text" name="cod_mat" size="10" maxlength="10">
-		&nbsp; Titulo <input type="text" name="nombre" size="30" maxlength="30"></p></br>
+		&nbsp; Titulo <input type="text" name="titulo" size="30" maxlength="30"></p></br>
                 <p>Autor/es <select name="autor" id="autor">
 			  <option>Seleccione autor</option>
                 
@@ -16,7 +16,7 @@
 
                 
 			  </select></p></br> 
-		<p>Comentario Gral <input type="text" name="comentario_gral" size="30" maxlength="30"></p></br>
+		<p>Comentario Gral <input type="text" name="com_gral" size="30" maxlength="30"></p></br>
 		<p>Fecha de alta &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
 			  <option></option>
               <option>1</option>
@@ -88,7 +88,7 @@
               <option>1996</option>
 			  </select></p>
 		
-		&nbsp;&nbsp; Estado L&oacute;gico <select name="estado_logico" id="estado_logico">
+		&nbsp;&nbsp; Estado L&oacute;gico <select name="est_log" id="est_log">
 		      <option>SI</option>
 			  </select></p>
 		</br>

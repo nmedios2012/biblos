@@ -5,7 +5,8 @@
         include "../../persistencia/Bibliotecologo.php";
         $admin=new Bibliotecologo();
         extract($_POST);
-        $admin->agregarRevista($cod_mat,$titulo,$nro_revista,$anio,$com_gral,$fec_alta,$est_log);
+        $admin->agregarRevista($cod_mat,$nro_revista,$est_log);
+        $admin->agregarMaterial($cod_mat,$titulo,$anio,$com_gral,$est_log);
         header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_r")
         
 ?>

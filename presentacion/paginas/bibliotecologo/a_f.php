@@ -1,8 +1,8 @@
 <p>ADMINISTRACI&Oacute;N DE MATERIALES - ALTA DE FOTOCOPIAS</p>
 		<form name="input" action="../../../negocio/bibliotecologo/altafotocopia.php" method="post">
                 <p>C&oacute;digo Material <input type="text" name="cod_mat" size="10" maxlength="10">
-		&nbsp; Titulo <input type="text" name="nombre" size="30" maxlength="30"></p></br>
-                <p>Cantidad de p&aacute;ginas <input type="text" name="paginas" size="6" maxlength="6"></p></br>
+		&nbsp; Titulo <input type="text" name="titulo" size="30" maxlength="30"></p></br>
+                <p>Cantidad de p&aacute;ginas <input type="text" name="cant_pag" size="6" maxlength="6"></p></br>
 		&nbsp; A&ntilde;o <input type="text" name="anio" size="5" maxlength="5"></p></br>
                 <p>Profesor <select name="profe" id="profe">
 
@@ -10,7 +10,7 @@
 
                 
 			  </select></p></br> 
-		<p>Comentario Gral <input type="text" name="comentario_gral" size="30" maxlength="30"></p></br>
+		<p>Comentario Gral <input type="text" name="com_gral" size="30" maxlength="30"></p></br>
 		<p>Fecha de alta &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
 			  <option></option>
               <option>1</option>
@@ -60,7 +60,7 @@
               <option>11</option>
               <option>12</option>
 			  </select>
-		   &nbsp;&nbsp;A&ntilde;o <select name="anio" id="anio">
+		   &nbsp;&nbsp;A&ntilde;o <select name="anios" id="anios">
 			  <option></option>
               <option>2013</option>
               <option>2012</option>
@@ -82,7 +82,7 @@
               <option>1996</option>
 			  </select></p>
 		
-		&nbsp;&nbsp; Estado L&oacute;gico <select name="estado_logico" id="estado_logico">
+		&nbsp;&nbsp; Estado L&oacute;gico <select name="est_log" id="est_log">
 		      <option>SI</option>
 			  </select></p>
 		</br>

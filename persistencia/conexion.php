@@ -17,7 +17,6 @@
             return $this->conexion->query($sql);
             
         }
-        
        
     }
 

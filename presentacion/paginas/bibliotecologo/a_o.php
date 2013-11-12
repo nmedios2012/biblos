@@ -1,8 +1,8 @@
 <p>ADMINISTRACI&Oacute;N DE MATERIALES - ALTA DE OTROS TIPOS DE MATERIALES</p>
 		<form name="input" action="../../../negocio/bibliotecologo/altaotro.php" method="post">
                 <p>C&oacute;digo Material <input type="text" name="cod_mat" size="10" maxlength="10">
-		<p>C&oacute;digo Tipo Material <input type="text" name="cod_mat" size="10" maxlength="10"></p></br>
-                <p>T&iacute;tulo <input type="text" name="nombre" size="30" maxlength="30">
+		<p>C&oacute;digo Tipo Material <input type="text" name="cod_otro" size="10" maxlength="10"></p></br>
+                <p>T&iacute;tulo <input type="text" name="titulo" size="30" maxlength="30">
                 <p>Tipo de material <select name="tipo" id="tipo">
 
 			  <option>Seleccione tipo</option>
@@ -11,7 +11,7 @@
                 
 			  </select>
                 &nbsp; A&ntilde;o <input type="text" name="anio" size="5" maxlength="5"></p></br>
-                <p>Comentario Gral <input type="text" name="comentario_gral" size="30" maxlength="30"></p></br>
+                <p>Comentario Gral <input type="text" name="com_gral" size="30" maxlength="30"></p></br>
 		<p>Fecha de alta &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
 			  <option></option>
               <option>1</option>
@@ -61,7 +61,7 @@
               <option>11</option>
               <option>12</option>
 			  </select>
-		   &nbsp;&nbsp;A&ntilde;o <select name="anio" id="anio">
+		   &nbsp;&nbsp;A&ntilde;o <select name="anios" id="anios">
 			  <option></option>
               <option>2013</option>
               <option>2012</option>
@@ -83,7 +83,7 @@
               <option>1996</option>
 			  </select></p>
 		
-		&nbsp;&nbsp; Estado L&oacute;gico <select name="estado_logico" id="estado_logico">
+		&nbsp;&nbsp; Estado L&oacute;gico <select name="est_log" id="est_log">
 		      <option>SI</option>
 			  </select></p>
 		</br>
