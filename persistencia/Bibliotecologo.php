@@ -15,6 +15,7 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
+    
     public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
                          ($cod_mat,$isbn,$edicion,'$est_log')");
@@ -51,8 +52,8 @@ class Bibliotecologo extends Conexion{
     public function agregarEditorial($cod_emp,$nom_edit,$id_pais,$ciudad,$calle,$nro_puerta,
                 $nro_apto,$mail,$est_log){
         $this->consultar("INSERT INTO editorial_empresa (codigo_empresa,nombre,id_pais,ciudad,calle,numero_puerta,
-               numero_apartamento,e_mail,fecha_alta,estado_logico) VALUES ($cod_emp,'$nom_edit',$id_pais,
-               '$ciudad','$calle','$nro_puerta','$nro_apto','$mail','$fec_alta','$est_log')");
+                          numero_apartamento,e_mail,fecha_alta,estado_logico) VALUES ($cod_emp,'$nom_edit',$id_pais,
+               '$ciudad','$calle','$nro_puerta','$nro_apto','$mail','12/12/13','$est_log')");
         return true;
       
     }
