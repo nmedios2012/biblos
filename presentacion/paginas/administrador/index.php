@@ -30,7 +30,7 @@
   <div class="sidebar1">
     <ul class="nav">
         <li><a href="index.php?pag=a_s">Alta socio</a></li>
-        <li><a href="index.php?pag=b_s">Baja socio</a></li>
+        <li><a href="index.php?pag=b_s">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Vínculo cuatro</a></li>
     </ul>

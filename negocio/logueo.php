@@ -9,7 +9,6 @@
 	if($usuario!=NULL){
 		$_SESSION["tipo"]=$usuario;
 		header("location:".RUTA."presentacion/paginas/$usuario/index.php");
-
 	}
 	else{
                 $_SESSION["mensajelogueo"]="Usuario y/o contraseña equivocada";

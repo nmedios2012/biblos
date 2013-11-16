@@ -1,7 +1,13 @@
 $(document).ready(inicializarEventos);
 
 function inicializarEventos(){
+    $("editar").click(editar_pro);
     
+}
+
+function editar_pro(){
+    
+    $(location).attr('href',"index.php?pag=e_s");
 }
 
 function controlar(){

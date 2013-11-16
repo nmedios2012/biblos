@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <h1>HOLA MUNDO</h1>
+    <h1></h1>
 <div id="login">
         <table id="Principal">
           <tr>
