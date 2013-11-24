@@ -50,10 +50,10 @@ class Bibliotecologo extends Conexion{
     }
     
     public function agregarEditorial($cod_emp,$nom_edit,$id_pais,$ciudad,$calle,$nro_puerta,
-                $nro_apto,$mail,$est_log){
+                                        $nro_apto,$mail,$est_log){
         $this->consultar("INSERT INTO editorial_empresa (codigo_empresa,nombre,id_pais,ciudad,calle,numero_puerta,
                           numero_apartamento,e_mail,fecha_alta,estado_logico) VALUES ($cod_emp,'$nom_edit',$id_pais,
-               '$ciudad','$calle','$nro_puerta','$nro_apto','$mail','12/12/13','$est_log')");
+                          '$ciudad','$calle','$nro_puerta','$nro_apto','$mail','12/12/13','$est_log')");
         return true;
       
     }
@@ -65,9 +65,17 @@ class Bibliotecologo extends Conexion{
         
     }
     
-    public function agregarRol($cod_emp,$rol,$id_rol,$est_log){
+    public function agregarRol($cod_emp,$nombre,$id_rol,$est_log){
         $this->consultar("INSERT INTO rol_empresa (codigo_empresa,nombre,id_rol,estado_logico) VALUES
-                          ($cod_emp,'$rol',$id_rol,'$est_log')");
+                          ($cod_emp,'$nombre',$id_rol,'$est_log')");
+
+        return true;
+    
+    }
+    
+     public function agregarPais($pais,$id_pais,$est_log){
+        $this->consultar("INSERT INTO pais (nombre,id_pais,estado_logico) VALUES
+                          ('$pais',$id_pais,'$est_log')");
 
         return true;
     
