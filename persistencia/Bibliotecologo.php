@@ -65,9 +65,9 @@ class Bibliotecologo extends Conexion{
         
     }
     
-    public function agregarRol($cod_emp,$nombre,$id_rol,$est_log){
-        $this->consultar("INSERT INTO rol_empresa (codigo_empresa,nombre,id_rol,estado_logico) VALUES
-                          ($cod_emp,'$nombre',$id_rol,'$est_log')");
+    public function agregarRol($nombre,$id_rol,$cod_emp,$est_log){
+        $this->consultar("INSERT INTO rol_empresa (nombre,id_rol,codigo_empresa,estado_logico) VALUES
+                          ('$nombre',$id_rol,$cod_emp,'$est_log')");
 
         return true;
     
@@ -76,6 +76,22 @@ class Bibliotecologo extends Conexion{
      public function agregarPais($pais,$id_pais,$est_log){
         $this->consultar("INSERT INTO pais (nombre,id_pais,estado_logico) VALUES
                           ('$pais',$id_pais,'$est_log')");
+
+        return true;
+    
+    }
+    
+    public function agregarTema($cod_tema,$nom_tema,$est_log){
+        $this->consultar("INSERT INTO tema (codigo_tema,nombre,estado_logico) VALUES
+                          ($cod_tema,'$nom_tema','$est_log')");
+
+        return true;
+    
+    }
+    
+    public function agregarEspecializacion($cod_tema,$cod_esp,$nom_esp,$est_log){
+        $this->consultar("INSERT INTO especializacion (codigo_es,codigo_tema,nombre,estado_logico) VALUES
+                          ($cod_esp,$cod_tema,'$nom_esp','$est_log')");
 
         return true;
     
