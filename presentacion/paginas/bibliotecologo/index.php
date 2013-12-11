@@ -38,6 +38,7 @@
         <li><a href="index.php?pag=a_e">Alta editorial/empresa</a></li>
         <li><a href="index.php?pag=a_p">Ingreso de Pa&iacute;s</a></li>
         <li><a href="index.php?pag=a_t_e">Tema/Especializaci&oacute;n</a></li>
+        <li><a href="index.php?pag=a_c">Conservaci&oacute;n</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Vínculo cuatro</a></li>
     </ul>

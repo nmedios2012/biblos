@@ -97,6 +97,22 @@ class Bibliotecologo extends Conexion{
     
     }
     
+    public function agregarConservacion($cod_cnsv,$nom_cnsv,$est_log){
+        $this->consultar("INSERT INTO conservacion (codigo_conservacion,nombre,estado_logico) VALUES
+                          ($cod_cnsv,'$nom_cnsv','$est_log')");
+
+        return true;
+    
+    }
+    
+    public function agregarPosterior($cod_cnsv,$nom_pst,$cod_pst,$est_log){
+        $this->consultar("INSERT INTO conservacion_posterior (codigo_conservacion,nombre_post,
+                         codigo_post,estado_logico) VALUES ($cod_cnsv,'$nom_pst',$cod_pst,'$est_log')");
+
+        return true;
+    
+    }
+    
     public function buscar($ci)
     {
         $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
