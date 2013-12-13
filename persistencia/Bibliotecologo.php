@@ -109,7 +109,7 @@ class Bibliotecologo extends Conexion{
         $this->consultar("INSERT INTO conservacion_posterior (codigo_conservacion,nombre_post,
                          codigo_post,estado_logico) VALUES ($cod_cnsv,'$nom_pst',$cod_pst,'$est_log')");
 
-        return true;
+        return true; //Esta funcion no guarda. Ya van dos y quedará para atrás//
     
     }
     
