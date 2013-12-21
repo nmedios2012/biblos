@@ -16,5 +16,6 @@
         define("USUARIO_PASANTE","pasante");
         define("PASS_PASANTE","pasante");
         
-        define("USUARIO_SALA","usuari");
+        define("USUARIO_SALA","usuarisala");
+        define("PASS_USALA","usuariosala");
 ?>

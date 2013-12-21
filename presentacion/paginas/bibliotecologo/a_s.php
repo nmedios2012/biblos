@@ -1,7 +1,7 @@
 
 	<p>ADMINISTRACI&Oacute;N DE SOCIOS - ALTA DE SOCIOS</p>
 		<form name="input" action="../../../negocio/bibliotecologo/altausuario.php" method="post">
-                    <p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
+                <p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
 		&nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15"></p>
 		<p>Sexo <input type="radio" name="sexo" value="hombre">Hombre 
 		&nbsp; <input type="radio" name="sexo" value="mujer">Mujer</p>
