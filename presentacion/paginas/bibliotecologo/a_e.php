@@ -3,7 +3,7 @@
                 <p>C&oacute;digo Edit/Emp <input type="text" name="cod_emp" size="15" maxlength="15">
 		&nbsp; Edit/Emp <input type="text" name="nom_edit" size="20" maxlength="20"></p></br>
 		<p>Nro Rol <input type="text" name="id_rol" size="10" maxlength="10">
-                &nbsp;&nbsp;Rol <input type="text" name="rol" size="15" maxlength="15"></p></br>
+                &nbsp;&nbsp;Rol <input type="text" name="nombre" size="15" maxlength="15"></p></br>
 		<p>Direcci&oacute;n <input type="text" name="calle" size="50" maxlength="60"></p></br>
 		<p>Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4">
 		&nbsp; Nro Apartamento <input type="text" name="nro_apto" size="4" maxlength="4"></p></br>
