@@ -5,15 +5,15 @@
         include "../imagenes.php";
         include "../../persistencia/Administrador.php";
         $admin=new Administrador();
-        extract($_POST);
+        extract($_POST);//Traer los valores de la variable
         $foto=$_FILES["foto"];
         $insertado=false;
-        if($foto!=NULL){
-            $array=Array("jpg","gif","png","bmp");
-            $archivo=new uploadImagen($foto,$array,1048576);
-            if($archivo->pesoByte()){
-                if($archivo->validarExtension()){
-                    if($archivo->moverArchivo("../../presentacion/imagenes/fotousuario/", $documento .".jpg")){
+        if($foto!=NULL){//Controlamos si el usuario subio foto o no
+            $array=Array("jpg","gif","png","bmp","jpeg");//Autorizacion de los formatos de imagen
+            $archivo=new uploadImagen($foto,$array,1048576);//Creamos el objeto que administrara nuestra foto
+            if($archivo->pesoByte()){//Dice si los mb de la imagen esta dentro de los intervalos propuesto
+                if($archivo->validarExtension()){//
+                    if($archivo->moverArchivo("../../presentacion/imagenes/fotousuario/", $documento .".jpg")){//se mueve la imagen al servidor
                         $insertado=true;
                     }
                     else{
@@ -33,11 +33,19 @@
         }
         
         if($insertado){
-            $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);
+            if(isset($telefono)){//si ingreso telefono en el formulario alta usuario
+                $admin->insertarTelefono($ci, $telefono);//Se guarda en la tabla de telefonos
+            }
+            if(isset($celular)){//si ingreso celular en el formulario alta usuario
+                $admin->insertarTelefono($ci, $celular);//Se guarda en la tabla de telefonos
+            }
+            $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             $_SESSION["mensaje"]="Se ingreso correctamente";
         }
-        
-       header("Location: ../../presentacion/paginas/administrador/index.php?pag=a_s")
+        else{
+            echo $_SESSION["mensaje"];
+        }
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=a_s")//Se vuelve a la pagina de alta
         
 ?>
 

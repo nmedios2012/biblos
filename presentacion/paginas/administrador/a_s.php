@@ -16,7 +16,7 @@
             <option>Canelones</option>
             <option>Florida</option>
             <option>Salto</option>
-            <option>Durazno</option>
+        <option>Durazno</option>
         </select>
         &nbsp; Zona <select name="zona" id="zona">
             <option>Nueva</option>

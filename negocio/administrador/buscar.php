@@ -6,9 +6,9 @@
         include "../../persistencia/Administrador.php";
         $admin=new Administrador();
         extract($_POST);
-        $resultado=$admin->buscar($documento);
-        $_SESSION["resultado"]= $resultado;
+        $resultado=$admin->buscar($documento);//Devuelve un usuario del documento dado. Sino existe devuelve null
+        $_SESSION["resultado"]= $resultado;//El resultado se guarda en una session
         
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=b_s")
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=b_s")//vuelve a la pagina de busqueda
         
 ?>

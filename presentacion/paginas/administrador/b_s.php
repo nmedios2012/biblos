@@ -3,6 +3,9 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
     extract($_SESSION["resultado"]);
     $_SESSION["editar"]=$_SESSION["resultado"];
+    //$mensaje=$_SESSION["mensaje"];
+    $mensaje="";
+   
     unset($_SESSION["resultado"]);
     $activar = "";
 } else {
@@ -10,6 +13,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $apellido = "";
     $ci = "";
     $activar = " disabled='disabled' ";
+    $mensaje="";
 }
 ?>
 <script type="text/javascript">
@@ -57,4 +61,6 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     &nbsp;&nbsp; <input type="submit" <?php echo $activar; ?> value="Eliminar"/> 
 </form>
 &nbsp;&nbsp; <input type="button" value="Cancelar">		
-
+<?php
+    echo $mensaje;
+?>

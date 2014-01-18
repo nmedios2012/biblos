@@ -8,8 +8,8 @@ if (isset($_SESSION["editar"]) && $_SESSION["editar"] != NULL) {
 
 ?>
 <p>ADMINISTRACI&Oacute;N DE SOCIOS - EDITAR DE SOCIOS</p>
-<form name="input" action="../../../negocio/administrador/altausuario.php" enctype="multipart/form-data" method="post">
-    <p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
+<form name="input" action="../../../negocio/administrador/editarusuario.php" enctype="multipart/form-data" method="post">
+    <p>Nombre <input type="text" name="nombre" size="15" maxlength="15" value="<?php echo $nombre; ?>">
         &nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15" value="<?php echo $apellido; ?>"></p>
 
     <p>Documento <input type="text" name="documento" size="11" maxlength="11"value="<?php echo $ci; ?>"></p></br>
@@ -44,6 +44,7 @@ if (isset($_SESSION["editar"]) && $_SESSION["editar"] != NULL) {
     <?php
         if(isset($_SESSION["mensaje"])){
             $mensaje=$_SESSION["mensaje"];
+            unset($_SESSION["mensaje"]);
         }
         
     ?>

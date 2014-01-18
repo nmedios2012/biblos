@@ -2,7 +2,7 @@
 
 class Bibliotecologo extends Conexion{
     
-    public function __construct(){
+    public function __construct(){//El constructor del objeto biblotecologo
         parent::__construct(SERVIDOR,PUERTO,USUARIO_BIBLIOTECOLOGO,PASS_BIBLIOTECOLOGO);
     }
     
@@ -15,6 +15,7 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
+    
     
     public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
