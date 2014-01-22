@@ -33,11 +33,11 @@
         <li><a href="index.php?pag=b_s">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoUsuario.php">Listado Socio</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
-        <li><a href="#">Vínculo cuatro</a></li>
+        <li><a href="#">Otro vínculo</a></li>
     </ul>
     <aside>
-      <p> Los vínculos anteriores muestran una estructura de navegación básica que emplea una lista no ordenada con estilo de CSS. Utilícela como punto de partida y modifique las propiedades para lograr el aspecto deseado. Si necesita menús desplegables, créelos empleando un menú de Spry, un widget de menú de Adobe Exchange u otras soluciones de javascript o CSS.</p>
-      <p>Si desea que la navegación se sitúe a lo largo de la parte superior, simplemente mueva ul a la parte superior de la página y vuelva a crear el estilo.</p>
+      <p> </p>
+      <p></p>
     </aside>
   <!-- end .sidebar1 --></div>
   <article class="content">
@@ -54,10 +54,10 @@
   </article>
   <aside>
     <h4>Lateral </h4>
-    <p>Por naturaleza, el color de fondo de cualquier elemento del bloque sólo se muestra a lo largo del contenido. Si desea usar una línea divisoria en lugar de un color, coloque un borde en el lado del bloque .content (pero sólo en el caso de que siempre vaya a tener más contenido).</p>
+    <p></p>
   </aside>
   <footer>
-    <p>Este footer contiene la declaración position:relative; para dar a Internet Explorer 6 hasLayout para footer y provocar que se borre correctamente. Si no es necesario proporcionar compatibilidad con IE6, puede quitarlo.</p>
+    <p></p>
     <address>
       Contenido de dirección
     </address>
