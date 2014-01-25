@@ -50,8 +50,8 @@ class Administrador extends Conexion{
             $i=0;
             foreach ($stmt as $fila){
                $dato=array();
-              echo $fila[1];
-               $dato["ci"]=1;//$fila[0];
+              
+               $dato["ci"]=$fila[0];
                $dato["nombre"]=$fila[1];
                $dato["apellido"]=$fila[2];
                $dato["ciudad"]=$fila[3];

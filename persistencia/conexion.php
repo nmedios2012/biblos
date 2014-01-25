@@ -19,6 +19,10 @@
             return $this->conexion->query($sql);
             
         }
+        
+        public function getConexion(){
+            return $this->conexion;
+        }
        
     }
 
