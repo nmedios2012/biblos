@@ -114,6 +114,13 @@ class Bibliotecologo extends Conexion{
     
     }
     
+    public function agregarSancion($codigo,$tipo_penaliz,$nombre,$descripcion,$est_log){
+        $this->consultar("INSERT INTO penalizaciones (codigo,tipo_penaliz,nombre,descripcion,estado_logico)
+                          VALUES ('$codigo','$tipo_penaliz','$nombre','$descripcion','$est_log')");
+
+        return true;
+    }
+    
     public function buscar($ci)
     {
         $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
