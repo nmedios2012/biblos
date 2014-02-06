@@ -106,17 +106,26 @@ class Bibliotecologo extends Conexion{
     
     }
     
-    public function agregarPosterior($cod_cnsv,$nom_pst,$cod_pst,$est_log){
+    /*public function agregarPosterior($cod_cnsv,$nom_pst,$cod_pst,$est_log){
         $this->consultar("INSERT INTO conservacion_posterior (codigo_conservacion,nombre_post,
                          codigo_post,estado_logico) VALUES ($cod_cnsv,'$nom_pst',$cod_pst,'$est_log')");
 
-        return true; //Esta funcion no guarda. Ya van dos y quedará para atrás//
+        return true;
+      No es necesaria esta función al momento de cargar nuevo tipo de conservación, 
+      debería tomar desde tabla conservación y agregarlo a esta tabla
     
-    }
+    }*/
     
     public function agregarSancion($codigo,$tipo_penaliz,$nombre,$descripcion,$est_log){
         $this->consultar("INSERT INTO penalizaciones (codigo,tipo_penaliz,nombre,descripcion,estado_logico)
                           VALUES ('$codigo','$tipo_penaliz','$nombre','$descripcion','$est_log')");
+
+        return true;
+    }
+    
+    public function agregarEstados($cod_est,$estado_anterior,$est_log){
+        $this->consultar("INSERT INTO estado (cod_est,estado_anterior,estado_logico)
+                          VALUES ('$cod_est','$estado_anterior','$est_log')");
 
         return true;
     }
