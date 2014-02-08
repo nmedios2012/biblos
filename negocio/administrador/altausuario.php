@@ -32,7 +32,7 @@
             $insertado=true;
         }
         
-        if($insertado){
+      
             if(isset($telefono)){//si ingreso telefono en el formulario alta usuario
                 $admin->insertarTelefono($ci, $telefono);//Se guarda en la tabla de telefonos
             }
@@ -41,10 +41,7 @@
             }
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             $_SESSION["mensaje"]="Se ingreso correctamente";
-        }
-        else{
-            echo $_SESSION["mensaje"];
-        }
+
         header("Location: ../../presentacion/paginas/administrador/index.php?pag=a_s")//Se vuelve a la pagina de alta
         
 ?>

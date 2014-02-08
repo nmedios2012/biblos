@@ -34,7 +34,7 @@ class Administrador extends Conexion{
                             numero_apartamento=$nro_apto,
                             numero_puerta=$nro_puerta,
                             e_mail='$email'
-                           WHERE $ci=$ci");
+                           WHERE ci=$ci");
         
         return true;
         
@@ -77,6 +77,33 @@ class Administrador extends Conexion{
         return $respuesta;
     }
 
+    //Se devuelve la lista de usuarios
+    public function listadoMaterial(){
+        $stmt=$this->consultar("SELECT nombre,anio,comentario_general FROM material");
+        $respuesta=array();
+        
+            
+            
+            $i=0;
+            foreach ($stmt as $fila){
+               $dato=array();
+              
+              
+               $dato["nombre"]=$fila[0];
+               $dato["anio"]=$fila[1];
+               $dato["descripcion"]=$fila[2];
+               
+             
+               $respuesta[$i]=$dato;
+               $i++;
+            }
+               
+
+            
+        
+        return $respuesta;
+    }
+    
     //Se busca el usuario a base de la cedula
     public function buscar($ci)
     {

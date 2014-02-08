@@ -32,6 +32,7 @@
         <li><a href="index.php?pag=a_s">Alta socio</a></li>
         <li><a href="index.php?pag=b_s">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoUsuario.php">Listado Socio</a></li>
+        <li><a href="../../../negocio/administrador/listadoMateriales.php">Listado Materiales</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Otro vínculo</a></li>
     </ul>
@@ -44,9 +45,7 @@
     <?php
 	if(isset($_GET["pag"])){
 		
-			include($_GET["pag"].".php");
-
-
+            include($_GET["pag"].".php");
 	}
 
 ?>

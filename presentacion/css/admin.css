@@ -125,3 +125,19 @@ footer {
 header, section, footer, aside, article, figure {
 	display: block;
 }
+
+.nodisponible{
+    font-size:14px;
+
+    background-color:#F00;
+}
+
+.disponibleSala{
+    font-size:16px;
+
+    background-color:yellow;
+}
+.disponibleCasa{
+    font-size:16px;
+    background-color:green;
+}
