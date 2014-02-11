@@ -6,10 +6,10 @@ class Bibliotecologo extends Conexion{
         parent::__construct(SERVIDOR,PUERTO,USUARIO_BIBLIOTECOLOGO,PASS_BIBLIOTECOLOGO);
     }
     
-    public function agregarUsuario($ci,$nombre,$apellido,$ciudad,$calle,$nro_apto,$nro_puerta,$email){
+    public function agregarUsuario($documento,$nombre,$apellido,$ciudad,$calle,$nro_apto,$nro_puerta,$email){
         $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
                                 numero_apartamento,numero_puerta,e_mail,estado_logico)
-                                VALUES ($ci,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
+                                VALUES ($documento,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
                                 ");
                 
         return true;
@@ -104,6 +104,15 @@ class Bibliotecologo extends Conexion{
 
         return true;
     
+    }
+    
+    public function agregarAutor($cod_art,$nom_art,$ape_art,$id_pais,$fec_alta,$est_log){
+        $this->consultar("INSERT INTO artista_autor (codigo_artista,nombre,apellido,fecha_alta,estado_logico)
+                          VALUES ($cod_art,'$nom_art','$ape_art',$id_pais,'$fec_alta,'$est_log')");
+    }
+    
+    public function agregarRol_Autor($id_rol,$rol,$est_log){
+        $this->consultar ("INSERT INTO rol_autor (id_rol,nombre,estado_logico) VALUES ($id_rol,'$rol','$est_log')");
     }
     
     /*public function agregarPosterior($cod_cnsv,$nom_pst,$cod_pst,$est_log){

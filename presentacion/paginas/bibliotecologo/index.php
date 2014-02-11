@@ -41,6 +41,7 @@
         <li><a href="index.php?pag=a_c">Conservaci&oacute;n</a></li>
         <li><a href="index.php?pag=penalizaciones">Sanciones</a></li>
         <li><a href="index.php?pag=estado">Estado de material</a></li>
+        <li><a href="index.php?pag=alta_autores">Artista/Autor</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Otro vínculo</a></li>
     </ul>

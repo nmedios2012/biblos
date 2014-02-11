@@ -6,7 +6,7 @@
 		<p>Sexo <input type="radio" name="sexo" value="hombre">Hombre 
 		&nbsp; <input type="radio" name="sexo" value="mujer">Mujer</p>
 		<p>Documento <input type="text" name="documento" size="11" maxlength="11"></p></br>
-		<p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60">
+		<p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60"></p>
 		&nbsp; Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4">
 		&nbsp; Nro Apartamento <input type="text" name="nro_apto" size="3" maxlength="3">
 		&nbsp; Block <input type="text" name="block" size="3" maxlength="3"></p>
@@ -29,7 +29,7 @@
               <option>Cerro</option>
 			  </select></p><br/>
 		<p>Tel&eacute;fono <input type="text" name="telefono" size="11" maxlength="11">
-		&nbsp; Celular <input type="text" name="celular" size="9" maxlength="9">
+		&nbsp; Celular <input type="text" name="celular" size="9" maxlength="9"></p>
 		&nbsp; Mail <input type="text" name="mail" size="30" maxlength="30"></p><br/>
 		<p>Fecha de alta &nbsp;&nbsp;D&iacute;a <select name="dia" id="dia">
 			  <option>1</option>
