@@ -6,6 +6,14 @@ class Bibliotecologo extends Conexion{
         parent::__construct(SERVIDOR,PUERTO,USUARIO_BIBLIOTECOLOGO,PASS_BIBLIOTECOLOGO);
     }
     
+    //Se guarda en la tabla tel_usuario el telefono correspondiente a la cedula
+    public function  insertarTelefono($documento,$telefono){
+        
+        $this->consultar("INSERT INTO tel_usuario (ci,tel_usu,estado_logico)VALUES($documento,$telefono,'si')");
+        return true;
+    }
+    
+    //Se guarda en la tabla usuario los datos
     public function agregarUsuario($documento,$nombre,$apellido,$ciudad,$calle,$nro_apto,$nro_puerta,$email){
         $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
                                 numero_apartamento,numero_puerta,e_mail,estado_logico)
@@ -15,7 +23,22 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
-    
+    //Se editan los datos de la tabla usuario desde la cedula
+    public function editarUsuario($documento,$nombre,$apellido,$ciudad,$calle,$nro_apto,$nro_puerta,$email){
+        $this->consultar("UPDATE usuario 
+                          SET
+                            nombre='$nombre',
+                            apellido='$apellido',
+                            ciudad='$ciudad',
+                            calle='$calle',
+                            numero_apartamento=$nro_apto,
+                            numero_puerta=$nro_puerta,
+                            e_mail='$email'
+                           WHERE ci=$documento");
+        
+        return true;
+        
+    }
     
     public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
