@@ -78,29 +78,31 @@ class Administrador extends Conexion{
     }
 
     //Se devuelve la lista de usuarios
-    public function listadoMaterial(){
-        $stmt=$this->consultar("SELECT nombre,anio,comentario_general FROM material");
+    public function listadoEjemplarMaterial(){
+        $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*) FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general");
         $respuesta=array();
-        
-            
-            
+
             $i=0;
             foreach ($stmt as $fila){
                $dato=array();
-              
-              
                $dato["nombre"]=$fila[0];
                $dato["anio"]=$fila[1];
                $dato["descripcion"]=$fila[2];
+               if($fila[3]>1){
+                   $dato["disponibilidad"]="disponibleCasa";
+                   $dato["mostrardisponibilidad"]="<a href='#'>Prestamo</a><a href='#'>En SALA</a>";
+               }
+               else{
+                   
+                        $dato["disponibilidad"]="disponibleSala";
+                        $dato["mostrardisponibilidad"]="<a href='#'>En SALA</a>";
+
+                    }
                
-             
                $respuesta[$i]=$dato;
                $i++;
             }
                
-
-            
-        
         return $respuesta;
     }
     

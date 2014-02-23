@@ -47,8 +47,8 @@ class Bibliotecologo extends Conexion{
     }
     
     public function agregarMaterial($cod_mat,$titulo,$anio,$com_gral,$est_log){
-        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 
-                         ($cod_mat,'$titulo',$anio,'$com_gral','25/7/2013','$est_log')");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,cod_est,estado_logico) VALUES 
+                         ($cod_mat,'$titulo',$anio,'$com_gral',to_date(),1,'$est_log')");
         return true;
     }
      

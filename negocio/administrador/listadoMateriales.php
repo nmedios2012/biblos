@@ -7,7 +7,7 @@
         include "../../persistencia/Administrador.php";
         $admin=new Administrador();
         
-        $resultado=$admin->listadoMaterial();
+        $resultado=$admin->listadoEjemplarMaterial();
        
         $_SESSION["probando"]= serialize($resultado);
         
