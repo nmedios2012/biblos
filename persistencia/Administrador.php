@@ -79,7 +79,7 @@ class Administrador extends Conexion{
 
     //Se devuelve la lista de usuarios
     public function listadoEjemplarMaterial(){
-        $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*) FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general");
+        $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta=array();
 
             $i=0;
@@ -88,9 +88,10 @@ class Administrador extends Conexion{
                $dato["nombre"]=$fila[0];
                $dato["anio"]=$fila[1];
                $dato["descripcion"]=$fila[2];
+               
                if($fila[3]>1){
                    $dato["disponibilidad"]="disponibleCasa";
-                   $dato["mostrardisponibilidad"]="<a href='#'>Prestamo</a><a href='#'>En SALA</a>";
+                   $dato["mostrardisponibilidad"]="<a href='../../../negocio/administrador/altaprestamo.php?codigo=".$fila[4]."'>Prestamo</a><a href='#'>En SALA</a>";
                }
                else{
                    
@@ -139,8 +140,6 @@ class Administrador extends Conexion{
                                 estado_logico='no',
                                 fecha_borrado=today
                             WHERE ci=$ci");
-                                
-        
         return true;
         
     }
