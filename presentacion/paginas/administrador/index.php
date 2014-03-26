@@ -33,6 +33,7 @@
         <li><a href="index.php?pag=b_s">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoUsuario.php">Listado Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoMateriales.php">Listado Materiales</a></li>
+        <li><a href="../../../negocio/administrador/altaprestamo.php">Pr&eacute;stamos</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         <li><a href="#">Otro vínculo</a></li>
     </ul>

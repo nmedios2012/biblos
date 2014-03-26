@@ -61,7 +61,7 @@ $codigoEjemplar=$_SESSION["codigo"];
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
 <p>CI : <label><?php echo $ci; ?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
-    &nbsp; Apellido : <label><?php echo $apellido; ?></label>
+<p>Apellido : <label><?php echo $apellido; ?></label>
     <br />
     
 </div>
