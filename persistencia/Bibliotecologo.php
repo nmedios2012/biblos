@@ -198,5 +198,16 @@ class Bibliotecologo extends Conexion{
         return true;
         
     }
+    
+    //Revisar desde aqui No ingresa en la base de datos el prestamo
+    public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
+        $codigo_conservacion=$this->escalar("  SELECT first 1 codigo_conservacion
+                            FROM mantiene
+                            WHERE codigo_ejem=@codigoEjemplar AND fecha_final IS NULL");
+        echo $codigo_conservacion;
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin,estado_logico)
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,today,date($fecha),'si')");
+
+    }
 }
 ?>
