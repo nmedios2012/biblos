@@ -51,7 +51,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 <form name="input" action="../../../negocio/bibliotecologo/buscar.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
-    <input type="hidden" name="pagina" value="a_p" />
+    <input type="hidden" name="pagina" value="prestamo" />
 </form>
 <div id="mensaje">
     
@@ -74,7 +74,7 @@ $codigoEjemplar=$_SESSION["codigo"];
     
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/biblotecologo/eliminado.php">
+    <form name="prestar" method="post" action="../../../negocio/bibliotecologo/eliminado.php">
       
     &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
 </form>

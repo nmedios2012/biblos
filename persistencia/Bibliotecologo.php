@@ -209,5 +209,35 @@ class Bibliotecologo extends Conexion{
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,today,date($fecha),'si')");
 
     }
+    
+    //Se devuelve la lista de usuarios
+    public function listadoEjemplarMaterial(){
+        $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
+        $respuesta=array();
+
+            $i=0;
+            foreach ($stmt as $fila){
+               $dato=array();
+               $dato["nombre"]=$fila[0];
+               $dato["anio"]=$fila[1];
+               $dato["descripcion"]=$fila[2];
+               
+               if($fila[3]>1){
+                   $dato["disponibilidad"]="disponibleCasa";
+                   $dato["mostrardisponibilidad"]="<a href='../../../negocio/bibliotecologo/altaprestamo.php?codigo=".$fila[4]."'>Prestamo</a><a href='#'>En SALA</a>";
+               }
+               else{
+                   
+                        $dato["disponibilidad"]="disponibleSala";
+                        $dato["mostrardisponibilidad"]="<a href='#'>En SALA</a>";
+
+                    }
+               
+               $respuesta[$i]=$dato;
+               $i++;
+            }
+               
+        return $respuesta;
+    }
 }
 ?>
