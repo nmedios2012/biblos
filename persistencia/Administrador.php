@@ -77,7 +77,7 @@ class Administrador extends Conexion{
         return $respuesta;
     }
 
-    //Se devuelve la lista de usuarios
+    //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial(){
         $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta=array();
