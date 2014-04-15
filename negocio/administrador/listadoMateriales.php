@@ -11,6 +11,6 @@
        
         $_SESSION["probando"]= serialize($resultado);
         
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=l_m")
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=listado_material_admin")
 
 ?>

@@ -42,7 +42,7 @@
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             $_SESSION["mensaje"]="Se ingreso correctamente";
 
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=a_s")//Se vuelve a la pagina de alta
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_socio_admin")//Se vuelve a la pagina de alta
         
 ?>
 

@@ -42,7 +42,7 @@
             if(!$inserto)
                 $_SESSION["mensaje"]=$_SESSION["mensaje"]." pero no la imagen";
        
-       header("Location: ../../presentacion/paginas/administrador/index.php?pag=b_s")//Se vuelve a la pagina de busqueda
+       header("Location: ../../presentacion/paginas/administrador/index.php?pag=editar_usuario_admin")//Se vuelve a la pagina de busqueda
         
 
 ?>

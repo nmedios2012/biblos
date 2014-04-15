@@ -7,7 +7,7 @@
         extract($_POST);
     
         $resultado=$admin->eliminar($documento);//Se obtiene el documento que se desea borrar
-       header("Location: ../../presentacion/paginas/administrador/index.php?pag=b_s")
+       header("Location: ../../presentacion/paginas/administrador/index.php?pag=editar_usuario_admin")
 
 
 
