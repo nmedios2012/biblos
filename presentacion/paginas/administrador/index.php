@@ -29,12 +29,16 @@
   </header>
   <div class="sidebar1">
     <ul class="nav">
-        <li><a href="index.php?pag=a_s">Alta socio</a></li>
-        <li><a href="index.php?pag=b_s">Buscar/Editar/Eliminar Socio</a></li>
+        <li><a href="index.php?pag=alta_socio_admin">Alta socio</a></li>
+        <li><a href="index.php?pag=editar_socio_admin">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoUsuario.php">Listado Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoMateriales.php">Listado Materiales</a></li>
         <li><a href="../../../negocio/administrador/altaprestamo.php">Pr&eacute;stamos</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
+        
+        <li><a href="index.php?pag=alta_libro_admin_web">Alta libros</a></li>
+        <li><a href="index.php?pag=alta_revista_admin_web">Alta revistas</a></li>
+        <li><a href="index.php?pag=alta_pais_web">Ingreso de Pa&iacute;s</a></li>
         <li><a href="#">Otro vínculo</a></li>
     </ul>
     <aside>

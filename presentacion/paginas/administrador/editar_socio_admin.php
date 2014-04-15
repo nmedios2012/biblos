@@ -24,7 +24,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     }
     function editar_pro(){
     
-        $(location).attr('href',"index.php?pag=e_s");
+        $(location).attr('href',"index.php?pag=editar_socio_admin");//editar_usuario_admin
     }
     
     function controlar() {
@@ -46,7 +46,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 <form name="input" action="../../../negocio/administrador/buscar.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
-    <input type="hidden" name="pagina" value="b_s" />
+    <input type="hidden" name="pagina" value="editar_socio_admin" />
 </form>
 <div id="mensaje">
     

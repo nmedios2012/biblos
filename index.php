@@ -6,10 +6,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Documento sin título</title>
+<title>Biblos</title>
 <script type="text/javascript" src="presentacion/js/jquery.js"></script>
 <script type="text/javascript"  src="presentacion/js/inicio.js"></script>
-<link href="presentacion/css/estilos.css"  rel="stylesheet" type="text/css" />
+<!--link href="presentacion/css/estilos.css"  rel="stylesheet" type="text/css" /-->
 </head>
 
 <body>
