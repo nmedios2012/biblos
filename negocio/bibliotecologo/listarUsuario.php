@@ -7,7 +7,7 @@
         include "../../persistencia/Bibliotecologo.php";
         $admin=new Bibliotecologo();
         
-        $resultado=$admin->listadoUsuario();
+        $resultado=$admin->listarUsuario();
         
         $_SESSION["probando"]= serialize($resultado);
         
