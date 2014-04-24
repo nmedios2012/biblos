@@ -7,7 +7,7 @@ function inicializarEventos(){
 
 function editar_pro(){
     
-    $(location).attr('href',"index.php?pag=e_s");
+    $(location).attr('href',"index.php?pag=editar_usuario_admin");
 }
 
 function controlar(){
