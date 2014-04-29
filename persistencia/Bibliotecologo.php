@@ -241,7 +241,7 @@ class Bibliotecologo extends Conexion{
     }
     
     //Se devuelve la lista de usuarios
-    public function listarUsuario(){
+    public function listadoUsuario(){
         $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE estado_logico='si'");
         
         if($stmt->fetchColumn()>0){
