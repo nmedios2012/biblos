@@ -30,7 +30,7 @@
   <div class="sidebar1">
     <ul class="nav">
         <li><a href="index.php?pag=a_s">Alta socio</a></li>
-        <li><a href="index.php?pag=listasocios">Listar socios</a></li>
+        <li><a href="../../../negocio/bibliotecologo/listadoUsuario.php">Listar socios</a></li>
         <li><a href="index.php?pag=b_s">Baja socio</a></li>
         <li><a href="index.php?pag=a_l">Alta libros</a></li>
         <li><a href="index.php?pag=a_r">Alta revistas</a></li>
@@ -40,7 +40,7 @@
         <li><a href="index.php?pag=a_p">Ingreso de Pa&iacute;s</a></li>
         <li><a href="index.php?pag=a_t_e">Tema/Especializaci&oacute;n</a></li>
         <li><a href="index.php?pag=a_c">Conservaci&oacute;n</a></li>
-        <li><a href="index.php?pag=prestamo">Pr&eacute;stamo</a></li>
+        <li><a href="../../../negocio/bibliotecologo/altaprestamo.php">Pr&eacute;stamo</a></li>
         <li><a href="index.php?pag=penalizaciones">Sanciones</a></li>
         <li><a href="index.php?pag=estado">Estado de material</a></li>
         <li><a href="index.php?pag=alta_autores">Artista/Autor</a></li>

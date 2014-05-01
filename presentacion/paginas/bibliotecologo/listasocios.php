@@ -9,7 +9,7 @@
         <td>Ir</td>
     </tr>   
 <?php
-include_once('../../../negocio/bibliotecologo/listadoUsuario.php');
+//include_once('../../../negocio/bibliotecologo/listadoUsuario.php');
         
 $resultado=unserialize($_SESSION["probando"]);
 

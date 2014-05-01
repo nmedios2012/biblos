@@ -23,3 +23,4 @@ function controlar(){
        $("#mensaje").html("Usuario y/o contraseña equivocada");
    }
 }
+
