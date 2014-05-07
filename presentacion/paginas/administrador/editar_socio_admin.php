@@ -24,7 +24,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     }
     function editar_pro(){
     
-        $(location).attr('href',"index.php?pag=editar_socio_admin");//editar_usuario_admin
+        $(location).attr('href',"index.php?pag=editar_usuario_admin");//editar_usuario_admin
     }
     
     function controlar() {
