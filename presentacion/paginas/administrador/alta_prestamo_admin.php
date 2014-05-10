@@ -1,14 +1,11 @@
 <?php
-include '../../../negocio/configuracion/configuracion.php';
-include '../../../persistencia/conexion.php';
-include '../../../persistencia/Administrador.php';
 if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
     extract($_SESSION["resultado"]);
     $_SESSION["editar"]=$_SESSION["resultado"];
     //$mensaje=$_SESSION["mensaje"];
     $mensaje="";
-   $codigoEjemplar=$_SESSION["codigo"];
+   
     unset($_SESSION["resultado"]);
     $activar = "";
     
@@ -18,16 +15,11 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $ci = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
-    $administrador=new Administrador();
-    $codigoEjemplar=$administrador->obtenerCodigoEjemplar($_SESSION["codigo"]);
-    $_SESSION["codigo"]=$codigoEjemplar;
- 
+    
+    
+    
 }
-
-
-
-
-$fecha=$_SESSION["fecha"];
+$codigoEjemplar=$_SESSION["codigo"];
 ?>
 <script type="text/javascript">
     $(document).ready(inicializar);
@@ -37,7 +29,7 @@ $fecha=$_SESSION["fecha"];
     }
     function editar_pro(){
     
-        $(location).attr('href',"index.php?pag=e_s");
+        $(location).attr('href',"index.php?pag=editar_usuario_admin");
     }
     
     function controlar() {
@@ -59,7 +51,7 @@ $fecha=$_SESSION["fecha"];
 <form name="input" action="../../../negocio/administrador/buscar.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
-    <input type="hidden" name="pagina" value="a_p" />
+    <input type="hidden" name="pagina" value="alta_prestamo_admin" />
 </form>
 <div id="mensaje">
     
@@ -67,27 +59,22 @@ $fecha=$_SESSION["fecha"];
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $ci;
-                     $_SESSION["ci"]=$ci;
-
-?></label><br/>
+<p>CI : <label><?php echo $ci; ?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
 <p>Apellido : <label><?php echo $apellido; ?></label>
     <br />
     
 </div>
 <div id="ejemplar">
-    Codigo Ejemplar: <?php echo $codigoEjemplar; ?><br/>
-    Fecha de devolucion sugerida: <?php 
-    
-    echo date("d-m-Y",$fecha);
-    
-    ?><br/>
+    Codigo Ejemplar: <?php echo $codigoEjemplar; ?>
     
 </div>
+    
+    
+    
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/administrador/AltaConfirmacionPrestamos.php">
+    <form name="prestar" method="post" action="../../../negocio/administrador/eliminado.php">
       
     &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
 </form>

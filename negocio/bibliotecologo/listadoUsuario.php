@@ -4,13 +4,13 @@
         include "../../negocio/configuracion/configuracion.php";	
         include "../../persistencia/conexion.php";
         
-        include "../../persistencia/Administrador.php";
-        $admin=new Administrador();
+        include "../../persistencia/Bibliotecologo.php";
+        $admin=new Bibliotecologo();
         
         $resultado=$admin->listadoUsuario();
         
         $_SESSION["probando"]= serialize($resultado);
         
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=listado_socio_admin")
+        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=listasocios")
 
 ?>

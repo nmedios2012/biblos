@@ -210,7 +210,7 @@ class Bibliotecologo extends Conexion{
 
     }
     
-    //Se devuelve la lista de usuarios
+    //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial(){
         $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta=array();
@@ -237,6 +237,39 @@ class Bibliotecologo extends Conexion{
                $i++;
             }
                
+        return $respuesta;
+    }
+    
+    //Se devuelve la lista de usuarios
+    public function listadoUsuario(){
+        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE estado_logico='si'");
+        
+        if ($stmt->fetchColumn() > 0){
+            
+            $respuesta = array();
+            $i = 0;
+            foreach ($stmt as $fila) {
+               $dato = array();
+              
+               $dato["ci"] = $fila[0];
+               $dato["nombre"] = $fila[1];
+               $dato["apellido"] = $fila[2];
+               $dato["ciudad"] = $fila[3];
+               $dato["calle"] = $fila[4];
+               $dato["numero_apartamento"] = $fila[5];
+               $dato["numero_puerta"] = $fila[6];
+               $dato["email"] = $fila[7];
+               if (file_exists("../../presentacion/imagenes/fotousuario/" . $fila[0] . ".jpg")){
+                   $dato["foto"] = $fila[0] .".jpg";
+               }else{
+                   $dato["foto"] = "silueta.jpg";
+               }
+               $respuesta[$i]=$dato;
+               
+               $i++;
+            }            
+        }
+        
         return $respuesta;
     }
 }
