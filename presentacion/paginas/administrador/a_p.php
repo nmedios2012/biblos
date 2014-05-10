@@ -1,11 +1,14 @@
 <?php
+include '../../../negocio/configuracion/configuracion.php';
+include '../../../persistencia/conexion.php';
+include '../../../persistencia/Administrador.php';
 if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
     extract($_SESSION["resultado"]);
     $_SESSION["editar"]=$_SESSION["resultado"];
     //$mensaje=$_SESSION["mensaje"];
     $mensaje="";
-   
+   $codigoEjemplar=$_SESSION["codigo"];
     unset($_SESSION["resultado"]);
     $activar = "";
     
@@ -15,11 +18,16 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $ci = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
-    
-    
-    
+    $administrador=new Administrador();
+    $codigoEjemplar=$administrador->obtenerCodigoEjemplar($_SESSION["codigo"]);
+    $_SESSION["codigo"]=$codigoEjemplar;
+ 
 }
-$codigoEjemplar=$_SESSION["codigo"];
+
+
+
+
+$fecha=$_SESSION["fecha"];
 ?>
 <script type="text/javascript">
     $(document).ready(inicializar);
@@ -59,22 +67,27 @@ $codigoEjemplar=$_SESSION["codigo"];
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $ci; ?></label><br/>
+<p>CI : <label><?php echo $ci;
+                     $_SESSION["ci"]=$ci;
+
+?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
 <p>Apellido : <label><?php echo $apellido; ?></label>
     <br />
     
 </div>
 <div id="ejemplar">
-    Codigo Ejemplar: <?php echo $codigoEjemplar; ?>
+    Codigo Ejemplar: <?php echo $codigoEjemplar; ?><br/>
+    Fecha de devolucion sugerida: <?php 
+    
+    echo date("d-m-Y",$fecha);
+    
+    ?><br/>
     
 </div>
-    
-    
-    
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/administrador/eliminado.php">
+    <form name="prestar" method="post" action="../../../negocio/administrador/AltaConfirmacionPrestamos.php">
       
     &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
 </form>

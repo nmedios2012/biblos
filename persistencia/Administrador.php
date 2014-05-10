@@ -77,6 +77,14 @@ class Administrador extends Conexion{
         return $respuesta;
     }
 
+    public function obtenerCodigoEjemplar($codigoMaterial){
+        $stmt=$this->consultar("SELECT codigo_ejem FROM ejemplar_material WHERE codigo_material=$codigoMaterial");
+        foreach ($stmt as $fila){
+               
+               return $fila[0];
+        }
+    }
+   
     //Se devuelve la lista de usuarios
     public function listadoEjemplarMaterial(){
         $stmt=$this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
@@ -143,14 +151,14 @@ class Administrador extends Conexion{
         return true;
         
     }
-    //Revisar desde aqui No ingresa en la base de datos el prestamo
+   
     public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
         $codigo_conservacion=$this->escalar("  SELECT first 1 codigo_conservacion
                             FROM mantiene
-                            WHERE codigo_ejem=@codigoEjemplar AND fecha_final IS NULL");
-        echo $codigo_conservacion;
-        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin,estado_logico)
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,today,date($fecha),'si')");
+                            WHERE codigo_ejem=$codigoEjemplar AND fecha_final IS NULL");
+        echo "ss ".$codigo_conservacion;
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'".date("d-m-Y",$fecha)."') ");
 
     }
     
