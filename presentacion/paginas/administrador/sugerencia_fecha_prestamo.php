@@ -5,19 +5,21 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $_SESSION["editar"]=$_SESSION["resultado"];
     //$mensaje=$_SESSION["mensaje"];
     $mensaje="";
-   
-    //unset($_SESSION["resultado"]);
+   $fecha=$_SESSION["fecha"];
+   $codigo=$_SESSION["codigo"];
+   $_SESSION["ci"]=$ci;
     $activar = "";
     
 } else {
     $nombre = "";
     $apellido = "";
     $ci = "";
+    $codigo="";
     $activar = " disabled='disabled' ";
     $mensaje="";
-    
-    
-    
+
+    $fecha="";
+
 }
 $codigoEjemplar=$_SESSION["codigo"];
 ?>
@@ -60,23 +62,21 @@ $codigoEjemplar=$_SESSION["codigo"];
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
 <p>CI : <label><?php echo $ci; ?></label><br/>
-<p>Nombre : <label><?php echo $nombre; ?></label><br/>
-<p>Apellido : <label><?php echo $apellido; ?></label>
     <br />
     
 </div>
 <div id="ejemplar">
-    Codigo Ejemplar: <?php echo $codigoEjemplar; ?>
-    
+    Codigo Ejemplar: <?php echo $codigo; ?><br/>
+    Fecha de sugerencia:<?php echo $fecha; ?>
 </div>
     
     
     
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/administrador/sugerenciaFechaPrestamo.php">
-      <input type="hidden" name="codigo" value="<?php echo $codigoEjemplar; ?>" />
-    &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
+    <form name="prestar" method="post" action="../../../negocio/administrador/AltaConfirmacionPrestamos.php">
+      
+    &nbsp;&nbsp; <input type="submit" value="Confirmar"/> 
 </form>
 &nbsp;&nbsp; <input type="button" value="Cancelar">		
 <?php

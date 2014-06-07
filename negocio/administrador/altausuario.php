@@ -34,15 +34,17 @@
         
       
             if(isset($telefono)){//si ingreso telefono en el formulario alta usuario
-                $admin->insertarTelefono($ci, $telefono);//Se guarda en la tabla de telefonos
+                $admin->insertarTelefono($documento, $telefono);//Se guarda en la tabla de telefonos
             }
+
+            
             if(isset($celular)){//si ingreso celular en el formulario alta usuario
-                $admin->insertarTelefono($ci, $celular);//Se guarda en la tabla de telefonos
+                $admin->insertarTelefono($documento, $celular);//Se guarda en la tabla de telefonos
             }
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             $_SESSION["mensaje"]="Se ingreso correctamente";
 
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_socio_admin")//Se vuelve a la pagina de alta
+       header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_socio_admin")//Se vuelve a la pagina de alta
         
 ?>
 
