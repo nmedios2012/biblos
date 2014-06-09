@@ -24,7 +24,7 @@ class Administrador extends Conexion {
     }
 
     //Se editan los datos de la tabla usuario desde la cedula
-    public function editarUsuario($ci, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
+    public function editarUsuario($ci, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email,$telefono1,$telefono2,$telefono,$celular) {
         $this->consultar("UPDATE usuario 
                           SET
                             nombre='$nombre',
@@ -35,7 +35,21 @@ class Administrador extends Conexion {
                             numero_puerta=$nro_puerta,
                             e_mail='$email'
                            WHERE ci=$ci");
-
+        
+        if($telefono1!=$telefono){
+            $this->consultar("UPDATE tel_usuario
+                              SET 
+                          
+                                tel_usu=$telefono
+                          WHERE ci=$ci and tel_usu=$telefono1");
+        }
+        if($telefono2!=$celular){
+            $this->consultar("UPDATE tel_usuario
+                              SET 
+                          
+                                tel_usu=$celular
+                              WHERE ci=$ci and tel_usu=$telefono2");
+        }
         return true;
     }
 
@@ -111,9 +125,10 @@ class Administrador extends Conexion {
     //Se busca el usuario a base de la cedula
     public function buscar($ci) {
         $stmt = $this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
-        $row = $stmt->fetch(PDO::FETCH_NUM);
+        $row= $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
         if ($row != NULL) {
+            
             $respuesta["ci"] = $row[0];
             $respuesta["nombre"] = $row[1];
             $respuesta["apellido"] = $row[2];
@@ -122,15 +137,26 @@ class Administrador extends Conexion {
             $respuesta["numero_apartamento"] = $row[5];
             $respuesta["numero_puerta"] = $row[6];
             $respuesta["email"] = $row[7];
+            
             if (file_exists("../../presentacion/imagenes/fotousuario/" . $row[0] . ".jpg")) {
                 $respuesta["foto"] = $row[0] . ".jpg";
             } else {
                 $respuesta["foto"] = "silueta.jpg";
             }
+
         }
         return $respuesta;
     }
-
+    public function buscarTelefono($ci) {
+        $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$ci AND estado_logico='si'");
+        $fila = $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+        
+        foreach ($stmt as $fila) {
+            $respuesta[count($respuesta)] = $fila[0];
+        }
+        return $respuesta;
+    }
     //Se elimina a base de la cedula
     public function eliminar($ci) {
         $this->consultar("  UPDATE usuario 
@@ -143,11 +169,11 @@ class Administrador extends Conexion {
    
     public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
         $codigo_conservacion=$this->escalar("  SELECT first 1 codigo_conservacion
-                            FROM mantiene
-                            WHERE codigo_ejem=$codigoEjemplar AND fecha_final IS NULL");
-        echo "ss ".$codigo_conservacion;
+                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+                            WHERE codigo_material=$codigoEjemplar AND fecha_final IS NULL");
+        echo "ss ".$codigo_conservacion;//Desde aqui seguir 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'".date("d-m-Y",$fecha)."') ");
+                            VALUES($ci,1,$codigoEjemplar,'si',today,'".date("d-m-Y",$fecha)."') ");
 
     }
 

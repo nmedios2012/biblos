@@ -11,6 +11,6 @@
         $_SESSION["resultado"]= $resultado;//El resultado se guarda en una session
         $_SESSION["telefono"]=$telefono[0];
         $_SESSION["celular"]=$telefono[1];
-        header("Location: ../../presentacion/paginas/administrador/index.php?pag=editar_socio_admin")//vuelve a la pagina de busqueda
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_prestamo_admin")//vuelve a la pagina de busqueda
         
 ?>

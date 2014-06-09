@@ -37,12 +37,11 @@
             $insertado=true;
         }
         
-            $admin->editarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se manda la informacion del usuario para modificar
+            $admin->editarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail,$telefono1,$telefono2,$telefono,$celular);//Se manda la informacion del usuario para modificar
             //$_SESSION["mensaje"]="Se edito correctamente los datos";
             if(!$inserto)
                 $_SESSION["mensaje"]=$_SESSION["mensaje"]." pero no la imagen";
        
        header("Location: ../../presentacion/paginas/administrador/index.php?pag=editar_socio_admin")//Se vuelve a la pagina de busqueda
-        
 
 ?>
