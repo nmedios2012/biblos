@@ -272,5 +272,37 @@ class Bibliotecologo extends Conexion{
         
         return $respuesta;
     }
+        //Se devuelve la lista de reservas
+    public function listadoReservas(){
+        $stmt=$this->consultar("SELECT ci,curso.nombre,codigo_material,edicion,isbn,
+nro_reserva,fecha_inicio,fecha_fin,reserva.estado_logico,reserva.fecha_borrado FROM reserva,curso");
+        
+        if ($stmt->fetchColumn() > 0){
+            
+            $respuesta = array();
+            $i = 0;
+            foreach ($stmt as $fila) {
+               $dato = array();
+              
+               $dato["ci"] = $fila[0];
+//               $temp=$this->consultar("SELECT nombre FROM curso WHERE codigo_curso = ".$fila[1]);codigo_curso
+               $dato["curso.nombre"] =$fila[1];
+               $dato["codigo_material"] = $fila[2];
+               $dato["edicion"] = $fila[3];
+               $dato["isbn"] = $fila[4];
+               $dato["nro_reserva"] = $fila[5];
+               $dato["fecha_inicio"] = $fila[6];
+               $dato["fecha_fin"] = $fila[7];
+               $dato["estado_logico"] = $fila[8];
+               $dato["fecha_borrado"] = $fila[9];
+                          
+               $respuesta[$i]=$dato;
+               
+               $i++;
+            }            
+        }
+        
+        return $respuesta;
+    }
 }
 ?>
