@@ -23,17 +23,12 @@ abstract class Conexion {
  */
     public function escalar($sql) {
         $stmt = $this->conexion->query($sql);
-        
-        if ($stmt->fetchColumn() > 0) {
 
             $row=$stmt->fetch(PDO::FETCH_NUM);
             $valor=$row[0];
-            echo $valor;
+            
            return $valor;
-        
-        }
-        else
-            return NULL;
+
     }
 
     public function getConexion() {

@@ -108,7 +108,7 @@ class Administrador extends Conexion {
 
             if ($fila[3] > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
-                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>Prestamo</a><a href='#'>En SALA</a>";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>En DOMICILIO</a><a href='#'>En SALA</a>";
             } else {
 
                 $dato["disponibilidad"] = "disponibleSala";
@@ -168,15 +168,31 @@ class Administrador extends Conexion {
     }
    
     public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
-        $codigo_conservacion=$this->escalar("  SELECT first 1 codigo_conservacion
+        
+
+        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
-                            WHERE codigo_material=$codigoEjemplar AND fecha_final IS NULL");
-        echo "ss ".$codigo_conservacion;//Desde aqui seguir 
+                            WHERE codigo_material=$codigoEjemplar");
+        
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($ci,1,$codigoEjemplar,'si',today,'".date("d-m-Y",$fecha)."') ");
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
 
     }
 
+    public function buscarLibro($codigo_ejemplar){
+        $stmt=$this->consultar("  SELECT material.nombre 
+                            FROM ejemplar_material INNER material ON ejemplar_material.codigo_material=material.codigo_material 
+                            WHERE ejemplar_material.codigo_ejem=$codigo_ejemplar");
+        $fila = $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta ="";
+        
+        foreach ($stmt as $fila) {
+            $respuesta = $fila[0];
+        }
+        return $respuesta;
+    }
+            
+    
     public function agregarLibro($cod_mat, $isbn, $edicion, $est_log) {
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
                          ($cod_mat,$isbn,$edicion,'$est_log')");

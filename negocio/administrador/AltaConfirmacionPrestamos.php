@@ -9,12 +9,15 @@
         $fecha=$_SESSION["fecha"];
         $ci=$_SESSION["ci"];
         $codigoEjemplar=$_SESSION["codigo"];
-        unset($_SESSION["fecha"]);
-        unset($_SESSION["ci"]);
-        unset($_SESSION["codigo"]);
+
+        
+
        
         $admin->agregarPrestamo($ci, $codigoEjemplar, $fecha);
-       // header("Location: ../../presentacion/paginas/administrador/index.php?pag=e_p");
+        
+        //$libro=$admin->buscarLibro($codigoEjemplar);
+        //$_SESSION["titulo"]=$libro;
+        header("Location: ../../presentacion/paginas/administrador/index.php?pag=confirmacion_prestamo");
         
         
 ?>
