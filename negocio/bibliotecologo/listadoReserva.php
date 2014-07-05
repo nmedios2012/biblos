@@ -9,7 +9,7 @@
         
         $resultado=$admin->listadoReservas();
         
-        $_SESSION["probando"]= serialize($resultado);
+        $_SESSION['listadoResBiblo']= serialize($resultado);
         
         header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=listaReserva")
 
