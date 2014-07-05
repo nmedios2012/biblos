@@ -274,8 +274,21 @@ class Bibliotecologo extends Conexion{
     }
         //Se devuelve la lista de reservas
     public function listadoReservas(){
-        $stmt=$this->consultar("SELECT ci,curso.nombre,codigo_material,edicion,isbn,
-nro_reserva,fecha_inicio,fecha_fin,reserva.estado_logico,reserva.fecha_borrado FROM reserva,curso");
+        $stmt=$this->consultar("
+            SELECT 
+                res.ci,
+                cur.nombre,
+                mate.nombre,
+                res.edicion,
+                res.isbn,
+                res.nro_reserva,
+                res.fecha_inicio,
+                res.fecha_fin,
+                res.estado_logico,
+                res.fecha_borrado
+            FROM reserva res 
+            LEFT OUTER JOIN curso cur ON cur.codigo_curso = res.codigo_curso
+            LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
         
         if ($stmt->fetchColumn() > 0){
             
@@ -285,9 +298,8 @@ nro_reserva,fecha_inicio,fecha_fin,reserva.estado_logico,reserva.fecha_borrado F
                $dato = array();
               
                $dato["ci"] = $fila[0];
-//               $temp=$this->consultar("SELECT nombre FROM curso WHERE codigo_curso = ".$fila[1]);codigo_curso
-               $dato["curso.nombre"] =$fila[1];
-               $dato["codigo_material"] = $fila[2];
+               $dato["cur.nombre"] =$fila[1];
+               $dato["mate.nombre"] = $fila[2];
                $dato["edicion"] = $fila[3];
                $dato["isbn"] = $fila[4];
                $dato["nro_reserva"] = $fila[5];
