@@ -5,15 +5,16 @@
 	include "../persistencia/Usuario.php";
         $comunicacion=new Usuario();
         extract($_POST);
-	$usuario=$comunicacion->loguearse($usuario, $pass);
-	if($usuario!=NULL){
-		$_SESSION["tipo"]=$usuario;
-		header("location:".RUTA."presentacion/paginas/$usuario/index.php");
+$rolUsuario=$comunicacion->loguearse($usuario, $pass);
+	if($rolUsuario!=NULL){
+		$_SESSION["usuario"]=$usuario;
+                $_SESSION["tipo"]=$rolUsuario;
+		header("location:".RUTA."presentacion/paginas/$rolUsuario/index.php");
 	}
 	else{
                 $_SESSION["mensajelogueo"]="Usuario y/o contraseña equivocada";
-		header("location:".RUTA."index.php");
-	}
+		header("location:".RUTA."index.php");                   
+	}        
          
          
 ?>
