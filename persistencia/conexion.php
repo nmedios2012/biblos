@@ -18,9 +18,7 @@ abstract class Conexion {
     public function consultar($sql) {
         return $this->conexion->query($sql);
     }
-/*
- * NO FUNCIONA
- */
+
     public function escalar($sql) {
         $stmt = $this->conexion->query($sql);
 

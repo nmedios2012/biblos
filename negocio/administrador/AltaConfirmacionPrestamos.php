@@ -14,9 +14,10 @@
 
        
         $admin->agregarPrestamo($ci, $codigoEjemplar, $fecha);
+        //Falta actualizar el estadoi en ejemplar
+        $libro=$admin->buscarLibro($codigoEjemplar);
         
-        //$libro=$admin->buscarLibro($codigoEjemplar);
-        //$_SESSION["titulo"]=$libro;
+        $_SESSION["titulo"]=$libro;
         header("Location: ../../presentacion/paginas/administrador/index.php?pag=confirmacion_prestamo");
         
         

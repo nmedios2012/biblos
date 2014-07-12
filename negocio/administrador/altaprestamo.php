@@ -1,6 +1,13 @@
 <?php
     session_start();
-    $_SESSION["codigo"] = $_GET["codigo"];
+    include "../../negocio/configuracion/configuracion.php";	
+    include "../../persistencia/conexion.php";
+    include "../../persistencia/Administrador.php";
+    $admin=new Administrador();
+    $codigo_material=$_GET["codigo"];
+    $dato=$admin->codigoEjemplar($codigo_material);
+    $_SESSION["codigo"] = $dato[0];
+   
 
     $fecha_devolucion = mktime(0,0,0,date("m"),date("d")+2,date("Y"));
 
