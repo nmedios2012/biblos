@@ -35,11 +35,31 @@ class Bibliotecologo extends Conexion{
                             numero_puerta=$nro_puerta,
                             e_mail='$email'
                            WHERE ci=$documento");
-        
+        if($telefono1!=$telefono){
+            $this->consultar("UPDATE tel_usuario
+                              SET 
+                          
+                                tel_usu=$telefono
+                          WHERE ci=$ci and tel_usu=$telefono1");
+        }
+        if($telefono2!=$celular){
+            $this->consultar("UPDATE tel_usuario
+                              SET 
+                          
+                                tel_usu=$celular
+                              WHERE ci=$ci and tel_usu=$telefono2");
+        }
         return true;
         
     }
     
+    public function obtenerCodigoEjemplar($codigoMaterial){
+        $stmt=$this->consultar("SELECT codigo_ejem FROM ejemplar_material WHERE codigo_material=$codigoMaterial");
+        foreach ($stmt as $fila){
+               
+               return $fila[0];
+        }
+    }
     public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
                          ($cod_mat,$isbn,$edicion,'$est_log')");
@@ -162,6 +182,7 @@ class Bibliotecologo extends Conexion{
         return true;
     }
     
+    // Se busca un socio por número de documento
     public function buscar($ci)
     {
         $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
@@ -187,26 +208,44 @@ class Bibliotecologo extends Conexion{
         return $respuesta;
        
     }
+    
+    public function buscarLibro($codigo_ejemplar){
+        return $this->escalar("  SELECT material.nombre 
+                            FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material 
+                            WHERE ejemplar_material.codigo_ejem=$codigo_ejemplar");
+
+    }
+    
+    public function buscarTelefono($ci) {
+        $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$documento AND estado_logico='si'");
+        $fila = $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+        
+        foreach ($stmt as $fila) {
+            $respuesta[count($respuesta)] = $fila[0];
+        }
+        return $respuesta;
+    }
+    
     public function eliminar($ci){
         $this->consultar("  UPDATE usuario 
                             SET
                                 estado_logico='no',
                                 fecha_borrado=today
-                            WHERE ci=$ci");
+                            WHERE ci=$documento");
                                 
         
         return true;
         
     }
     
-    //Revisar desde aqui No ingresa en la base de datos el prestamo
-    public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
-        $codigo_conservacion=$this->escalar("  SELECT first 1 codigo_conservacion
-                            FROM mantiene
-                            WHERE codigo_ejem=@codigoEjemplar AND fecha_final IS NULL");
-        echo $codigo_conservacion;
-        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin,estado_logico)
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,today,date($fecha),'si')");
+    public function agregarPrestamo($documento,$codigoEjemplar,$fecha){
+        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
+                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
+        
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
+                            VALUES($documento,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
 
     }
     

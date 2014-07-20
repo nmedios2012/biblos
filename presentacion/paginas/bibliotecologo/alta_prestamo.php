@@ -6,7 +6,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     //$mensaje=$_SESSION["mensaje"];
     $mensaje="";
    
-    unset($_SESSION["resultado"]);
+    //unset($_SESSION["resultado"]);
     $activar = "";
     
 } else {
@@ -48,10 +48,10 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
-<form name="input" action="../../../negocio/bibliotecologo/buscar.php" method="post" id="frmBuscar">
+<form name="input" action="../../../negocio/bibliotecologo/buscarSocioPrestamo.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
-    <input type="hidden" name="pagina" value="prestamo" />
+    <input type="hidden" name="pagina" value="alta_prestamo" />
 </form>
 <div id="mensaje">
     
@@ -74,8 +74,8 @@ $codigoEjemplar=$_SESSION["codigo"];
     
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/bibliotecologo/eliminado.php">
-      
+    <form name="prestar" method="post" action="../../../negocio/bibliotecologo/sugerenciaFechaPrestamo.php">
+      <input type="hidden" name="codigo" value="<?php echo $codigoEjemplar; ?>" />
     &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
 </form>
 &nbsp;&nbsp; <input type="button" value="Cancelar">		

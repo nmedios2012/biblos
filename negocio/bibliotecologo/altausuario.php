@@ -41,7 +41,7 @@
             }
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             $_SESSION["mensaje"]="Se ingreso correctamente";
-        
+            $admin->agregarCuenta_Usuario($documento,$nombre, $apellido, $mail);
         
        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s")
         
