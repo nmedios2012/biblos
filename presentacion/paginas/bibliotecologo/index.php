@@ -75,6 +75,9 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                                 <a href="../../../negocio/bibliotecologo/altaprestamo.php">Pr&eacute;stamo</a>
                             </li>
                             <li>
+                                <a href="../../../negocio/bibliotecologo/listadoMateriales.php">Listado de Materiales</a>
+                            </li>
+                            <li>
                                 <a href="index.php?pag=penalizaciones">Sanciones</a>
                             </li>
                         </ul>
