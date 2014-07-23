@@ -1,10 +1,9 @@
 
 <table border="1">
-    <tr>
-        <td></td>
+    <tr style="background-color: grey;">
         <td>Cedula</td>
-        <td>CodCurso</td>
-        <td>CodMaterial</td>
+        <td>NombreCurso</td>
+        <td>Material/Libro</td>
         <td>Edicion</td>
         <td>ISBN</td>
         <td>NumeroReserva</td>
@@ -15,7 +14,7 @@
     <?php
 //include_once('../../../negocio/bibliotecologo/listadoUsuario.php');
 
-    $resultado = unserialize($_SESSION["probando"]);
+    $resultado = unserialize($_SESSION['listadoResBiblo']);
 
     $cantidad = count($resultado);
 
@@ -31,15 +30,15 @@
 //           }
 
         echo "<td>" . $resultado[$i]["ci"] . "</td>";
-        echo "<td>" . $resultado[$i]["curso.nombre"] . "</td>";
-        echo "<td>" . $resultado[$i]["codigo_material"]."</td>";
-        echo "<td>" . $resultado[$i]["edicion"]."</td>";
-        echo "<td>" . $resultado[$i]["isbn"]."</td>";
-        echo "<td>" . $resultado[$i]["nro_reserva"]."</td>";
-        echo "<td>" . $resultado[$i]["fecha_inicio"]."</td>";
-        echo "<td>" . $resultado[$i]["fecha_fin"]."</td>";
-        echo "<td>" . $resultado[$i]["estado_logico"]."</td>";
-        echo "<td>" . $resultado[$i]["fecha_borrado"] ."</td>";
+        echo "<td>" . $resultado[$i]["cur.nombre"] . "</td>";
+        echo "<td>" . $resultado[$i]["mate.nombre"] . "</td>";
+        echo "<td>" . $resultado[$i]["edicion"] . "</td>";
+        echo "<td>" . $resultado[$i]["isbn"] . "</td>";
+        echo "<td>" . $resultado[$i]["nro_reserva"] . "</td>";
+        echo "<td>" . $resultado[$i]["fecha_inicio"] . "</td>";
+        echo "<td>" . $resultado[$i]["fecha_fin"] . "</td>";
+//        echo "<td>" . $resultado[$i]["estado_logico"]."</td>";
+//        echo "<td>" . $resultado[$i]["fecha_borrado"] ."</td>";
 //        echo "<td>
 //                <form name='input' action='../../../negocio/bibliotecologo/buscar.php' method='post' id='frmBuscar'>
 //                    <input type='submit' value='Modificar/Eliminar' /><input type='hidden' name='documento' value='" . $resultado[$i]["ci"] . "'/>

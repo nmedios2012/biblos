@@ -10,6 +10,6 @@
         
         $_SESSION['busquedaLibros']= serialize($resultado);
         
-        header("Location: ../../presentacion/paginas/socio/index.php?pag=busquedaLibros")
+        header("Location: ../../presentacion/paginas/socio/index.php?pag=busquedaLibros");
 
 ?>

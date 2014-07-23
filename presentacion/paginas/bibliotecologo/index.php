@@ -69,13 +69,16 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                                 <a href="index.php?pag=b_s">Baja socio</a>
                             </li>
                             <li>
+                                <!--index.php?pag=usuarioACurso-->
+                                <!--<a href="index.php?pag=usuarioACurso">Asignar Usuario a Curso</a>-->
+                                <a href="../../../negocio/bibliotecologo/usuarioACurso.php">Asignar Usuario a Curso</a>
+                            </li>
+
+                            <li>
                                 <a href="../../../negocio/bibliotecologo/listadoUsuario.php">Listar socios</a>
                             </li>
                             <li>
                                 <a href="../../../negocio/bibliotecologo/altaprestamo.php">Pr&eacute;stamo</a>
-                            </li>
-                            <li>
-                                <a href="../../../negocio/bibliotecologo/listadoMateriales.php">Listado de Materiales</a>
                             </li>
                             <li>
                                 <a href="index.php?pag=penalizaciones">Sanciones</a>

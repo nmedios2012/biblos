@@ -29,6 +29,6 @@ class Usuario extends Conexion{
 
     }
     
-}
+    }
 
 ?>
