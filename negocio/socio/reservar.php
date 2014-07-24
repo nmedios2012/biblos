@@ -1,8 +1,15 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-echo 'No implementado todavia!!!';
+    session_start();
+    include "../../negocio/configuracion/configuracion.php";
+    include "../../persistencia/conexion.php";
+    include "../../persistencia/Socio.php";
+    $admin = new Socio();
+    extract($_POST);
+                
+    $resultado = $admin->confirmarReserva($_SESSION['usuario'],$_POST["seleccionado"]);
+    
+    $_SESSION['confirmarReserva'] = serialize($resultado);
+
+    header("Location: ../../presentacion/paginas/socio/index.php?pag=reservar")
 ?>
