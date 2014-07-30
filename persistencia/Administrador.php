@@ -23,6 +23,17 @@ class Administrador extends Conexion {
         return true;
     }
 
+    //Me dan el codigo material, buscamos el primer codigo ejemplar disponible
+    
+    public function codigoEjemplar($codigo_material){
+        
+        return $this->escalar(" SELECT codigo_ejem
+                                FROM ejemplar_material
+                                WHERE codigo_material=$codigo_material AND cod_est=1");
+        
+        
+    }
+    
     //Se editan los datos de la tabla usuario desde la cedula
     public function editarUsuario($ci, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email,$telefono1,$telefono2,$telefono,$celular) {
         $this->consultar("UPDATE usuario 
@@ -96,7 +107,7 @@ class Administrador extends Conexion {
 
     //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial() {
-        $stmt = $this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
+        $stmt = $this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material WHERE cod_est=1 GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta = array();
 
         $i = 0;
@@ -172,7 +183,7 @@ class Administrador extends Conexion {
 
         $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
-                            WHERE codigo_material=$codigoEjemplar");
+                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
@@ -180,16 +191,10 @@ class Administrador extends Conexion {
     }
 
     public function buscarLibro($codigo_ejemplar){
-        $stmt=$this->consultar("  SELECT material.nombre 
-                            FROM ejemplar_material INNER material ON ejemplar_material.codigo_material=material.codigo_material 
+        return $this->escalar("  SELECT material.nombre 
+                            FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material 
                             WHERE ejemplar_material.codigo_ejem=$codigo_ejemplar");
-        $fila = $stmt->fetch(PDO::FETCH_NUM);
-        $respuesta ="";
 
-        foreach ($stmt as $fila) {
-            $respuesta = $fila[0];
-    }
-        return $respuesta;
     }
             
     
