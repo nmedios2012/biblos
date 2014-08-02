@@ -1,5 +1,5 @@
 <?php
-
+//Script que realizará conexiones con informix
 abstract class Conexion {
 
     private $conexion; //Atributos de la clase conexion
