@@ -18,6 +18,9 @@
         $libro=$admin->buscarLibro($codigoEjemplar);
         
         $_SESSION["titulo"]=$libro;
+        
+        
+        
         header("Location: ../../presentacion/paginas/administrador/index.php?pag=confirmacion_prestamo");
         
         

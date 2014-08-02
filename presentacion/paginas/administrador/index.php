@@ -16,10 +16,14 @@
 <link 
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+<link href="../../css/jquery-ui.css" rel="stylesheet" type="text/css">
 <link href="../../css/admin.css" rel="stylesheet" type="text/css">
+
+
+
 <script type="text/javascript" src="../../js/jquery.js"></script>
 <script type="text/javascript" src="../../js/administrador.js"></script>
-
+<script type="text/javascript" src="../../js/jquery-ui.min.js"></script>
 </head>
 
 <body>

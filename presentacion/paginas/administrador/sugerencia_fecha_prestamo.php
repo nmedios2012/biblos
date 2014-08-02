@@ -1,3 +1,7 @@
+
+
+
+
 <?php
 if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
@@ -6,6 +10,9 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     //$mensaje=$_SESSION["mensaje"];
     $mensaje="";
    $fecha=$_SESSION["fecha"];
+   $mes=$_SESSION["mes"]-1;
+   $dia=$_SESSION["dia"];
+   $anio=$_SESSION["anio"];
    $codigo=$_SESSION["codigo"];
    $_SESSION["ci"]=$ci;
     $activar = "";
@@ -17,7 +24,9 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $codigo="";
     $activar = " disabled='disabled' ";
     $mensaje="";
-
+    $mes="";
+    $dia="";
+    $anio="";
     $fecha="";
 
 }
@@ -68,6 +77,17 @@ $codigoEjemplar=$_SESSION["codigo"];
 <div id="ejemplar">
     Codigo Ejemplar: <?php echo $codigo; ?><br/>
     Fecha de sugerencia:<?php echo $fecha; ?>
+    <div id="datepicker"></div>
+    <script>
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "setDate", new Date( <?php echo $anio;?>, <?php echo $mes;?>, <?php echo $dia;?>) );
+    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ] );
+    $( "#datepicker" ).datepicker( "option", "firstDay", 1 );
+    $( "#datepicker" ).datepicker("option", "minDate", new Date() );
+    $( "#datepicker" ).datepicker( "option", "maxDate", "+1m" );
+    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Novviembre", "Diciembre"]);
+    
+</script>
 </div>
     
     
@@ -75,7 +95,21 @@ $codigoEjemplar=$_SESSION["codigo"];
 </div>
 <div>
     <form name="prestar" method="post" action="../../../negocio/administrador/AltaConfirmacionPrestamos.php">
-      
+          <div id="datepicker"></div>
+    <script>
+    $( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "setDate", new Date( <?php echo $anio;?>, <?php echo $mes;?>, <?php echo $dia;?>) );
+    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ] );
+    $( "#datepicker" ).datepicker( "option", "firstDay", 1 );
+    $( "#datepicker" ).datepicker("option", "minDate", new Date() );
+    $( "#datepicker" ).datepicker( "option", "maxDate", "+1m" );
+    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Novviembre", "Diciembre"]);
+    $('#datepicker').datepicker({
+    onSelect: function(dateText, inst) { 
+        alert("vxcvcxv");
+    }
+});
+</script>
     &nbsp;&nbsp; <input type="submit" value="Confirmar"/> 
 </form>
 &nbsp;&nbsp; <input type="button" value="Cancelar">		
