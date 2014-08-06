@@ -2,10 +2,10 @@
     <table border="1">
     <tr>
         
-        <td>Nombre</td>
-        <td>Año</td>
-        <td>Descripcion</td>
-        <td>Disponible</td>
+        <th>Nombre</th>
+        <th>Año</th>
+        <th>Descripcion</th>
+        <th>Prestamo Disponible</th>
     </tr>
 <?php
 

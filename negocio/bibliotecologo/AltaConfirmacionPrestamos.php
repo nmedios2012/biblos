@@ -7,13 +7,13 @@
         $admin=new Bibliotecologo();
         
         $fecha=$_SESSION["fecha"];
-        $ci=$_SESSION["ci"];
+        $documento=$_SESSION["ci"];
         $codigoEjemplar=$_SESSION["codigo"];
 
         
 
        
-        $admin->agregarPrestamo($ci, $codigoEjemplar, $fecha);
+        $admin->agregarPrestamo($documento, $codigoEjemplar, $fecha);
         //Falta actualizar el estadoi en ejemplar
         $libro=$admin->buscarLibro($codigoEjemplar);
         

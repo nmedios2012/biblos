@@ -171,9 +171,9 @@ class Bibliotecologo extends Conexion {
     }
     
     // Se busca un socio por número de documento
-    public function buscar($ci)
+    public function buscar($documento)
     {
-        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
+        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$documento' AND estado_logico='si'");
         $row=$stmt->fetch(PDO::FETCH_NUM);
         $respuesta=array();
         if ($row!=NULL){
@@ -203,7 +203,7 @@ class Bibliotecologo extends Conexion {
 
     }
     
-    public function buscarTelefono($ci) {
+    public function buscarTelefono($documento) {
         $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$documento AND estado_logico='si'");
         $fila = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
