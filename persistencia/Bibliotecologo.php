@@ -15,9 +15,15 @@ class Bibliotecologo extends Conexion {
 
     //Se guarda en la tabla usuario los datos
     public function agregarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
-        $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
-                                numero_apartamento,numero_puerta,e_mail,estado_logico)
-                                VALUES ($documento,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
+        $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
+                                VALUES ('$nombre','$apellido','$email','socio',$documento)
+                                ");
+
+        return true;
+    }
+     public function agregarCuenta_Usuario($documento, $nombre, $apellido, $email) {
+        $this->consultar("INSERT INTO usuarios (nombre,apeliido,usuario,rol,contrasenia)
+                                VALUES ('$nombre','$apellido','$email','socio',$documento)
                                 ");
 
         return true;
