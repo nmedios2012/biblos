@@ -46,14 +46,14 @@ class Bibliotecologo extends Conexion {
                               SET 
                           
                                 tel_usu=$telefono
-                          WHERE ci=$ci and tel_usu=$telefono1");
+                          WHERE ci=$documento and tel_usu=$telefono1");
         }
         if($telefono2!=$celular){
             $this->consultar("UPDATE tel_usuario
                               SET 
                           
                                 tel_usu=$celular
-                              WHERE ci=$ci and tel_usu=$telefono2");
+                              WHERE ci=$documento and tel_usu=$telefono2");
         }
         return true;
     }
