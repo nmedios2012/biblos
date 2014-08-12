@@ -12,7 +12,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 } else {
     $nombre = "";
     $apellido = "";
-    $ci = "";
+    $documento = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
     
@@ -51,7 +51,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 <form name="input" action="../../../negocio/bibliotecologo/buscar.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
-    <input type="hidden" name="pagina" value="prestamo" />
+    <input type="hidden" name="pagina" value="alta_prestamo" />
 </form>
 <div id="mensaje">
     
@@ -59,7 +59,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $ci; ?></label><br/>
+<p>CI : <label><?php echo $documento; ?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
 <p>Apellido : <label><?php echo $apellido; ?></label>
     <br />
@@ -74,7 +74,7 @@ $codigoEjemplar=$_SESSION["codigo"];
     
 </div>
 <div>
-    <form name="prestar" method="post" action="../../../negocio/bibliotecologo/eliminado.php">
+    <form name="prestar" method="post" action="../../../negocio/bibliotecologo/sugerenciaFechaPrestamo.php">
       
     &nbsp;&nbsp; <input type="submit" value="Prestar"/> 
 </form>

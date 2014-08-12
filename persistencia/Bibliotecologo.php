@@ -15,9 +15,15 @@ class Bibliotecologo extends Conexion {
 
     //Se guarda en la tabla usuario los datos
     public function agregarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
-        $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
-                                numero_apartamento,numero_puerta,e_mail,estado_logico)
-                                VALUES ($documento,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
+        $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
+                                VALUES ('$nombre','$apellido','$email','socio',$documento)
+                                ");
+
+        return true;
+    }
+     public function agregarCuenta_Usuario($documento, $nombre, $apellido, $email) {
+        $this->consultar("INSERT INTO usuarios (nombre,apeliido,usuario,rol,contrasenia)
+                                VALUES ('$nombre','$apellido','$email','socio',$documento)
                                 ");
 
         return true;
@@ -40,14 +46,14 @@ class Bibliotecologo extends Conexion {
                               SET 
                           
                                 tel_usu=$telefono
-                          WHERE ci=$ci and tel_usu=$telefono1");
+                          WHERE ci=$documento and tel_usu=$telefono1");
         }
         if($telefono2!=$celular){
             $this->consultar("UPDATE tel_usuario
                               SET 
                           
                                 tel_usu=$celular
-                              WHERE ci=$ci and tel_usu=$telefono2");
+                              WHERE ci=$documento and tel_usu=$telefono2");
         }
         return true;
     }
@@ -171,9 +177,9 @@ class Bibliotecologo extends Conexion {
     }
     
     // Se busca un socio por número de documento
-    public function buscar($ci)
+    public function buscar($documento)
     {
-        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
+        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$documento' AND estado_logico='si'");
         $row=$stmt->fetch(PDO::FETCH_NUM);
         $respuesta=array();
         if ($row!=NULL){
@@ -203,7 +209,7 @@ class Bibliotecologo extends Conexion {
 
     }
     
-    public function buscarTelefono($ci) {
+    public function buscarTelefono($documento) {
         $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$documento AND estado_logico='si'");
         $fila = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();

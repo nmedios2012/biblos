@@ -40,12 +40,14 @@ if (isset($_SESSION["editar"]) && $_SESSION["editar"] != NULL) {
             <option <?php echo (trim($ciudad)=="Treinta y Tres")? "selected='selected'":""; ?>value="Treinta y Tres">Treinta y Tres</option>
             
         </select>
-    </p><br/>
-    <p>Tel&eacute;fono <input type="text" name="telefono" size="11" maxlength="11">
-        &nbsp; Celular <input type="text" name="celular" size="9" maxlength="9">
+        </p><br/>
+        <input type="hidden" name="telefono1" value="<?php echo $telefono; ?>"/>
+        <input type="hidden" name="telefono2" value="<?php echo $celular; ?>"/>
+        <p>Tel&eacute;fono <input type="text" name="telefono" size="11" maxlength="11" value="<?php echo $telefono; ?>">
+        &nbsp; Tel&eacute;fono <input type="text" name="celular" size="9" maxlength="9" value="<?php echo $celular; ?>">
         &nbsp; Mail <input type="text" name="mail" size="30" maxlength="30"value="<?php echo $email; ?>"></p><br/>
-
-    <p>Agregar foto <input type="file" name="foto" />
+   
+        <p>Agregar foto <input type="file" name="foto" />
     </p>
     <?php
         if(isset($_SESSION["mensaje"])){

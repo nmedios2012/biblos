@@ -12,7 +12,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 } else {
     $nombre = "";
     $apellido = "";
-    $ci = "";
+    $documento = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
     
@@ -59,7 +59,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $ci; ?></label><br/>
+<p>CI : <label><?php echo $documento; ?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
 <p>Apellido : <label><?php echo $apellido; ?></label>
     <br />

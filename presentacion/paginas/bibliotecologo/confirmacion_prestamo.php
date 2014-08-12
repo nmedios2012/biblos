@@ -2,7 +2,7 @@
 <?php
 
     $fecha=$_SESSION["fecha"];
-    $ci=$_SESSION["ci"];
+    $documento=$_SESSION["ci"];
     $codigo=$_SESSION["codigo"];
     $titulo=$_SESSION["titulo"];
     
