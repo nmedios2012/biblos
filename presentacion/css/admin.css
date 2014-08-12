@@ -35,7 +35,7 @@ a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usu
 }
 /* ~~ Este contenedor de anchura fija rodea a todas las demás bloques ~~ */
 .container {
-	width: 960px;
+	width: auto;
 	background-color: #FFFFFF;
 	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
 }

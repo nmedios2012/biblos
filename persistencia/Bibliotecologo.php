@@ -15,15 +15,9 @@ class Bibliotecologo extends Conexion {
 
     //Se guarda en la tabla usuario los datos
     public function agregarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
-        $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido','$email','socio',$documento)
-                                ");
-
-        return true;
-    }
-     public function agregarCuenta_Usuario($documento, $nombre, $apellido, $email) {
-        $this->consultar("INSERT INTO usuarios (nombre,apeliido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido','$email','socio',$documento)
+        $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
+                                numero_apartamento,numero_puerta,e_mail,estado_logico)
+                                VALUES ($documento,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
                                 ");
 
         return true;
@@ -41,39 +35,41 @@ class Bibliotecologo extends Conexion {
                             numero_puerta=$nro_puerta,
                             e_mail='$email'
                            WHERE ci=$documento");
-        if($telefono1!=$telefono){
+        if ($telefono1 != $telefono) {
             $this->consultar("UPDATE tel_usuario
                               SET 
                           
                                 tel_usu=$telefono
-                          WHERE ci=$documento and tel_usu=$telefono1");
+                          WHERE ci=$ci and tel_usu=$telefono1");
         }
-        if($telefono2!=$celular){
+        if ($telefono2 != $celular) {
             $this->consultar("UPDATE tel_usuario
                               SET 
                           
                                 tel_usu=$celular
-                              WHERE ci=$documento and tel_usu=$telefono2");
+                              WHERE ci=$ci and tel_usu=$telefono2");
         }
         return true;
     }
-    
-    public function obtenerCodigoEjemplar($codigoMaterial){
-        $stmt=$this->consultar("SELECT codigo_ejem FROM ejemplar_material WHERE codigo_material=$codigoMaterial");
-        foreach ($stmt as $fila){
-               
-               return $fila[0];
+
+    public function obtenerCodigoEjemplar($codigoMaterial) {
+        $stmt = $this->consultar("SELECT codigo_ejem FROM ejemplar_material WHERE codigo_material=$codigoMaterial");
+        foreach ($stmt as $fila) {
+
+            return $fila[0];
         }
     }
-    public function agregarLibro($cod_mat,$isbn,$edicion,$est_log){
+
+    public function agregarLibro($cod_mat, $isbn, $edicion, $est_log) {
         $this->consultar("INSERT INTO libro (codigo_material,isbn,edicion,estado_logico) VALUES 
                          ($cod_mat,$isbn,$edicion,'$est_log')");
         return true;
     }
 
     public function agregarMaterial($cod_mat, $titulo, $anio, $com_gral, $est_log) {
-        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,cod_est,estado_logico) VALUES 
-                         ($cod_mat,'$titulo',$anio,'$com_gral',to_date(),1,'$est_log')");
+        $fecha = date("d/m/Y");
+        $this->consultar("INSERT INTO material (codigo_material,nombre,anio,comentario_general,fecha_alta,estado_logico) VALUES 
+                         ($cod_mat,'$titulo',$anio,'$com_gral','$fecha','$est_log')");
         return true;
     }
 
@@ -175,70 +171,65 @@ class Bibliotecologo extends Conexion {
 
         return true;
     }
-    
+
     // Se busca un socio por número de documento
-    public function buscar($documento)
-    {
-        $stmt=$this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$documento' AND estado_logico='si'");
-        $row=$stmt->fetch(PDO::FETCH_NUM);
-        $respuesta=array();
-        if ($row!=NULL){
-           $respuesta["ci"]=$row[0];
-           $respuesta["nombre"]=$row[1];
-           $respuesta["apellido"]=$row[2];
-           $respuesta["ciudad"]=$row[3];
-           $respuesta["calle"]=$row[4];
-           $respuesta["numero_apartamento"]=$row[5];
-           $respuesta["numero_puerta"]=$row[6];
-           $respuesta["email"]=$row[7];
-           if (file_exists("../../presentacion/imagenes/fotousuario/".$row[0].".jpg")){
-               $respuesta["foto"]=$row[0].".jpg";
-           }
-           else
-           {
-               $respuesta["foto"]="silueta.jpg";
-           }
+    public function buscar($ci) {
+        $stmt = $this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+        if ($row != NULL) {
+            $respuesta["ci"] = $row[0];
+            $respuesta["nombre"] = $row[1];
+            $respuesta["apellido"] = $row[2];
+            $respuesta["ciudad"] = $row[3];
+            $respuesta["calle"] = $row[4];
+            $respuesta["numero_apartamento"] = $row[5];
+            $respuesta["numero_puerta"] = $row[6];
+            $respuesta["email"] = $row[7];
+            if (file_exists("../../presentacion/imagenes/fotousuario/" . $row[0] . ".jpg")) {
+                $respuesta["foto"] = $row[0] . ".jpg";
+            } else {
+                $respuesta["foto"] = "silueta.jpg";
+            }
         }
         return $respuesta;
     }
-    
-    public function buscarLibro($codigo_ejemplar){
+
+    public function buscarLibro($codigo_ejemplar) {
         return $this->escalar("  SELECT material.nombre 
                             FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material 
                             WHERE ejemplar_material.codigo_ejem=$codigo_ejemplar");
-
     }
-    
-    public function buscarTelefono($documento) {
+
+    public function buscarTelefono($ci) {
         $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$documento AND estado_logico='si'");
         $fila = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
-        
+
         foreach ($stmt as $fila) {
             $respuesta[count($respuesta)] = $fila[0];
         }
         return $respuesta;
     }
-    
-    public function eliminar($ci){
+
+    public function eliminar($ci) {
         $this->consultar("  UPDATE usuario 
                             SET
                                 estado_logico='no',
                                 fecha_borrado=today
                             WHERE ci=$documento");
-                                
-        
+
+
         return true;
     }
-    
-    public function agregarPrestamo($documento,$codigoEjemplar,$fecha){
-        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
+
+    public function agregarPrestamo($documento, $codigoEjemplar, $fecha) {
+        $codigo_conservacion = $this->escalar("  SELECT first 1 mantiene.codigo_conservacion
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
-        
+
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($documento,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
-
     }
 
     //Se devuelve la lista de materiales
@@ -348,58 +339,76 @@ class Bibliotecologo extends Conexion {
     }
 
     public function asignarUsuarioCurso($ci, $codCurso) {
-
-      $this->consultar("INSERT INTO pertenece (ci,codigo_curso,tipo_usuario) VALUES($ci,$codCurso,'socio')");
-        
-//        
-//        
-//ci                   integer                                 no
-//codigo_curso         integer                                 no
-//fecha_alta           date                                    no
-//fecha_baja           date                                    yes
-//tipo_usuario         char(20)                                no
-
-
-
+        $this->consultar("insert into pertenece (ci,codigo_curso,tipo_usuario) values ($ci,$codCurso,'socio');");
         return true;
     }
 
     public function cargarCursos() {
 
         $stmt = $this->consultar("select * from curso;");
-//        $stmt->fetch(PDO::FETCH_NUM);
-                
-//        if ($stmt->fetchColumn() > 0) {
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo_curso'] = $fila[0];
+            $dato['nombre'] = $fila[1];
+            $dato['turno'] = $fila[2];
+            $dato['grupo'] = $fila[3];
+            $dato['egresado'] = $fila[4];
+            $dato['estado_logico'] = $fila[5];
+            $dato['fecha_borrado'] = $fila[6];
+            $respuesta[$i] = $dato;
 
-            $respuesta = array();
-            $i = 0;
-            foreach ($stmt as $fila) {
-                $dato = array();
-                $dato['codigo_curso'] = $fila[0];
-                $dato['nombre'] = $fila[1];
-                $dato['turno'] = $fila[2];
-                $dato['grupo'] = $fila[3];
-                $dato['egresado'] = $fila[4];
-                $dato['estado_logico'] = $fila[5];
-                $dato['fecha_borrado'] = $fila[6];
-                $respuesta[$i] = $dato;
+            $i++;
+        }
+        return $respuesta;
+    }
 
-                $i++;
-            }
-            return $respuesta;
-//        } else {
-//            return "ERROR";
-//        }
+    public function listarMateriales() {
 
+        $stmt = $this->consultar("select * from material;");
 
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo_material'] = $fila[0];
+            $dato['nombre'] = $fila[1];
+            $dato['anio'] = $fila[2];
+            $dato['comentario_general'] = $fila[3];
+            $dato['fecha_alta'] = $fila[4];
+            $dato['fecha_baja'] = $fila[5];
+            $dato['estado_logico'] = $fila[6];
+            $dato['fecha_borrado'] = $fila[7];
+            $respuesta[$i] = $dato;
 
-//codigo_curso         integer                                 no
-//nombre               char(20)                                no
-//turno                char(10)                                no
-//grupo                char(10)                                no
-//egresado             char(2)                                 no
-//estado_logico        char(2)                                 no
-//fecha_borrado        datetime year to minute                 yes
+            $i++;
+        }
+        return $respuesta;
+    }
+
+    public function cargarEstadoEjemplar() {
+
+        $stmt = $this->consultar("select * from estado;");
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['cod_est'] = $fila[0];
+            $dato['estado_anterior'] = $fila[1];
+            $dato['estado_logico'] = $fila[2];
+            $dato['fecha_borrado'] = $fila[3];
+            $respuesta[$i] = $dato;
+            $i++;
+        }
+        return $respuesta;
+    }
+
+    public function nuevoEjemplar($cod_material, $cod_estado) {
+        $fecha = date("d/m/Y");
+        $this->consultar("insert into ejemplar_material (cod_est,codigo_ejem,codigo_material,fecha_alta) 
+                          values ($cod_estado,0,$cod_material,'$fecha')");
+        return true;
     }
 
 }

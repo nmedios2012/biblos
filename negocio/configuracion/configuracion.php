@@ -19,8 +19,8 @@
         
         
         
-        define("USUARIO_SALA","bibliotecologo");
-        define("PASS_USALA","bibliotecologo");
+        define("USUARIO_SALA","administrador");
+        define("PASS_USALA","administrador");
 //        define("USUARIO_SALA","usuario_sala");
 //        define("PASS_USALA","usuariosala");
 ?>

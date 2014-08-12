@@ -34,9 +34,9 @@ if ($_SESSION["tipo"] != "bibliotecologo")
 
             function checkTime(i) {
                 if (i < 10) {
-                    i = "0" + i;
+                    i = "0" + i
                 }
-                 // add zero in front of numbers < 10
+                ;  // add zero in front of numbers < 10
                 return i;
             }
         </script>
@@ -77,9 +77,6 @@ if ($_SESSION["tipo"] != "bibliotecologo")
 
                             <li>
                                 <a href="../../../negocio/bibliotecologo/listadoUsuario.php">Listar socios</a>
-                            </li>
-                            <li>
-                                <a href="../../../negocio/bibliotecologo/listadoMateriales.php">Listar materiales</a>
                             </li>
                             <li>
                                 <a href="../../../negocio/bibliotecologo/altaprestamo.php">Pr&eacute;stamo</a>
