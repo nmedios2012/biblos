@@ -34,9 +34,9 @@ if ($_SESSION["tipo"] != "bibliotecologo")
 
             function checkTime(i) {
                 if (i < 10) {
-                    i = "0" + i
+                    i = "0" + i;
                 }
-                ;  // add zero in front of numbers < 10
+                 // add zero in front of numbers < 10
                 return i;
             }
         </script>
@@ -53,6 +53,7 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                 if ($_SESSION['tipo']) { //Si hay un usuario lo mostramos
                     echo" <strong>USUARIO: " . $_SESSION['usuario'] . "<BR/>   ROL: " . $_SESSION['tipo'] . "</strong><br />";
                 }
+                echo date("d/m/Y");
                 ?>
                 <div id="clock" align="right"/>
 
@@ -98,7 +99,11 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                     </li>
                     <li><a href='#'><span>Materiales</span></a>
                         <ul>
-                            <li><a href="index.php?pag=a_l">Alta libros</a></li>
+                            <li><a href="index.php?pag=a_l">Alta libros</a>
+                                <ul>
+                                    <li><a href="../../../negocio/bibliotecologo/altaEjemplares.php">Alta Ejemplares</a></li>
+                                </ul>
+                            </li>
                             <li><a href="index.php?pag=a_r">Alta revistas</a></li>
                             <li><a href="index.php?pag=a_f">Alta fotocopias</a></li>
                             <li><a href="index.php?pag=a_o">Alta otros</a></li>
@@ -128,8 +133,8 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                 <address>
                     Contenido de dirección
                     <?php
-                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
-                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
+//                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
+//                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
                     ?>
                 </address>
             </footer>
