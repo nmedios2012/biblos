@@ -201,7 +201,7 @@ class Bibliotecologo extends Conexion {
                             WHERE ejemplar_material.codigo_ejem=$codigo_ejemplar");
     }
 
-    public function buscarTelefono($ci) {
+    public function buscarTelefono($documento) {
         $stmt = $this->consultar("SELECT tel_usu FROM tel_usuario WHERE ci=$documento AND estado_logico='si'");
         $fila = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();

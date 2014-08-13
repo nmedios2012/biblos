@@ -42,7 +42,7 @@
 
         <tbody>    
             <?php
-            $resultado = unserialize($_SESSION['listadoUsuarios']);
+            $resultado = unserialize($_SESSION['probando']);
 //            unset($_SESSION['listadoUsuarios']);
             $cantidad = count($resultado);
 

@@ -19,6 +19,6 @@
 
 <div>
     Falta actualizar a la tabla ejemplar_material dla columna estado
-    Se realizo exitosamente el prestamos para la cedula <?php echo $ci; ?> y el titulo del libro es  <?php echo $titulo; ?> con el codigo <?php echo $codigo; ?>
+    Se realizo exitosamente el prestamos para la cedula <?php echo $documento; ?> y el titulo del libro es  <?php echo $titulo; ?> con el codigo <?php echo $codigo; ?>
     <br/>Debe devolver para el <?php echo $fecha; ?>
 </div>
