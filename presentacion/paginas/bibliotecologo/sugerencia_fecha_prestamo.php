@@ -7,7 +7,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $mensaje="";
    $fecha=$_SESSION["fecha"];
    $codigo=$_SESSION["codigo"];
-   $_SESSION["ci"]=$ci;
+   $_SESSION["ci"]=$documento;
     $activar = "";
     
 } else {
@@ -61,7 +61,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $ci; ?></label><br/>
+<p>CI : <label><?php echo $documento; ?></label><br/>
     <br />
     
 </div>

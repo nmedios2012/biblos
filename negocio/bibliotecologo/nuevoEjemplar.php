@@ -12,5 +12,5 @@ extract($_POST);
 //echo"";
 //echo $_POST['codigoEstado'];
 $resultado = $admin->nuevoEjemplar($_POST['codigoMat'], $_POST['codigoEstado']);
-echo 'SE EJECUTO LA PUTA QUE TE PARIO';
+echo 'SE EJECUTO CORRECTAMENTE!!';
 ?>

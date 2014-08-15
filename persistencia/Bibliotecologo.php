@@ -40,14 +40,14 @@ class Bibliotecologo extends Conexion {
                               SET 
                           
                                 tel_usu=$telefono
-                          WHERE ci=$ci and tel_usu=$telefono1");
+                          WHERE ci=$documento and tel_usu=$telefono1");
         }
         if ($telefono2 != $celular) {
             $this->consultar("UPDATE tel_usuario
                               SET 
                           
                                 tel_usu=$celular
-                              WHERE ci=$ci and tel_usu=$telefono2");
+                              WHERE ci=$documento and tel_usu=$telefono2");
         }
         return true;
     }
@@ -173,8 +173,8 @@ class Bibliotecologo extends Conexion {
     }
 
     // Se busca un socio por número de documento
-    public function buscar($ci) {
-        $stmt = $this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$ci' AND estado_logico='si'");
+    public function buscar($documento) {
+        $stmt = $this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE ci='$documento' AND estado_logico='si'");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
         if ($row != NULL) {
@@ -212,7 +212,7 @@ class Bibliotecologo extends Conexion {
         return $respuesta;
     }
 
-    public function eliminar($ci) {
+    public function eliminar($documento) {
         $this->consultar("  UPDATE usuario 
                             SET
                                 estado_logico='no',
@@ -338,8 +338,8 @@ class Bibliotecologo extends Conexion {
         return $respuesta;
     }
 
-    public function asignarUsuarioCurso($ci, $codCurso) {
-        $this->consultar("insert into pertenece (ci,codigo_curso,tipo_usuario) values ($ci,$codCurso,'socio');");
+    public function asignarUsuarioCurso($documento, $codCurso) {
+        $this->consultar("insert into pertenece (ci,codigo_curso,tipo_usuario) values ($documento,$codCurso,'socio');");
         return true;
     }
 
