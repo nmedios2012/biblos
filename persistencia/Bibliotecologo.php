@@ -23,12 +23,13 @@ class Bibliotecologo extends Conexion {
         return true;
     }
     //Se guarda en la tabla usuarios los datos para la cuenta
-    public function agregarCuenta_Usuario($documento,$nombre, $apellido, $mail) {
+    public function agregarCuenta_Usuario($nombre, $apellido, $mail,$passwd){
         $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido,'$mail','socio',$documento)");
+                                VALUES ('$nombre','$apellido,'$mail','socio',$passwd)");
 
         return true;
     }
+    
 
     //Se editan los datos de la tabla usuario desde la cedula
     public function editarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {

@@ -39,10 +39,15 @@
             if(isset($celular)){//si ingreso celular en el formulario alta usuario
                 $admin->insertarTelefono($documento, $celular);//Se guarda en la tabla de telefonos
             }
+           /* if(isset($documento)){//si ingreso celular en el formulario alta usuario
+                $admin->insertarpasswd($documento);//Se guarda en la tabla de telefonos
+            }*/
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
-            $_SESSION["mensaje"]="Se ingreso correctamente";
             //Crea una cuenta de usuario
             $admin->agregarCuenta_Usuario($documento,$nombre, $apellido, $mail);
+            $contrasenia = $_POST['$documento'];
+            $passwd = md5 ($contrasenia);
+            $_SESSION["mensaje"]="Se ingreso correctamente";
         
        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s")
         
