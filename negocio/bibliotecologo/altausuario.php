@@ -44,10 +44,9 @@
             }*/
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             //Crea una cuenta de usuario
-            $admin->agregarCuenta_Usuario($documento,$nombre, $apellido, $mail);
-            $contrasenia = $_POST['$documento'];
-            $passwd = md5 ($contrasenia);
+            $admin->agregarCuenta_Usuario($nombre, $apellido, $mail);
             $_SESSION["mensaje"]="Se ingreso correctamente";
+            $admin->encriptar($documento,$passwd);
         
        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s")
         
