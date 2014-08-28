@@ -23,18 +23,22 @@ class Bibliotecologo extends Conexion {
         return true;
     }
     //Se guarda en la tabla usuarios los datos para la cuenta
-    public function agregarCuenta_Usuario($nombre, $apellido, $mail){
+    public function agregarCuenta_Usuario($nombre, $apellido, $mail, $documento, $passwd, $encript){
+        $passwd = $documento; 
+        $encript = md5 ("$passwd");
         $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido,'$mail','socio')");
+                                VALUES ('$nombre','$apellido,'$mail','socio', '$encript')");
 
         return true;
     }
-    public function encriptar($nombre, $apellido, $mail){
-        $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido,'$mail','socio')");
+    //Script de encriptación de contraseña.
+    /*public function encriptar($documento,$passwd){
+        $passwd = md5($documento);
+        $this->consultar("INSERT INTO usuarios (contrasenia)
+                                VALUES ('$passwd')");
 
         return true;
-    }
+    }*/
 
     //Se editan los datos de la tabla usuario desde la cedula
     public function editarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {

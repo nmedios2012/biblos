@@ -36,7 +36,7 @@
         </select>
         </p><br/>
     <p>Tel&eacute;fono <input type="text" name="telefono" size="11" maxlength="11">
-        &nbsp; Celular <input type="text" name="celular" size="9" maxlength="9">
+        &nbsp; Celular <input type="text" name="celular" size="9" maxlength="9"></p><br/>
         &nbsp; Mail <input type="text" name="mail" size="30" maxlength="30"></p><br/>
 
     <p>Agregar foto <input type="file" name="foto" />
