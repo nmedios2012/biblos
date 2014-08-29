@@ -70,6 +70,9 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                                 <a href="index.php?pag=b_s">Baja socio</a>
                             </li>
                             <li>
+                                <a href="index.php?pag=cambio_contrasenia">Cambio de Password</a>
+                            </li>
+                            <li>
                                 <!--index.php?pag=usuarioACurso-->
                                 <!--<a href="index.php?pag=usuarioACurso">Asignar Usuario a Curso</a>-->
                                 <a href="../../../negocio/bibliotecologo/usuarioACurso.php">Asignar Usuario a Curso</a>
