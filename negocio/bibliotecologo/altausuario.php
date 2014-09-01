@@ -44,7 +44,7 @@
             //Crea una cuenta de usuario
             $admin->agregarCuenta_Usuario($nombre, $apellido, $mail, $documento, $passwd, $encript);
             $_SESSION["mensaje"]="Se ingreso correctamente";
-            //$admin->encriptar($documento,$passwd);
+            
         
        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s")
         

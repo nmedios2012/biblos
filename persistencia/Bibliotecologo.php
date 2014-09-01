@@ -30,12 +30,12 @@ class Bibliotecologo extends Conexion {
         return true;
     }
     //Script de encriptación de contraseña.
-    public function encriptar($passwd,$encrypt_passwd){
+    public function encriptar($usuario,$passwd,$encrypt_passwd){
         $encrypt_passwd = md5($passwd);
         $this->consultar("UPDATE usuarios 
                           SET
                             contrasenia='$encrypt_passwd' 
-                          WHERE usuario='fluzardo@icm.com.uy'");
+                          WHERE usuario='$usuario'");
 
         return true;
     }
