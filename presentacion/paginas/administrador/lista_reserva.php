@@ -30,7 +30,7 @@
                 <td>Num.Reserva</td>
                 <td>Fec.Reserva</td>
                 <td>Fec.FinReserva</td>    
-
+                <td></td>
             </tr> 
         </thead>
 
@@ -44,7 +44,7 @@
                 <td>Num.Reserva</td>
                 <td>Fec.Reserva</td>
                 <td>Fec.FinReserva</td>    
-                
+                <td><a href="">Prestar</td>
             </tr> 
         </tfoot>
 
@@ -65,7 +65,7 @@
                 echo "<td>" . $resultado[$i]["nro_reserva"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_inicio"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_fin"] . "</td>";
-
+                echo "<td><a href='../../../negocio/administrador/altaprestamoporreserva.php?r=".  $resultado[$i]["nro_reserva"] . "&c=" . $resultado[$i]["ci"] . "'>Prestar</a></td>";    
                 echo "</tr>";
             }
             ?>

@@ -20,6 +20,9 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     
 }
 $codigoEjemplar=$_SESSION["codigo"];
+
+
+
 ?>
 <script type="text/javascript">
     $(document).ready(inicializar);
@@ -48,6 +51,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
+
 <form name="input" action="../../../negocio/administrador/buscarSocioPrestamo.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
@@ -84,3 +88,4 @@ $codigoEjemplar=$_SESSION["codigo"];
 ?>
     
 </div>
+

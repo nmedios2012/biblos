@@ -110,9 +110,9 @@ class Administrador extends Conexion {
         $stmt = $this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material WHERE cod_est=1 GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta = array();
 
-        $i = 0;
-        foreach ($stmt as $fila) {
-            $dato = array();
+            $i = 0;
+            foreach ($stmt as $fila) {
+                $dato = array();
             $dato["nombre"] = $fila[0];
             $dato["anio"] = $fila[1];
             $dato["descripcion"] = $fila[2];
@@ -120,16 +120,36 @@ class Administrador extends Conexion {
             if ($fila[3] > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
                 $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>En DOMICILIO</a><a href='#'>En SALA</a>";
-            } else {
+                } else {
 
                 $dato["disponibilidad"] = "disponibleSala";
                 $dato["mostrardisponibilidad"] = "<a href='#'>En SALA</a>";
+                }
+
+                $respuesta[$i] = $dato;
+
+                $i++;
             }
+        
 
-            $respuesta[$i] = $dato;
-            $i++;
+        return $respuesta;
+    }
+    
+    
+    //Se devuelve la lista de materiales
+    public function obtenerReservar($nro) {
+        $stmt = $this->consultar("SELECT ci,codigo_material FROM reserva WHERE nro_reserva=$nro");
+                $row= $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+        
+        if ($row != NULL) {
+            
+            $respuesta["ci"] = $row[0];
+            $respuesta["codigo_material"] = $row[1];
+            
+            
+
         }
-
         return $respuesta;
     }
 
@@ -187,6 +207,7 @@ class Administrador extends Conexion {
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+
 
     }
 

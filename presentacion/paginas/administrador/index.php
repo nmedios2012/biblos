@@ -38,6 +38,7 @@
         <li><a href="index.php?pag=editar_socio_admin">Buscar/Editar/Eliminar Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoUsuario.php">Listado Socio</a></li>
         <li><a href="../../../negocio/administrador/listadoMateriales.php">Listado Materiales</a></li>
+        <li><a href="../../../negocio/administrador/listadoReserva.php">Listado Reserva</a></li>
         <li><a href="../../../negocio/administrador/altaprestamo.php">Pr&eacute;stamos</a></li>
         <li><a href="../../../negocio/desloguearse.php">Cerrar session</a></li>
         

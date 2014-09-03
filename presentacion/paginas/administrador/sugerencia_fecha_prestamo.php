@@ -3,6 +3,18 @@
 
 
 <?php
+
+if(isset($_GET["c"])){
+    $ci=$_SESSION["ci"];
+    $fecha=$_SESSION["fecha"];
+   $mes=$_SESSION["mes"]-1;
+   $dia=$_SESSION["dia"];
+   $anio=$_SESSION["anio"];
+   $codigo=$_SESSION["codigo"];
+   $foto=$_SESSION["foto"];
+   $mensaje="";
+}
+else
 if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
     extract($_SESSION["resultado"]);
@@ -118,3 +130,9 @@ $codigoEjemplar=$_SESSION["codigo"];
 ?>
     
 </div>
+<?php
+    if(isset($_GET["c"]))
+    {
+        echo "<script type='text/javascript'>$('#frmBuscar').hide();</script>";
+    }
+?>
