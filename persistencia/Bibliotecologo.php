@@ -315,7 +315,7 @@ class Bibliotecologo extends Conexion {
         $stmt = $this->consultar("
             SELECT 
                 res.ci,
-                cur.nombre,
+               
                 mate.nombre,
                 res.edicion,
                 res.isbn,
@@ -325,7 +325,6 @@ class Bibliotecologo extends Conexion {
                 res.estado_logico,
                 res.fecha_borrado
             FROM reserva res 
-            LEFT OUTER JOIN curso cur ON cur.codigo_curso = res.codigo_curso
             LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
 
         if ($stmt->fetchColumn() > 0) {

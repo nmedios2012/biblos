@@ -58,7 +58,7 @@
 
                 echo "<tr>";
                 echo "<td>" . $resultado[$i]["ci"] . "</td>";
-                echo "<td>" . $resultado[$i]["cur.nombre"] . "</td>";
+                //echo "<td>" . $resultado[$i]["cur.nombre"] . "</td>";
                 echo "<td>" . $resultado[$i]["mate.nombre"] . "</td>";
                 echo "<td>" . $resultado[$i]["edicion"] . "</td>";
                 echo "<td>" . $resultado[$i]["isbn"] . "</td>";
