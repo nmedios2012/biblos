@@ -335,15 +335,15 @@ class Bibliotecologo extends Conexion {
                 $dato = array();
 
                 $dato["ci"] = $fila[0];
-                $dato["cur.nombre"] = $fila[1];
-                $dato["mate.nombre"] = $fila[2];
-                $dato["edicion"] = $fila[3];
-                $dato["isbn"] = $fila[4];
-                $dato["nro_reserva"] = $fila[5];
-                $dato["fecha_inicio"] = $fila[6];
-                $dato["fecha_fin"] = $fila[7];
-                $dato["estado_logico"] = $fila[8];
-                $dato["fecha_borrado"] = $fila[9];
+                //$dato["cur.nombre"] = $fila[1];
+                $dato["mate.nombre"] = $fila[1];
+                $dato["edicion"] = $fila[2];
+                $dato["isbn"] = $fila[3];
+                $dato["nro_reserva"] = $fila[4];
+                $dato["fecha_inicio"] = $fila[5];
+                $dato["fecha_fin"] = $fila[6];
+                $dato["estado_logico"] = $fila[7];
+                $dato["fecha_borrado"] = $fila[8];
 
                 $respuesta[$i] = $dato;
 
