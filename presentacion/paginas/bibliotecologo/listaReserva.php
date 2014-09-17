@@ -23,7 +23,6 @@
         <thead>
             <tr>
                 <td>Cedula</td>
-                
                 <td>Libro</td>
                 <td>Edicion</td>
                 <td>ISBN</td>
@@ -37,7 +36,6 @@
         <tfoot>
             <tr>
                 <td>Cedula</td>
-                
                 <td>Libro</td>
                 <td>Edicion</td>
                 <td>ISBN</td>
@@ -65,7 +63,7 @@
                 echo "<td>" . $resultado[$i]["nro_reserva"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_inicio"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_fin"] . "</td>";
-
+                echo "<td><a href='../../../negocio/bibliotecologo/altaprestamoporreserva.php?r=".  $resultado[$i]["nro_reserva"] . "&c=" . $resultado[$i]["ci"] . "'>Prestar</a></td>";
                 echo "</tr>";
             }
             ?>

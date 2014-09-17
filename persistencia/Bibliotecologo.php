@@ -358,6 +358,23 @@ class Bibliotecologo extends Conexion {
         $this->consultar("insert into pertenece (ci,codigo_curso,tipo_usuario) values ($documento,$codCurso,'socio');");
         return true;
     }
+    
+    //Se devuelve la lista de materiales
+    public function obtenerReservar($nro) {
+        $stmt = $this->consultar("SELECT ci,codigo_material FROM reserva WHERE nro_reserva=$nro");
+                $row= $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+        
+        if ($row != NULL) {
+            
+            $respuesta["ci"] = $row[0];
+            $respuesta["codigo_material"] = $row[1];
+            
+            
+
+        }
+        return $respuesta;
+    }
 
     public function cargarCursos() {
 

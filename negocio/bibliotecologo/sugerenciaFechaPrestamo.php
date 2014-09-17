@@ -14,6 +14,9 @@
     }
     
     $_SESSION["fecha"] =date("d-m-Y",$fecha_devolucion);
+    $_SESSION["dia"] =date("d",$fecha_devolucion);
+    $_SESSION["mes"] =date("m",$fecha_devolucion);
+    $_SESSION["anio"] =date("Y",$fecha_devolucion);
     header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=sugerencia_fecha_prestamo");
 ?>
 
