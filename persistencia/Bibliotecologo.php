@@ -315,7 +315,6 @@ class Bibliotecologo extends Conexion {
         $stmt = $this->consultar("
             SELECT 
                 res.ci,
-               
                 mate.nombre,
                 res.edicion,
                 res.isbn,
@@ -327,23 +326,23 @@ class Bibliotecologo extends Conexion {
             FROM reserva res 
             LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
 
-        if ($stmt->fetchColumn() > 0) {
+        if ($stmt->fetchColumn() > 1) {
 
             $respuesta = array();
-            $i = 0;
+            $i = 1;
             foreach ($stmt as $fila) {
                 $dato = array();
 
-                $dato["ci"] = $fila[0];
+                $dato["ci"] = $fila[1];
                 //$dato["cur.nombre"] = $fila[1];
-                $dato["mate.nombre"] = $fila[1];
-                $dato["edicion"] = $fila[2];
-                $dato["isbn"] = $fila[3];
-                $dato["nro_reserva"] = $fila[4];
-                $dato["fecha_inicio"] = $fila[5];
-                $dato["fecha_fin"] = $fila[6];
-                $dato["estado_logico"] = $fila[7];
-                $dato["fecha_borrado"] = $fila[8];
+                $dato["mate.nombre"] = $fila[2];
+                $dato["edicion"] = $fila[3];
+                $dato["isbn"] = $fila[4];
+                $dato["nro_reserva"] = $fila[5];
+                $dato["fecha_inicio"] = $fila[6];
+                $dato["fecha_fin"] = $fila[7];
+                $dato["estado_logico"] = $fila[8];
+                $dato["fecha_borrado"] = $fila[9];
 
                 $respuesta[$i] = $dato;
 

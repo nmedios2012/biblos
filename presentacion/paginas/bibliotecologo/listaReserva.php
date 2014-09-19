@@ -52,7 +52,7 @@
 //    unset($_SESSION['listadoResBiblo']);
             $cantidad = count($resultado);
 
-            for ($i = 0; $i < $cantidad; $i++) {
+            for ($i = 1; $i < $cantidad; $i++) {
 
                 echo "<tr>";
                 echo "<td>" . $resultado[$i]["ci"] . "</td>";
