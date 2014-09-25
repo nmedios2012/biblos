@@ -443,6 +443,17 @@ class Bibliotecologo extends Conexion {
         return true;
     }
 
+    //Me dan el codigo material, buscamos el primer codigo ejemplar disponible
+    
+    public function codigoEjemplar($codigo_material){
+        
+        return $this->escalar(" SELECT codigo_ejem
+                                FROM ejemplar_material
+                                WHERE codigo_material=$codigo_material AND cod_est=1");
+        
+        
+    }
+
 }
 
 ?>

@@ -69,8 +69,4 @@
             ?>
         </tbody>
     </table>
-    <?php
-    //echo $resultado[0]["mate.nombre"];
-    //echo $resultado[1]["mate.nombre"];
-    ?>
 </fieldset>

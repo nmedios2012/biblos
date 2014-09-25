@@ -20,6 +20,9 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     
 }
 $codigoEjemplar=$_SESSION["codigo"];
+
+
+
 ?>
 <script type="text/javascript">
     $(document).ready(inicializar);
