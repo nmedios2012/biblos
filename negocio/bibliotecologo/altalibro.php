@@ -10,4 +10,3 @@
         header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_l")
             
 ?>
-

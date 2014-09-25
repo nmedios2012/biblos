@@ -42,7 +42,7 @@
            
             $admin->agregarUsuario($documento, $nombre, $apellido, $ciudad,$direccion,$nro_apto,$nro_puerta,$mail);//Se guardar los datos restante en la tabla usuario
             //Crea una cuenta de usuario
-            $admin->agregarCuenta_Usuario($nombre, $apellido, $mail, $documento, $passwd, $encript);
+            $admin->agregarCuenta_Usuario($nombre, $apellido, $mail, $documento);
             $_SESSION["mensaje"]="Se ingreso correctamente";
             
         
