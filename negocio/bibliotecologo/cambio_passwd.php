@@ -7,7 +7,7 @@
         
         $admin=new Bibliotecologo();
         extract($_POST);
-        $admin->encriptar($usuario,$passwd,$encrypt_passwd);
+        $admin->encriptar($mail,$documento,$encrypt_passwd);
         header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=cambio_contrasenia")
         
 

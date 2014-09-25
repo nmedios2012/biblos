@@ -25,17 +25,17 @@ class Bibliotecologo extends Conexion {
     //Se guarda en la tabla usuarios los datos para la cuenta
     public function agregarCuenta_Usuario($nombre, $apellido, $mail, $documento){
         $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
-                                VALUES ('$nombre','$apellido,'$mail','socio', $documento)");
+                                VALUES ('$nombre','$apellido','$mail','socio', $documento)");
 
         return true;
     }
     //Script de encriptación de contraseña.
-    public function encriptar($usuario,$passwd,$encrypt_passwd){
+    public function encriptar($mail,$documento,$encrypt_passwd){
         $encrypt_passwd = md5($passwd);
         $this->consultar("UPDATE usuarios 
                           SET
                             contrasenia='$encrypt_passwd' 
-                          WHERE usuario='$usuario'");
+                          WHERE usuario='$mail'");
 
         return true;
     }
