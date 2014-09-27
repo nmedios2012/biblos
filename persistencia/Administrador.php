@@ -27,10 +27,14 @@ class Administrador extends Conexion {
     
     public function codigoEjemplar($codigo_material){
         
-        return $this->escalar(" SELECT codigo_ejem
-                                FROM ejemplar_material
-                                WHERE codigo_material=$codigo_material AND cod_est=1");
-        
+        return $this->escalar(" SELECT ce.codigo_ejem
+                                FROM ejemplar_material AS ce
+                                WHERE ce.codigo_material=$codigo_material AND ce.codigo_ejem
+                                      NOT IN (  SELECT ejemplar_material.codigo_ejem
+                                                FROM ejemplar_material INNER JOIN prestamos
+                                                ON ejemplar_material.codigo_ejem =prestamos.codigo_ejem
+                                                WHERE codigo_material=$codigo_material AND cod_est=1 AND
+                                                fecha_devolucion IS NULL)");
         
     }
     
@@ -107,7 +111,12 @@ class Administrador extends Conexion {
 
     //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial() {
-        $stmt = $this->consultar("SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material WHERE cod_est=1 GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
+        $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material 
+                                    FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material 
+                                    WHERE cod_est=1 AND NOT EXISTS( SELECT *
+                                                                    FROM prestamos
+                                                                    WHERE prestamos.codigo_ejem=ejemplar_material.codigo_ejem AND fecha_devolucion IS NULL)
+                                    GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta = array();
 
             $i = 0;
@@ -116,8 +125,18 @@ class Administrador extends Conexion {
             $dato["nombre"] = $fila[0];
             $dato["anio"] = $fila[1];
             $dato["descripcion"] = $fila[2];
+            
+            $numero=$this->escalar("SELECT COUNT(*) 
+                                    FROM reserva 
+                                    WHERE reserva.codigo_material=".$fila[4]
+                                          
+                    );
+            
+            //$cantidadReserva= $fila[3];
 
-            if ($fila[3] > 1) {
+            $cantidadReserva= $fila[3]-$numero;
+            
+            if ($cantidadReserva > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
                 $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>En DOMICILIO</a><a href='#'>En SALA</a>";
                 } else {
@@ -205,6 +224,12 @@ class Administrador extends Conexion {
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
+        echo "SELECT first 1 mantiene.codigo_conservacion
+                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC";
+        
+        echo "  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ";
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
 
