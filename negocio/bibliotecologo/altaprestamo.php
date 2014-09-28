@@ -21,5 +21,5 @@
     }
     
     $_SESSION["fecha"] =$fecha_devolucion;
-header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=alta_prestamo");
+    header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=alta_prestamo");
 ?>

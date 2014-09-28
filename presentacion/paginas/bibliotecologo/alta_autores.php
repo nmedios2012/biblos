@@ -1,8 +1,9 @@
 <p>ADMINISTRACI&Oacute;N DE ARTISTAS Y AUTORES - ALTA DE ARTISTAS Y AUTORES</p>
 		<form name="input" action="../../../negocio/bibliotecologo/artista_autor.php" method="post">
                 <p>C&oacute;digo Artista <input type="text" name="cod_art" size="6" maxlength="6"></p></br>
-		<p>Artista/Autor <input type="text" name="nom_art" size="20" maxlength="20">
-		&nbsp;&nbsp;Apellido <input type="text" name="ape_art" size="20" maxlength="20">
+		<p>Artista/Autor 1 <input type="text" name="art_1" size="20" maxlength="20">
+		<p>Artista/Autor 2 <input type="text" name="art_2" size="20" maxlength="20">
+                <p>Artista/Autor 3 <input type="text" name="art_3" size="20" maxlength="20">
                 <p>Nro Pa&iacute;s <input type="text" name="id_pais" size="4" maxlength="4">
                 <p>Nro Rol <input type="text" name="id_rol" size="4" maxlength="4">
                 &nbsp;&nbsp;Rol <input type="text" name="rol" size="15" maxlength="15"></p></br>
