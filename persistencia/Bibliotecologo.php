@@ -157,13 +157,14 @@ class Bibliotecologo extends Conexion {
     }
 
     public function agregarAutor($cod_art, $art_1, $art_2,$art_3, $id_pais, $fec_alta, $est_log) {
-        $this->consultar("INSERT INTO artista_autor (codigo_artista,autor_1,autor_2,autor_3,fecha_alta,estado_logico)
-                          VALUES ($cod_art,'$art_1','$art_2','$art_3',$id_pais,'$fec_alta,'$est_log')");
+        $this->consultar("INSERT INTO artista_autor (codigo_artista,autor_1,autor_2,autor_3,id_pais,
+                          fecha_alta,estado_logico)
+      VALUES ($cod_art,'$art_1','$art_2','$art_3',$id_pais,'$fec_alta','$est_log')");
     }
 
-    public function agregarRol_Autor($id_rol, $rol, $est_log) {
-        $this->consultar("INSERT INTO rol_autor (id_rol,nombre,estado_logico) 
-                          VALUES ($id_rol,'$rol','$est_log')");
+    public function agregarRol_Autor($id_rol, $cod_art, $est_log) {
+        $this->consultar("INSERT INTO contiene_rol (id_rol,codigo_artista,estado_logico) 
+                          VALUES ($id_rol,'$cod_art','$est_log')");
     }
 
     /* public function agregarPosterior($cod_cnsv,$nom_pst,$cod_pst,$est_log){
