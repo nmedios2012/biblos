@@ -24,10 +24,10 @@ class Socio extends Conexion {
 
         $cedula = $this->obtener($socio);
 
-        if ($cedula != NULL) {//&& $respuesta !=NULL
-            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);
+       /* if ($cedula != NULL) {//&& $respuesta !=NULL
+            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);*/
 
-            if ($cod_curso != NULL) {
+            if ($cedula != NULL) {
                 $edicion = $this->obtenerEdicionEjemplar($codigo_material);
 //$retornador=$socio ." ". $codigo_material ." ". $cedula ." ".$cod_curso ." ".$edicion;
                 if ($edicion != NULL) {
@@ -35,7 +35,7 @@ class Socio extends Conexion {
                     if ($isbn != NULL) {
 //                            $retornador = $cedula ." ". $codigo_material ." ". $cod_curso ." ". $edicion ." ". $isbn;
                         $this->consultar("INSERT INTO reserva (ci,codigo_material,edicion,isbn,nro_reserva,fecha_inicio,fecha_fin)
-                                      VALUES ($cedula,$codigo_material,$edicion,$isbn,0,'$fecha','$fechafin')");
+                                      VALUES ($cedula,$codigo_material,$edicion,'$isbn',0,'$fecha','$fechafin')");
                         $cod_ejemplar = $this->obtPriEjemSegunCodMatYEst($codigo_material, 1); //obtiene un disponible
                         $putaso = $this->cambiarEstadoEjemplar($cod_ejemplar, 3); //reservado
                         $retornador = "VERIFICACION CORRECTA " . "codigo ejemplar" . $cod_ejemplar . " codmaterial " . $codigo_material . $putaso;
@@ -43,7 +43,7 @@ class Socio extends Conexion {
                     }
                 }
             }
-        }else{
+        else{
             return "ERROR PROCESANDO LOS DATOS";
         }
 
