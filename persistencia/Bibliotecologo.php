@@ -328,7 +328,7 @@ class Bibliotecologo extends Conexion {
                 FROM reserva res 
                 LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
 
-        if ($stmt->fetchColumn() > 0) {
+        if ($stmt->fetchColumn() > 1) {
 
             $respuesta = array();
             $i = 0;

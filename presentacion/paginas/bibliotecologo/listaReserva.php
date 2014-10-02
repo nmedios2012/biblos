@@ -28,7 +28,8 @@
                 <td>ISBN</td>
                 <td>Num.Reserva</td>
                 <td>Fec.Reserva</td>
-                <td>Fec.FinReserva</td>    
+                <td>Fec.FinReserva</td>
+                <td>Préstamo</td>
 
             </tr> 
         </thead>
@@ -41,13 +42,15 @@
                 <td>ISBN</td>
                 <td>Num.Reserva</td>
                 <td>Fec.Reserva</td>
-                <td>Fec.FinReserva</td>    
+                <td>Fec.FinReserva</td>
+                <td>Préstamo</td>
                 
             </tr> 
         </tfoot>
 
         <tbody>    
-            <?php
+            <?php                 
+                                
             $resultado = unserialize($_SESSION['listadoResBiblo']);
 //    unset($_SESSION['listadoResBiblo']);
             $cantidad = count($resultado);
