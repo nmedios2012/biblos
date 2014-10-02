@@ -210,7 +210,7 @@ class Socio extends Conexion {
         $stmt = $this->consultar("
             SELECT 
                 res.ci,
-                cur.nombre,
+                
                 mate.nombre,
                 res.edicion,
                 res.isbn,
@@ -220,11 +220,11 @@ class Socio extends Conexion {
                 res.estado_logico,
                 res.fecha_borrado
             FROM reserva res 
-            LEFT OUTER JOIN curso cur ON cur.codigo_curso = res.codigo_curso
+            
             LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material
             WHERE res.ci=$ciSocio and res.fecha_fin > today");
 
-        if ($stmt->fetchColumn() > 0) {
+        if ($stmt->fetchColumn() > 1) {
 
             $respuesta = array();
             $i = 0;
