@@ -1,4 +1,10 @@
 <?php
+$codigoEjemplar=$_SESSION["codigo"];
+
+if(isset($_SESSION["error"])){
+    $mensaje="La cantidad de reservas mas prestamos superan lo permitido";
+}
+
 if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 
     extract($_SESSION["resultado"]);
@@ -19,7 +25,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     
     
 }
-$codigoEjemplar=$_SESSION["codigo"];
+
 
 
 
@@ -51,7 +57,13 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
+<?php
+    if(isset($mensaje)){
+        echo $mensaje;
+        unset($mensaje);
+    }
 
+?>
 <form name="input" action="../../../negocio/administrador/buscarSocioPrestamo.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
