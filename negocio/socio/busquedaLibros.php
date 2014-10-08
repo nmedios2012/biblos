@@ -15,7 +15,7 @@ echo $conReserva;
 echo 'PRESTAMO:';
 echo $conPrestamo;
 
-if (($conReserva + $conPrestamo) >= 2) {
+if (($conReserva + $conPrestamo) >= 3) {
     $resultadoReserva = $admin->obtenerReservaUsuario($_SESSION['usuario']);
     $_SESSION['reservasActivas'] = serialize($resultadoReserva);
     $resultadoPrestamo=$admin->obtenerPrestamoUsuario($_SESSION['usuario']);

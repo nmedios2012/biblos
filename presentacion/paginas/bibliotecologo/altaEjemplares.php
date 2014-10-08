@@ -109,9 +109,9 @@
                 echo "</select> </br>";
                 echo "<div>";
                 echo 'Nombre Material seleccionado: </br>';
-                echo "<input type='text' id='nomEjSel' name='nomEjSel'  ></br>";
+                echo "<input type='text' id='nomEjSel' name='nomEjSel'  readonly></br>";
                 echo 'Codigo Material seleccionado: </br>';
-                echo "<input type='text' id='codigoMat' name='codigoMat'  ></br>";
+                echo "<input type='text' id='codigoMat' name='codigoMat' readonly ></br>";
                 echo "</div>";
                 echo "<div>";
 //                echo "Estado del Ejemplar Nuevo: </br>";

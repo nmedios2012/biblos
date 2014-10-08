@@ -24,10 +24,10 @@ class Socio extends Conexion {
 
         $cedula = $this->obtener($socio);
 
-       /* if ($cedula != NULL) {//&& $respuesta !=NULL
-            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);*/
+        if ($cedula != NULL) {//&& $respuesta !=NULL
+            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);
 
-            if ($cedula != NULL) {
+            if ($cod_curso != NULL) {
                 $edicion = $this->obtenerEdicionEjemplar($codigo_material);
 //$retornador=$socio ." ". $codigo_material ." ". $cedula ." ".$cod_curso ." ".$edicion;
                 if ($edicion != NULL) {
@@ -38,12 +38,12 @@ class Socio extends Conexion {
                                       VALUES ($cedula,$codigo_material,$edicion,'$isbn',0,'$fecha','$fechafin')");
                         $cod_ejemplar = $this->obtPriEjemSegunCodMatYEst($codigo_material, 1); //obtiene un disponible
                         $putaso = $this->cambiarEstadoEjemplar($cod_ejemplar, 3); //reservado
-                        $retornador = "VERIFICACION CORRECTA " . "codigo ejemplar" . $cod_ejemplar . " codmaterial " . $codigo_material . $putaso;
+                        $retornador = "VERIFICACION CORRECTA " . "codigo ejemplar " . $cod_ejemplar . " codmaterial " . $codigo_material . $putaso;
 //                        $retornador = "PUTAMADREEE " . $cod_ejemplar;
                     }
                 }
             }
-        else{
+        }else{
             return "ERROR PROCESANDO LOS DATOS";
         }
 

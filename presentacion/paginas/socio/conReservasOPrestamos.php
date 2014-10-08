@@ -45,7 +45,7 @@
     <legend>Usuario Con Prestamos:</legend>
     </br></br>
 
-    <p>USUARIO CON PRESTAMOS ACTIVOS, NO ES POSIBLE REALIZAR MAS RESERVAS</p>
+    <p>USUARIO CON PRESTAMOS ACTIVOS, NO ES POSIBLE REALIZAR MAS s</p>
 
     </br></br>
     <table id="prestamoActivo" cellspacing="0" width="100%" border="1">

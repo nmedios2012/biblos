@@ -30,8 +30,8 @@ class Bibliotecologo extends Conexion {
         return true;
     }
     //Script de encriptación de contraseña.
-    public function encriptar($mail,$documento,$encrypt_passwd){
-        $encrypt_passwd = md5($passwd);
+    public function encriptar($mail,$documento){
+        $encrypt_passwd = md5($documento);
         $this->consultar("UPDATE usuarios 
                           SET
                             contrasenia='$encrypt_passwd' 
@@ -328,7 +328,7 @@ class Bibliotecologo extends Conexion {
                 FROM reserva res 
                 LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
 
-        if ($stmt->fetchColumn() > 1) {
+        if ($stmt->fetchColumn() > 0) {
 
             $respuesta = array();
             $i = 0;

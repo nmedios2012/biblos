@@ -12,5 +12,33 @@ extract($_POST);
 //echo"";
 //echo $_POST['codigoEstado'];
 $resultado = $admin->nuevoEjemplar($_POST['codigoMat'], $_POST['codigoEstado']);
-echo 'SE EJECUTO CORRECTAMENTE!!';
+?>
+<!--<script>
+    function ingresoSatisfactorio() {
+        alert("Ingreso Correcto");
+        return true;
+    }
+    function error() {
+        alert("No se pudo ingresar el ejemplar");
+
+    }
+</script>-->
+
+<?php
+//
+//function phpAlert($msg) {
+//    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+//    return true;
+//}
+//
+//if ($resultado) {
+////    echo '<form id="asd" onload="ingresoSatisfactorio();"></form>';    
+////    phpAlert("Ingreso Correcto");
+////    echo '<body onload="ingresoSatisfactorio()" />';
+//    if (phpAlert("Ingreso Correcto")) {
+//        header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=altaEjemplares");
+//    }
+//} else {
+//    echo '<body onload="error()" />';
+//}
 ?>
