@@ -111,11 +111,15 @@ class Administrador extends Conexion {
 
     //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial() {
-        $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*),material.codigo_material 
-                                    FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material 
+        $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*)- (SELECT COUNT(*)
+                                                                                    FROM reserva 
+                                                                                     WHERE reserva.codigo_material=material.codigo_material
+                                                                                          AND fecha_fin>today),material.codigo_material 
+                                    FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material
                                     WHERE cod_est=1 AND NOT EXISTS( SELECT *
                                                                     FROM prestamos
                                                                     WHERE prestamos.codigo_ejem=ejemplar_material.codigo_ejem AND fecha_devolucion IS NULL)
+                                    
                                     GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta = array();
 
@@ -217,6 +221,19 @@ class Administrador extends Conexion {
         return true;
     }
    
+    public function cantidadLibros($ci){
+        $cantidadPrestado=$this->escalar("  SELECT COUNT(*) 
+                                            FROM prestamos
+                                            WHERE ci=$ci AND fecha_devolucion IS NULL");
+
+        $cantidadReserva=$this->escalar("   SELECT COUNT(*) 
+                                            FROM reserva
+                                            WHERE ci=$ci AND fecha_fin>TODAY");
+        
+        return $cantidadPrestado+$cantidadReserva;
+        
+    }
+
     public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
         
 
@@ -224,15 +241,8 @@ class Administrador extends Conexion {
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
-        echo "SELECT first 1 mantiene.codigo_conservacion
-                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
-                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC";
-        
-        echo "  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ";
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
-
 
     }
 

@@ -71,14 +71,14 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
-<form name="input" action="../../../negocio/administrador/buscarSocioPrestamo.php" method="post" id="frmBuscar">
+<!--<form name="input" action="../../../negocio/administrador/buscarSocioPrestamo.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
     <input type="hidden" name="pagina" value="alta_prestamo_admin" />
 </form>
 <div id="mensaje">
     
-</div>
+</div>-->
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
