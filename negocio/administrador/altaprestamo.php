@@ -25,8 +25,4 @@
         $_SESSION["fecha"] =$fecha_devolucion;
         header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_prestamo_admin");
 
-
-    
-    
-    
 ?>

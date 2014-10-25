@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+    session_start();
     include "../../negocio/configuracion/configuracion.php";	
     include "../../persistencia/conexion.php";
     include "../../persistencia/Administrador.php";

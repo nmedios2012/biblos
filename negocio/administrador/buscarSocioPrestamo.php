@@ -20,8 +20,7 @@
                     $_SESSION["celular"]=$telefono[1];
             }
             else{
-                $_SESSION["error"]=true;
-                echo "ssss";
+                header("location:Location: ../../presentacion/paginas/administrador/index.php?pag=ya_se_paso");
                
             }
         }

@@ -109,6 +109,21 @@ class Administrador extends Conexion {
         return $respuesta;
     }
 
+    public function controlPrestamo($ci,$codigoEjemplar){
+        $codigo=$this->escalar("    SELECT codigo_material
+                                    FROM ejemplar_material
+                                    WHERE codigo_ejem=$codigoEjemplar");
+        
+        $respuesta = $this->escalar("   SELECT COUNT(*)
+                                        FROM prestamos INNER JOIN ejemplar_material ON prestamos.codigo_ejem=ejemplar_material.codigo_ejem
+                                        WHERE fecha_devolucion IS NULL AND ci=$ci AND prestamos.codigo_ejem IN (   SELECT codigo_ejem
+                                                                                                      FROM ejemplar_material 
+                                                                                                      WHERE codigo_material=$codigo)");
+        
+      
+        return ($respuesta==0);
+    }
+    
     //Se devuelve la lista de materiales
     public function listadoEjemplarMaterial() {
         $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*)- (SELECT COUNT(*)
@@ -162,7 +177,7 @@ class Administrador extends Conexion {
     //Se devuelve la lista de materiales
     public function obtenerReservar($nro) {
         $stmt = $this->consultar("SELECT ci,codigo_material FROM reserva WHERE nro_reserva=$nro");
-                $row= $stmt->fetch(PDO::FETCH_NUM);
+        $row= $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
         
         if ($row != NULL) {
