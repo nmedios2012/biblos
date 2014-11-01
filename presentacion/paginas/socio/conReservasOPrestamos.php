@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <td  align='center'>Cedula</td>
-                <td  align='center'>NombreCurso</td>
+                <!--<td  align='center'>NombreCurso</td>-->
                 <td  align='center'>Libro</td>
                 <td  align='center'>Edicion</td>
                 <td  align='center'>ISBN</td>
@@ -28,7 +28,7 @@
 
             echo "<tr>";
             echo "<td  align='center'>" . $resultado[$i]["ci"] . "</td>";
-            echo "<td  align='center'>" . $resultado[$i]["cur.nombre"] . "</td>";
+//            echo "<td  align='center'>" . $resultado[$i]["cur.nombre"] . "</td>";
             echo "<td  align='center'>" . $resultado[$i]["mate.nombre"] . "</td>";
             echo "<td  align='center'>" . $resultado[$i]["edicion"] . "</td>";
             echo "<td  align='center'>" . $resultado[$i]["isbn"] . "</td>";
@@ -45,7 +45,7 @@
     <legend>Usuario Con Prestamos:</legend>
     </br></br>
 
-    <p>USUARIO CON PRESTAMOS ACTIVOS, NO ES POSIBLE REALIZAR MAS s</p>
+    <p>USUARIO CON PRESTAMOS ACTIVOS, NO ES POSIBLE REALIZAR MAS</p>
 
     </br></br>
     <table id="prestamoActivo" cellspacing="0" width="100%" border="1">

@@ -23,11 +23,11 @@ class Socio extends Conexion {
         $fechafin = date("Y-m-d H:i", strtotime($fechafin . ' + 1 days'));
 
         $cedula = $this->obtener($socio);
-
+//$retornador=$cedula;
         if ($cedula != NULL) {//&& $respuesta !=NULL
-            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);
+//            $cod_curso = $this->obtenerCodigoCursoUsuario($cedula);
 
-            if ($cod_curso != NULL) {
+//            if ($cod_curso != NULL) {
                 $edicion = $this->obtenerEdicionEjemplar($codigo_material);
 //$retornador=$socio ." ". $codigo_material ." ". $cedula ." ".$cod_curso ." ".$edicion;
                 if ($edicion != NULL) {
@@ -37,12 +37,12 @@ class Socio extends Conexion {
                         $this->consultar("INSERT INTO reserva (ci,codigo_material,edicion,isbn,nro_reserva,fecha_inicio,fecha_fin)
                                       VALUES ($cedula,$codigo_material,$edicion,'$isbn',0,'$fecha','$fechafin')");
                         $cod_ejemplar = $this->obtPriEjemSegunCodMatYEst($codigo_material, 1); //obtiene un disponible
-                        $putaso = $this->cambiarEstadoEjemplar($cod_ejemplar, 3); //reservado
-                        $retornador = "VERIFICACION CORRECTA " . "codigo ejemplar " . $cod_ejemplar . " codmaterial " . $codigo_material . $putaso;
-//                        $retornador = "PUTAMADREEE " . $cod_ejemplar;
+                        $retCambEstado = $this->cambiarEstadoEjemplar($cod_ejemplar, 3); //reservado
+                        $retornador = "VERIFICACION CORRECTA " . "codigo ejemplar " . $cod_ejemplar . " codmaterial " . $codigo_material . $retCambEstado;
+//                        $retornador = "TEST " . $cod_ejemplar;
                     }
                 }
-            }
+//            }
         }else{
             return "ERROR PROCESANDO LOS DATOS";
         }
@@ -68,7 +68,7 @@ class Socio extends Conexion {
                                 GROUP BY m.codigo_material,m.nombre,m.anio,
                                 e.estado_anterior"); //                                and ej.cod_est=1 
 
-        if ($stmt->fetchColumn() > 0) {
+//        if ($stmt->fetchColumn() > 0) {
 //            array_push($array, $stmt);
             $respuesta = array();
             $i = 0;
@@ -100,7 +100,7 @@ class Socio extends Conexion {
 
                 $i++;
             }
-        }
+//        }
 
         return $respuesta;
     }
@@ -181,7 +181,7 @@ class Socio extends Conexion {
     public function obtenerPrestamoUsuario($socio){
         $ciSocio = $this->obtener($socio);
         $stmt = $this->consultar("select * from prestamos where ci=$ciSocio and fecha_devolucion is null");
-         if ($stmt->fetchColumn() > 0) {
+//         if ($stmt->fetchColumn() > 0) {
 
             $respuesta = array();
             $i = 0;
@@ -199,7 +199,7 @@ class Socio extends Conexion {
 
                 $i++;
             }
-        }
+//        }
 
         return $respuesta;
     }
@@ -222,31 +222,33 @@ class Socio extends Conexion {
             FROM reserva res 
             
             LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material
-            WHERE res.ci=$ciSocio and res.fecha_fin > today");
+            WHERE res.ci=$ciSocio and res.fecha_fin > today order by nro_reserva");
 
-        if ($stmt->fetchColumn() > 1) {
-
+        
+//$nuevoMantenedor=$stmt;   
+//        if ($stmt > 1) {
+            
             $respuesta = array();
             $i = 0;
             foreach ($stmt as $fila) {
                 $dato = array();
 
                 $dato["ci"] = $fila[0];
-                $dato["cur.nombre"] = $fila[1];
-                $dato["mate.nombre"] = $fila[2];
-                $dato["edicion"] = $fila[3];
-                $dato["isbn"] = $fila[4];
-                $dato["nro_reserva"] = $fila[5];
-                $dato["fecha_inicio"] = $fila[6];
-                $dato["fecha_fin"] = $fila[7];
-                $dato["estado_logico"] = $fila[8];
-                $dato["fecha_borrado"] = $fila[9];
+//                $dato["cur.nombre"] = $fila[1];
+                $dato["mate.nombre"] = $fila[1];
+                $dato["edicion"] = $fila[2];
+                $dato["isbn"] = $fila[3];
+                $dato["nro_reserva"] = $fila[4];
+                $dato["fecha_inicio"] = $fila[5];
+                $dato["fecha_fin"] = $fila[6];
+                $dato["estado_logico"] = $fila[7];
+                $dato["fecha_borrado"] = $fila[8];
 
                 $respuesta[$i] = $dato;
 
                 $i++;
             }
-        }
+//        }
 
         return $respuesta;
     }

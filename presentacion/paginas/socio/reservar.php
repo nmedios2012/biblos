@@ -8,6 +8,7 @@
   <?php
   $resultado = unserialize($_SESSION['confirmarReserva']);
   echo $resultado ."<br/>";  
+  echo'hola';
   ?>
   
  </fieldset>

@@ -283,7 +283,7 @@ class Bibliotecologo extends Conexion {
     public function listadoUsuario() {
         $stmt = $this->consultar("SELECT ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail FROM usuario WHERE estado_logico='si'");
 
-        if ($stmt->fetchColumn() > 0) {
+//        if ($stmt->fetchColumn() > 0) {
 
             $respuesta = array();
             $i = 0;
@@ -307,7 +307,7 @@ class Bibliotecologo extends Conexion {
 
                 $i++;
             }
-        }
+//        }
 
         return $respuesta;
     }
@@ -328,7 +328,7 @@ class Bibliotecologo extends Conexion {
                 FROM reserva res 
                 LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
 
-        if ($stmt->fetchColumn() > 0) {
+//        if ($stmt->fetchColumn() > 0) {
 
             $respuesta = array();
             $i = 0;
@@ -350,7 +350,7 @@ class Bibliotecologo extends Conexion {
 
                 $i++;
             }
-        }
+//        }
 
         return $respuesta;
     }
