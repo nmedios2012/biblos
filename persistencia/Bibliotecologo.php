@@ -22,15 +22,17 @@ class Bibliotecologo extends Conexion {
 
         return true;
     }
+
     //Se guarda en la tabla usuarios los datos para la cuenta
-    public function agregarCuenta_Usuario($nombre, $apellido, $mail, $documento){
+    public function agregarCuenta_Usuario($nombre, $apellido, $mail, $documento) {
         $this->consultar("INSERT INTO usuarios (nombre,apellido,usuario,rol,contrasenia)
                                 VALUES ('$nombre','$apellido','$mail','socio', $documento)");
 
         return true;
     }
+
     //Script de encriptación de contraseña.
-    public function encriptar($mail,$documento){
+    public function encriptar($mail, $documento) {
         $encrypt_passwd = md5($documento);
         $this->consultar("UPDATE usuarios 
                           SET
@@ -156,7 +158,7 @@ class Bibliotecologo extends Conexion {
         return true;
     }
 
-    public function agregarAutor($cod_art, $art_1, $art_2,$art_3, $id_pais, $fec_alta, $est_log) {
+    public function agregarAutor($cod_art, $art_1, $art_2, $art_3, $id_pais, $fec_alta, $est_log) {
         $this->consultar("INSERT INTO artista_autor (codigo_artista,autor_1,autor_2,autor_3,id_pais,
                           fecha_alta,estado_logico)
       VALUES ($cod_art,'$art_1','$art_2','$art_3',$id_pais,'$fec_alta','$est_log')");
@@ -285,28 +287,28 @@ class Bibliotecologo extends Conexion {
 
 //        if ($stmt->fetchColumn() > 0) {
 
-            $respuesta = array();
-            $i = 0;
-            foreach ($stmt as $fila) {
-                $dato = array();
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
 
-                $dato["ci"] = $fila[0];
-                $dato["nombre"] = $fila[1];
-                $dato["apellido"] = $fila[2];
-                $dato["ciudad"] = $fila[3];
-                $dato["calle"] = $fila[4];
-                $dato["numero_apartamento"] = $fila[5];
-                $dato["numero_puerta"] = $fila[6];
-                $dato["email"] = $fila[7];
-                if (file_exists("../../presentacion/imagenes/fotousuario/" . $fila[0] . ".jpg")) {
-                    $dato["foto"] = $fila[0] . ".jpg";
-                } else {
-                    $dato["foto"] = "silueta.jpg";
-                }
-                $respuesta[$i] = $dato;
-
-                $i++;
+            $dato["ci"] = $fila[0];
+            $dato["nombre"] = $fila[1];
+            $dato["apellido"] = $fila[2];
+            $dato["ciudad"] = $fila[3];
+            $dato["calle"] = $fila[4];
+            $dato["numero_apartamento"] = $fila[5];
+            $dato["numero_puerta"] = $fila[6];
+            $dato["email"] = $fila[7];
+            if (file_exists("../../presentacion/imagenes/fotousuario/" . $fila[0] . ".jpg")) {
+                $dato["foto"] = $fila[0] . ".jpg";
+            } else {
+                $dato["foto"] = "silueta.jpg";
             }
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
 //        }
 
         return $respuesta;
@@ -330,26 +332,26 @@ class Bibliotecologo extends Conexion {
 
 //        if ($stmt->fetchColumn() > 0) {
 
-            $respuesta = array();
-            $i = 0;
-            foreach ($stmt as $fila) {
-                $dato = array();
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
 
-                $dato["ci"] = $fila[0];
-                //$dato["cur.nombre"] = $fila[1];
-                $dato["mate.nombre"] = $fila[1];
-                $dato["edicion"] = $fila[2];
-                $dato["isbn"] = $fila[3];
-                $dato["nro_reserva"] = $fila[4];
-                $dato["fecha_inicio"] = $fila[5];
-                $dato["fecha_fin"] = $fila[6];
-                $dato["estado_logico"] = $fila[7];
-                $dato["fecha_borrado"] = $fila[8];
+            $dato["ci"] = $fila[0];
+            //$dato["cur.nombre"] = $fila[1];
+            $dato["mate.nombre"] = $fila[1];
+            $dato["edicion"] = $fila[2];
+            $dato["isbn"] = $fila[3];
+            $dato["nro_reserva"] = $fila[4];
+            $dato["fecha_inicio"] = $fila[5];
+            $dato["fecha_fin"] = $fila[6];
+            $dato["estado_logico"] = $fila[7];
+            $dato["fecha_borrado"] = $fila[8];
 
-                $respuesta[$i] = $dato;
+            $respuesta[$i] = $dato;
 
-                $i++;
-            }
+            $i++;
+        }
 //        }
 
         return $respuesta;
@@ -359,20 +361,17 @@ class Bibliotecologo extends Conexion {
         $this->consultar("insert into pertenece (ci,codigo_curso,tipo_usuario) values ($documento,$codCurso,'socio');");
         return true;
     }
-    
+
     //Se devuelve la lista de materiales
     public function obtenerReservar($nro) {
         $stmt = $this->consultar("SELECT ci,codigo_material FROM reserva WHERE nro_reserva=$nro");
-                $row= $stmt->fetch(PDO::FETCH_NUM);
+        $row = $stmt->fetch(PDO::FETCH_NUM);
         $respuesta = array();
-        
+
         if ($row != NULL) {
-            
+
             $respuesta["ci"] = $row[0];
             $respuesta["codigo_material"] = $row[1];
-            
-            
-
         }
         return $respuesta;
     }
@@ -446,16 +445,81 @@ class Bibliotecologo extends Conexion {
     }
 
     //Me dan el codigo material, buscamos el primer codigo ejemplar disponible
-    
-    public function codigoEjemplar($codigo_material){
-        
+
+    public function codigoEjemplar($codigo_material) {
+
         return $this->escalar(" SELECT codigo_ejem
                                 FROM ejemplar_material
                                 WHERE codigo_material=$codigo_material AND cod_est=1");
-        
-        
     }
 
+    public function listarPrestamos() {
+
+        $stmt = $this->consultar("select * from prestamos where fecha_devolucion is null;");
+//UPDATE prestamos SET fecha_fin='' WHERE ci='41510608'
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['ci'] = $fila[0];
+            $dato['codigo_conservacion'] = $fila[1];
+            $dato['codigo_ejem'] = $fila[2];
+            $dato['fecha_inicio'] = $fila[3];
+            $dato['fecha_fin'] = $fila[4];
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
+    }
+
+    public function cargarSanciones() {
+
+        $stmt = $this->consultar("select * from penalizaciones;");
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo'] = $fila[0];
+            $dato['nombre'] = $fila[1];
+            $dato['tipo_penaliz'] = $fila[2];
+            $dato['descripcion'] = $fila[3];
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
+    }
+
+    public function sancion($ci, $codigoEjemplar, $selectSanciones) {
+
+        $respuesta = $this->obtenerDatosSancion($codigoEjemplar);
+                     
+        
+        $this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin,estado_logico,fecha_borrado)
+VALUES(".$respuesta['codigo_material'].",".$respuesta['ci'].",$selectSanciones,".$respuesta['codigo_ejem'].")");
+    }
+
+    public function obtenerDatosSancion($codigoEjemplar) {
+
+        $stmt = $this->consultar("SELECT cod_est,codigo_ejem,codigo_material FROM ejemplar_material WHERE codigo_ejem=$codigoEjemplar");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        $respuesta = array();
+
+        if ($row != NULL) {
+
+            $respuesta["ci"] = $row[0];
+            $respuesta["codigo_ejem"] = $row[1];
+            $respuesta["codigo_material"] = $row[2];
+        }
+        return $respuesta;
+    }
+
+    public function obtenerCurso($ci){
+        
+    }
+    
+    
 }
 
 ?>

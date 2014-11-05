@@ -81,14 +81,11 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                             <li>
                                 <a href="../../../negocio/bibliotecologo/listadoUsuario.php">Listar socios</a>
                             </li>
-                             <li>
+                            <li>
                                 <a href="../../../negocio/bibliotecologo/listadoMateriales.php">Listar Materiales</a>
                             </li>
                             <li>
                                 <a href="../../../negocio/bibliotecologo/altaprestamo.php">Pr&eacute;stamo</a>
-                            </li>
-                            <li>
-                                <a href="index.php?pag=penalizaciones">Sanciones</a>
                             </li>
                         </ul>
                     </li>
@@ -98,9 +95,15 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                             <li>
                                 <a href="../../../negocio/bibliotecologo/listadoReserva.php">Listar Reservas</a>
                             </li>
+                            <li>
+                                <a href="../../../negocio/bibliotecologo/listadoPrestamos.php">Listar Prestamos</a>
+                            </li>                            
                             <li><a href="index.php?pag=a_e">Alta editorial/empresa</a></li>
                             <li><a href="index.php?pag=alta_autores">Artista/Autor</a></li>
                             <li><a href="index.php?pag=a_p">Ingreso de Pa&iacute;s</a></li>
+                            <li>
+                                <a href="index.php?pag=penalizaciones">Sanciones</a>
+                            </li>
                         </ul>
                     </li>
                     <li><a href='#'><span>Materiales</span></a>
