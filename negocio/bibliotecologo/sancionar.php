@@ -16,7 +16,7 @@ extract($_POST);
 //    echo "</td>";
 //    echo "</tr>";
 //}
-$resultado = $admin->sancion($_SESSION['ci'], $_POST["ejemplar"],$_POST["selectSanciones"]);
+$resultado = $admin->sancion($_POST["ci"], $_POST["ejemplar"],$_POST["selectSanciones"]);
 echo $resultado;
 
 

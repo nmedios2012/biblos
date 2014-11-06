@@ -494,10 +494,18 @@ class Bibliotecologo extends Conexion {
     public function sancion($ci, $codigoEjemplar, $selectSanciones) {
 
         $respuesta = $this->obtenerDatosSancion($codigoEjemplar);
-                     
+        $codigoCurso=$this->obtenerCodigoCursoUsuario($ci);
+        $fecha = date("Y-m-d H:i");
+        $fechafin = date("Y-m-d H:i", strtotime($fecha . ' + 10 days'));
+//        $fechafin = date("m/d/Y", strtotime(' + 10 days'));
         
-        $this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin,estado_logico,fecha_borrado)
-VALUES(".$respuesta['codigo_material'].",".$respuesta['ci'].",$selectSanciones,".$respuesta['codigo_ejem'].")");
+        
+        
+        $caca=$this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
+VALUES(".$respuesta['codigo_material'].",$ci,$selectSanciones,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem'].",'$fecha','$fechafin')");
+        
+//        return $respuesta['codigo_material']. " kul ".$respuesta['ci']. "aoc  ".$respuesta['codigo_ejem']. "  ".$codigoCurso ."  ".$fechafin;
+        return $respuesta['codigo_material'].",$ci,$selectSanciones,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem']."   $fecha  ,   $fechafin.";
     }
 
     public function obtenerDatosSancion($codigoEjemplar) {
@@ -508,17 +516,23 @@ VALUES(".$respuesta['codigo_material'].",".$respuesta['ci'].",$selectSanciones,"
 
         if ($row != NULL) {
 
-            $respuesta["ci"] = $row[0];
+            $respuesta["cod_est"] = $row[0];
             $respuesta["codigo_ejem"] = $row[1];
             $respuesta["codigo_material"] = $row[2];
         }
         return $respuesta;
     }
 
-    public function obtenerCurso($ci){
-        
+        public function obtenerCodigoCursoUsuario($ci) {
+        $stmt = $this->consultar("select codigo_curso from pertenece where ci=$ci");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        } else {
+            return null;
+        }
     }
-    
+
     
 }
 
