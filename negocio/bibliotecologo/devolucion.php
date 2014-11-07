@@ -7,7 +7,7 @@
     $admin = new Bibliotecologo();
     extract($_POST);
                 
-    $resultado = $admin->devolucion($_SESSION['ci'],$_POST["ejemplar"]);
+    $resultado = $admin->devolucion($_POST['ci'],$_POST["ejemplar"]);
     
     echo $resultado;
     

@@ -29,7 +29,8 @@
                 <td>codigo_ejem</td>
                 <td>fecha_inicio</td>
                 <td>fecha_fin</td>
-                <td>Ejecutar</td>
+                <td>Sancion</td>
+                <td>Devolucion</td>
 
             </tr> 
         </thead>
@@ -41,7 +42,8 @@
                 <td>codigo_ejem</td>
                 <td>fecha_inicio</td>
                 <td>fecha_fin</td>
-                <td>Ejecutar</td>
+                <td>Sancion</td>
+                <td>Devolucion</td>
 
             </tr> 
         </tfoot>
@@ -72,29 +74,41 @@
 //                echo "<td>" . $resultado[$i]["fecha_devolucion"] . "</td>";
                 $ejemplarPrestado = $resultado[$i]['codigo_ejem'];
                 $ci = $resultado[$i]["ci"];
+
                 if ($resultado[$i]["fecha_fin"] > $fecha_hoy) {
-                    echo "<td style='background-color:#00FF00'>
+                    echo "<td style='background-color:#00FF00'>";
+                } else {
+                    echo "<td style='background-color:#FF0000'>";
+                    
+                }
+
+                echo"<form name='sancionForm' action='../../../negocio/bibliotecologo/sancionar.php' method='post' id='sancionForm'>
+                <input type='hidden' name='ejemplar' value='$ejemplarPrestado'/>";
+                echo" <input type='hidden' name='ci' value='$ci'>";
+                echo "Tipo de sancion: <select  id='selectSanciones' name='selectSanciones'>";
+                $cantidadSanciones = count($resultadoSanciones);
+                for ($iy = 0; $iy < $cantidadSanciones; $iy++) {
+                    echo "<option id='sancion" . $iy . " nombre='sancion" . $iy . "' value=" . $resultadoSanciones[$iy]['codigo'] . ">" . $resultadoSanciones[$iy]['nombre'] . "</option>";
+                }
+
+                echo "</select> ";
+                echo"<input type='submit' value='Sancionar'/>";
+                echo"  </form> </td>";
+
+
+
+//                if ($resultado[$i]["fecha_fin"] > $fecha_hoy) {
+                echo "<td style='background-color:#00FF00'>
                 <form name='devolucionForm' action='../../../negocio/bibliotecologo/devolucion.php' method='post' id='devolucionForm'>
                 <input type='hidden' name='ejemplar' value='$ejemplarPrestado'>
                 <input type='hidden' name='ci' value='$ci'>";
 
-                    echo"<input type='submit' value='Devolucion' />";
-                } else {
-                    echo "<td style='background-color:#FF0000'>
-                <form name='sancionForm' action='../../../negocio/bibliotecologo/sancionar.php' method='post' id='sancionForm'>
-                <input type='hidden' name='ejemplar' value='$ejemplarPrestado'/>";
-                    echo" <input type='hidden' name='ci' value='$ci'>";
-                    echo "Tipo de sancion: <select  id='selectSanciones' name='selectSanciones'>";
-                    $cantidadSanciones = count($resultadoSanciones);
-                    for ($iy = 0; $iy < $cantidadSanciones; $iy++) {
-                        echo "<option id='sancion" . $iy . " nombre='sancion" . $iy . "' value=" . $resultadoSanciones[$iy]['codigo'] . ">" . $resultadoSanciones[$iy]['nombre'] . "</option>";
-                    }
-
-                    echo "</select> ";
-                    echo"<input type='submit' value='Sancionar'/>";
-                }
-
+                echo"<input type='submit' value='Devolucion' />";
                 echo"  </form> </td>";
+//                } else {
+//                }
+
+
 
 
                 echo "</tr>";

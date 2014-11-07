@@ -533,7 +533,19 @@ VALUES(".$respuesta['codigo_material'].",$ci,$selectSanciones,$codigoCurso,".$re
         }
     }
 
+    public function devolucion($ci,$ejemplar){
+         $fecha = date("Y-m-d H:i");
+        $this->cambiarEstadoEjemplar($ejemplar,1);
+//        SELECT * FROM prestamos WHERE ci=46993221 AND codigo_ejem=1 AND fecha_devolucion is null;
+        $this->consultar("UPDATE prestamos SET fecha_devolucion='$fecha' WHERE  ci=$ci AND codigo_ejem=$ejemplar AND fecha_devolucion is null");
+        return "Se realizo la devolucion correctamente";
+    }
     
+    
+        public function cambiarEstadoEjemplar($codigo_ejemplar, $nuevo_estado) {
+        $this->consultar("UPDATE ejemplar_material SET cod_est=$nuevo_estado WHERE codigo_ejem=$codigo_ejemplar");
+        return "update realizada";
+    }
 }
 
 ?>
