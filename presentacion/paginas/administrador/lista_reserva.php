@@ -23,7 +23,7 @@
         <thead>
             <tr>
                 <td>Cedula</td>
-                <td>NombreCurso</td>
+               
                 <td>Libro</td>
                 <td>Edicion</td>
                 <td>ISBN</td>
@@ -37,7 +37,7 @@
         <tfoot>
             <tr>
                 <td>Cedula</td>
-                <td>NombreCurso</td>
+                
                 <td>Libro</td>
                 <td>Edicion</td>
                 <td>ISBN</td>

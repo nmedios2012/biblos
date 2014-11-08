@@ -328,7 +328,8 @@ class Bibliotecologo extends Conexion {
                 res.estado_logico,
                 res.fecha_borrado
                 FROM reserva res 
-                LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material");
+                LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material
+                WHERE res.fecha_fin>=today");
 
 //        if ($stmt->fetchColumn() > 0) {
 

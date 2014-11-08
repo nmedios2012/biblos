@@ -160,7 +160,7 @@ class Socio extends Conexion {
 
     public function reservasActivas($socio) {
         $ciSocio = $this->obtener($socio);
-        $stmt = $this->consultar("select count(ci) from reserva where ci=$ciSocio and fecha_fin >today");
+        $stmt = $this->consultar("select count(ci) from reserva where ci=$ciSocio and fecha_fin >=today");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
             return $row[0];
@@ -171,6 +171,16 @@ class Socio extends Conexion {
     public function prestamosActivos($socio) {
         $ciSocio = $this->obtener($socio);
         $stmt = $this->consultar("select count(ci) from prestamos where ci=$ciSocio and fecha_devolucion is null");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        }
+        return $row[0];
+    }
+    
+    public function sancionesActivas($socio){
+        $ciSocio = $this->obtener($socio);
+        $stmt = $this->consultar("select count(ci) from sufre where ci=$ciSocio and fecha_fin >=today");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
             return $row[0];
@@ -252,7 +262,51 @@ class Socio extends Conexion {
 
         return $respuesta;
     }
+    
+    public function obtenerSancionUsuario($socio){
+         $ciSocio = $this->obtener($socio);
+        $stmt = $this->consultar("
+            SELECT *
+            FROM sufre suf 
+            WHERE suf.ci=$ciSocio and suf.fecha_fin >= today order by fecha_inicio");
+           
+            $respuesta = array();
+            $i = 0;
+            foreach ($stmt as $fila) {
+                $dato = array();
 
+                $dato["codigo_material"] = $fila[0];
+                $dato["ci"] = $fila[1];
+                $dato["codigo"] =  $this->cargarSanciones($fila[2]);
+                 
+                $dato["codigo_curso"] = $fila[3];
+                $dato["codigo_conservacion"] = $fila[4];
+                $dato["codigo_ejem"] = $fila[5];
+                $dato["fecha_inicio"] = $fila[6];
+                $dato["fecha_fin"] = $fila[7];
+                $dato["estado_logico"] = $fila[8];
+                $dato["fecha_borrado"] = $fila[9];                                                
+                
+
+                $respuesta[$i] = $dato;
+
+                $i++;
+            }
+
+
+        return $respuesta;
+    }
+    public function cargarSanciones($codigo) {
+
+        $stmt = $this->consultar("select nombre from penalizaciones where codigo=$codigo;");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+
+        if ($row != NULL) {
+            return $row[0];
+        }else{
+            return "ERROR Obteniendo Nombre sancion";
+        }
+    }
 }
 ?>
 

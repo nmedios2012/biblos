@@ -77,7 +77,7 @@ if ($_SESSION["tipo"] != "socio")
                         <ul>
 
                             <li>
-                                <a href="../../../negocio/socio/busquedaLibros.php">Buscar Libros</a>
+                                <a href="../../../negocio/socio/busquedaLibros.php">Buscar Libros / Reservar</a>
                             </li>
 <!--                            <li>
                                 <a href="../../../negocio/socio/altaMaterial.php">Buscar Libros</a>
