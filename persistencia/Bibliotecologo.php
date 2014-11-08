@@ -496,8 +496,8 @@ class Bibliotecologo extends Conexion {
 
         $respuesta = $this->obtenerDatosSancion($codigoEjemplar);
         $codigoCurso=$this->obtenerCodigoCursoUsuario($ci);
-        $fecha = date("Y-m-d H:i");
-        $fechafin = date("Y-m-d H:i", strtotime($fecha . ' + 10 days'));
+        $fecha = date("d-m-Y");
+        $fechafin = date("d-m-Y", strtotime($fecha . ' + 10 days'));
 //        $fechafin = date("m/d/Y", strtotime(' + 10 days'));
         
         
