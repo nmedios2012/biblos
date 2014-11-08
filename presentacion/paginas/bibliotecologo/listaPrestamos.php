@@ -81,7 +81,7 @@
                     echo "<td style='background-color:#FF0000'>";
                     
                 }
-
+                
                 echo"<form name='sancionForm' action='../../../negocio/bibliotecologo/sancionar.php' method='post' id='sancionForm'>
                 <input type='hidden' name='ejemplar' value='$ejemplarPrestado'/>";
                 echo" <input type='hidden' name='ci' value='$ci'>";

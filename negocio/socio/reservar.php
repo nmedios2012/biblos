@@ -9,7 +9,7 @@
                 
     $resultado = $admin->confirmarReserva($_SESSION['usuario'],$_POST["seleccionado"]);
     
-    $_SESSION['confirmarReserva'] = serialize($resultado);
+//    $_SESSION['confirmarReserva'] = serialize($resultado);
 
-    header("Location: ../../presentacion/paginas/socio/index.php?pag=reservar")
+    header("Location: ../../presentacion/paginas/socio/index.php?pag=reservar&resultado=$resultado")
 ?>

@@ -2,7 +2,9 @@
     $ciudad="";
 
 ?>
-<p>ADMINISTRACI&Oacute;N DE SOCIOS - ALTA DE SOCIOS</p>
+<fieldset>
+  <legend>ADMINISTRACI&Oacute;N DE SOCIOS - ALTA DE SOCIOS:</legend>
+
 <form name="input" action="../../../negocio/bibliotecologo/altausuario.php" enctype="multipart/form-data" method="post">
     <p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
         &nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15"></p>
@@ -51,3 +53,4 @@
     &nbsp;&nbsp; <input type="reset" value="Limpiar"> <!--Borra el formulario pero no la base de datos-->
 </form>
 
+</fieldset>

@@ -492,21 +492,17 @@ class Bibliotecologo extends Conexion {
         return $respuesta;
     }
 
-    public function sancion($ci, $codigoEjemplar, $selectSanciones) {
+    public function sancion($ci, $codigoEjemplar, $codigoPenalizacion) {
 
         $respuesta = $this->obtenerDatosSancion($codigoEjemplar);
         $codigoCurso=$this->obtenerCodigoCursoUsuario($ci);
         $fecha = date("d-m-Y");
         $fechafin = date("d-m-Y", strtotime($fecha . ' + 10 days'));
-//        $fechafin = date("m/d/Y", strtotime(' + 10 days'));
-        
-        
-        
+
         $caca=$this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
-VALUES(".$respuesta['codigo_material'].",$ci,$selectSanciones,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem'].",'$fecha','$fechafin')");
+VALUES(".$respuesta['codigo_material'].",$ci,$codigoPenalizacion,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem'].",'$fecha','$fechafin')");
         
-//        return $respuesta['codigo_material']. " kul ".$respuesta['ci']. "aoc  ".$respuesta['codigo_ejem']. "  ".$codigoCurso ."  ".$fechafin;
-        return $respuesta['codigo_material'].",$ci,$selectSanciones,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem']."   $fecha  ,   $fechafin.";
+        return "Sancion agregada con exito fecha finalizacion: $fechafin";
     }
 
     public function obtenerDatosSancion($codigoEjemplar) {
