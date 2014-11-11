@@ -26,6 +26,6 @@
             }
         }
 
-       header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_prestamo_admin")//vuelve a la pagina de busqueda
+       header("Location: ../../presentacion/paginas/administrador/index.php?pag=alta_sala_admin")//vuelve a la pagina de busqueda
         
 ?>

@@ -1,3 +1,3 @@
 
-Pelotudo ya tiene el libro prestado
+Ya tiene el mismo libro prestado
 

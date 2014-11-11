@@ -157,11 +157,11 @@ class Administrador extends Conexion {
             
             if ($cantidadReserva > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
-                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>En DOMICILIO</a><a href='#'>En SALA</a>";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo.php?codigo=" . $fila[4] . "'>En DOMICILIO</a><a href='../../../negocio/administrador/altaprestamo_sala.php?codigo=" . $fila[4] . "'>En SALA</a>";
                 } else {
 
                 $dato["disponibilidad"] = "disponibleSala";
-                $dato["mostrardisponibilidad"] = "<a href='#'>En SALA</a>";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/administrador/altaprestamo_sala.php?codigo=" . $fila[4] . "'>SALA</a>";
                 }
 
                 $respuesta[$i] = $dato;
@@ -241,15 +241,41 @@ class Administrador extends Conexion {
                                             FROM prestamos
                                             WHERE ci=$ci AND fecha_devolucion IS NULL");
 
+        if($cantidadPrestado==NULL)
+            $cantidadPrestado=0;
         $cantidadReserva=$this->escalar("   SELECT COUNT(*) 
                                             FROM reserva
                                             WHERE ci=$ci AND fecha_fin>TODAY");
+        
+        if($cantidadReserva===NULL)
+            $cantidadReserva==0;
+        
         
         return $cantidadPrestado+$cantidadReserva;
         
     }
 
-    public function agregarPrestamo($ci,$codigoEjemplar,$fecha){
+    public function agregarPrestamo($ci,$codigoEjemplar,$fecha,$codigo_estado){
+        
+
+        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
+                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
+
+        /*
+         * Seguir desde aqui
+         * if($codigo_conservacion!=$codigo_estado)
+        {
+            $this->consultar("UPDATE
+        }
+        */
+        
+        
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+
+    }
+    public function agregarSala($ci,$codigoEjemplar){
         
 
         $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
@@ -257,7 +283,7 @@ class Administrador extends Conexion {
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'Today') ");
 
     }
 
@@ -299,6 +325,15 @@ class Administrador extends Conexion {
 
         return true;
     }
+    
+    public function sancionado($ci){
+        $respuesta= $this->escalar("    SELECT COUNT(*) 
+                                        FROM sufre
+                                        WHERE ci=$ci AND today>=fecha_inicio AND today<=fecha_fin");
+        return ($respuesta>0);
+    }
+    
+    
 
 }
 

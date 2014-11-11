@@ -326,7 +326,8 @@ class Bibliotecologo extends Conexion {
                 res.fecha_inicio,
                 res.fecha_fin,
                 res.estado_logico,
-                res.fecha_borrado
+                res.fecha_borrado,
+                res.codigo_material 
                 FROM reserva res 
                 LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material
                 WHERE res.fecha_fin>=today");
@@ -348,7 +349,7 @@ class Bibliotecologo extends Conexion {
             $dato["fecha_fin"] = $fila[6];
             $dato["estado_logico"] = $fila[7];
             $dato["fecha_borrado"] = $fila[8];
-
+            $dato["codigo_material"] = $fila[9];
             $respuesta[$i] = $dato;
 
             $i++;
