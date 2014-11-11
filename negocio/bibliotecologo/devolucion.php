@@ -7,7 +7,7 @@
     $admin = new Bibliotecologo();
     extract($_POST);
                 
-    $resultado = $admin->devolucion($_POST['ci'],$_POST["ejemplar"]);
+    $resultado = $admin->devolucion($_POST['ci'],$_POST['ejemplar'],$_POST['estadoDevolucion']);
     
     header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=devolucion&resultado=$resultado")
 ?>

@@ -251,6 +251,7 @@ class Bibliotecologo extends Conexion {
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($documento,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+        $this->cambiarEstadoEjemplar($codigo_ejemplar, 4); //4 EN PRESTAMO
     }
 
     //Se devuelve la lista de materiales
@@ -464,9 +465,37 @@ class Bibliotecologo extends Conexion {
             $dato = array();
             $dato['ci'] = $fila[0];
             $dato['codigo_conservacion'] = $fila[1];
+            $dato['nombre_conservacion'] = $this->cargarConservacion($fila[1]);
             $dato['codigo_ejem'] = $fila[2];
             $dato['fecha_inicio'] = $fila[3];
             $dato['fecha_fin'] = $fila[4];
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
+    }
+
+    public function cargarConservacion($estadoConservacion) {
+        $stmt = $this->consultar("select nombre from conservacion where codigo_conservacion=$estadoConservacion");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        } else {
+            return null;
+        }
+    }
+
+    public function cargarConservaciones() {
+        $stmt = $this->consultar("select * from conservacion");
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo_conservacion'] = $fila[0];
+            $dato['nombre'] = $fila[1];
+            $dato['estado_logico'] = $fila[2];
+            $dato['fecha_borrado'] = $fila[3];
             $respuesta[$i] = $dato;
 
             $i++;
@@ -495,13 +524,13 @@ class Bibliotecologo extends Conexion {
     public function sancion($ci, $codigoEjemplar, $codigoPenalizacion) {
 
         $respuesta = $this->obtenerDatosSancion($codigoEjemplar);
-        $codigoCurso=$this->obtenerCodigoCursoUsuario($ci);
+        $codigoCurso = $this->obtenerCodigoCursoUsuario($ci);
         $fecha = date("d-m-Y");
         $fechafin = date("d-m-Y", strtotime($fecha . ' + 10 days'));
 
-        $caca=$this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
-VALUES(".$respuesta['codigo_material'].",$ci,$codigoPenalizacion,$codigoCurso,".$respuesta["cod_est"].",".$respuesta['codigo_ejem'].",'$fecha','$fechafin')");
-        
+        $caca = $this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
+VALUES(" . $respuesta['codigo_material'] . ",$ci,$codigoPenalizacion,$codigoCurso," . $respuesta["cod_est"] . "," . $respuesta['codigo_ejem'] . ",'$fecha','$fechafin')");
+
         return "Sancion agregada con exito fecha finalizacion: $fechafin";
     }
 
@@ -520,7 +549,7 @@ VALUES(".$respuesta['codigo_material'].",$ci,$codigoPenalizacion,$codigoCurso,".
         return $respuesta;
     }
 
-        public function obtenerCodigoCursoUsuario($ci) {
+    public function obtenerCodigoCursoUsuario($ci) {
         $stmt = $this->consultar("select codigo_curso from pertenece where ci=$ci");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
@@ -530,19 +559,52 @@ VALUES(".$respuesta['codigo_material'].",$ci,$codigoPenalizacion,$codigoCurso,".
         }
     }
 
-    public function devolucion($ci,$ejemplar){
-         $fecha = date("Y-m-d H:i");
-        $this->cambiarEstadoEjemplar($ejemplar,1);
-//        SELECT * FROM prestamos WHERE ci=46993221 AND codigo_ejem=1 AND fecha_devolucion is null;
+    public function devolucion($ci, $ejemplar, $estadoConservacion) {
+        $fecha = date("Y-m-d H:i");
+        $retornoEE = $this->cambiarEstadoEjemplar($ejemplar, 1);
         $this->consultar("UPDATE prestamos SET fecha_devolucion='$fecha' WHERE  ci=$ci AND codigo_ejem=$ejemplar AND fecha_devolucion is null");
-        return "Se realizo la devolucion correctamente";
+        $retornoEC = $this->estadoConservacion($ejemplar, $estadoConservacion);
+        return "Se realizo la devolucion correctamente: " . $retornoEC . "  " . $retornoEE;
     }
-    
-    
-        public function cambiarEstadoEjemplar($codigo_ejemplar, $nuevo_estado) {
+
+    public function cambiarEstadoEjemplar($codigo_ejemplar, $nuevo_estado) {
         $this->consultar("UPDATE ejemplar_material SET cod_est=$nuevo_estado WHERE codigo_ejem=$codigo_ejemplar");
-        return "update realizada";
+        return "Modificando Disponibilidad del ejemplar";
     }
+
+    public function estadoConservacion($ejemplar, $estadoConservacion) {
+        $fecha_hoy = date("d-m-Y");
+
+            $fechaEstadoAnterior = $this->consultar("SELECT mantiene.fecha_inicio
+ FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+ WHERE mantiene.codigo_ejem=$ejemplar AND mantiene.fecha_final is null
+ORDER BY mantiene.fecha_inicio ASC");
+            $row = $fechaEstadoAnterior->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            $fechaEstadoAnterior= $row[0];
+        } else {
+            $fechaEstadoAnterior= null;
+        }
+       
+        if (isset($fechaEstadoAnterior)) {
+            //Ponemos la fecha de devolucion como la fecha de finalizacion de ese estado de ejemplar
+            $this->consultar("UPDATE mantiene SET fecha_final='$fecha_hoy' 
+                              WHERE codigo_ejem=$ejemplar AND fecha_inicio='$fechaEstadoAnterior'");
+            //luego agregamos el nuevo estado material con fecha de devolucion como fecha de inicio
+            //y ponemos el estado del material que se devolvio
+            $this->consultar("INSERT INTO mantiene(codigo_ejem,codigo_conservacion,fecha_inicio) 
+                  VALUES($ejemplar,$estadoConservacion,'$fecha_hoy')");
+        } else {
+            //como no existe el estado anterior generamos uno nuevo para este ejemplar
+            //con el nuevo estado de conservacion pasado por el bibliotecologo...
+            $this->consultar("INSERT INTO mantiene(codigo_ejem,codigo_conservacion,fecha_inicio) 
+                VALUES($ejemplar,$estadoConservacion,'$fecha_hoy')");
+        }
+
+//        return "Estado de conservacion actualizado Correctamente!!! ".$ejemplar ." ".$estadoConservacion ." ". $fecha_hoy;
+        return "Estado de conservacion actualizado Correctamente!!! ";
+    }
+
 }
 
 ?>
