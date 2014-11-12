@@ -9,6 +9,7 @@ $rolUsuario=$comunicacion->loguearse($usuario, $pass);
 	if($rolUsuario!=NULL){
 		$_SESSION["usuario"]=$usuario;
                 $_SESSION["tipo"]=$rolUsuario;
+                $_SESSION["logueado"]=true;
 		header("location:".RUTA."presentacion/paginas/$rolUsuario/index.php");
 	}
 	else{
