@@ -236,7 +236,7 @@ class Administrador extends Conexion {
         return true;
     }
    
-    public function cantidadLibros($ci){
+    public function cantidadLibros($ci,$codigo_ejemplar){
         $cantidadPrestado=$this->escalar("  SELECT COUNT(*) 
                                             FROM prestamos
                                             WHERE ci=$ci AND fecha_devolucion IS NULL");
@@ -245,7 +245,9 @@ class Administrador extends Conexion {
             $cantidadPrestado=0;
         $cantidadReserva=$this->escalar("   SELECT COUNT(*) 
                                             FROM reserva
-                                            WHERE ci=$ci AND fecha_fin>TODAY");
+                                            WHERE ci=$ci AND fecha_fin>TODAY AND codigo_material NOT IN (SELECT codigo_material
+                                                                                                      FROM ejemplar_material
+                                                                                                      WHERE codigo_ejem=$codigo_ejemplar)");
         
         if($cantidadReserva===NULL)
             $cantidadReserva==0;

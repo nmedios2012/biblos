@@ -10,10 +10,11 @@
         //Creamos un objeto
         $admin=new Administrador();
         
-        //Traemos de las reservas 
+        //Traemos todos los usuarios del sistema:
+            //Contiene las siguientes columnas : ci,nombre, apellido,ciudad, calle, numero_apartamento, numero_puerta, e_mail
         $resultado=$admin->listadoUsuario();
         
-        //Registramos el resultamos 
+        //Registramos el resultamos de dicho comportamiento anterior
         $_SESSION["probando"]= serialize($resultado);
         
         //Redireccionamos
