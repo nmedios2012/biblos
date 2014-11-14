@@ -95,11 +95,14 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                         <ul>
                             <li><a href='#'><span>Biblioteca</span></a>
                             <li>
-                                <a href="../../../negocio/bibliotecologo/listadoReserva.php">Listar Reservas</a>
+                                <a href="../../../negocio/bibliotecologo/listadoMaterialesPrestamo.php">Prestar</a>
                             </li>
                             <li>
+                                <a href="../../../negocio/bibliotecologo/listadoReserva.php">Listar Reservas</a>
+                            </li>   
+                            <li>
                                 <a href="../../../negocio/bibliotecologo/listadoPrestamos.php">Listar Prestamos</a>
-                            </li>                            
+                            </li>    
                             <li><a href="index.php?pag=a_e">Alta editorial/empresa</a></li>
                             <li><a href="index.php?pag=alta_autores">Artista/Autor</a></li>
                             <li><a href="index.php?pag=a_p">Ingreso de Pa&iacute;s</a></li>

@@ -606,6 +606,70 @@ ORDER BY mantiene.fecha_inicio ASC");
         return "Estado de conservacion actualizado Correctamente!!! ";
     }
 
-}
 
+//***********************************************************************************************************************
+
+
+    //Se devuelve la lista de materiales
+    public function listadoEjemplarMaterialPrestamo() {
+        $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*)- (SELECT COUNT(*)
+                                                                                    FROM reserva 
+                                                                                     WHERE reserva.codigo_material=material.codigo_material
+                                                                                          AND fecha_fin>today),material.codigo_material 
+                                    FROM ejemplar_material INNER JOIN material ON ejemplar_material.codigo_material=material.codigo_material
+                                    WHERE cod_est=1 AND NOT EXISTS( SELECT *
+                                                                    FROM prestamos
+                                                                    WHERE prestamos.codigo_ejem=ejemplar_material.codigo_ejem AND fecha_devolucion IS NULL)
+                                    
+                                    GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
+        $respuesta = array();
+
+            $i = 0;
+            foreach ($stmt as $fila) {
+                $dato = array();
+            $dato["nombre"] = $fila[0];
+            $dato["anio"] = $fila[1];
+            $dato["descripcion"] = $fila[2];
+            
+            $numero=$this->escalar("SELECT COUNT(*) 
+                                    FROM reserva 
+                                    WHERE reserva.codigo_material=".$fila[4]
+                                          
+                    );
+            
+            //$cantidadReserva= $fila[3];
+
+            $cantidadReserva= $fila[3]-$numero;
+            
+            if ($cantidadReserva > 1) {
+                $dato["disponibilidad"] = "disponibleCasa";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamobiblo.php?codigo=" . $fila[4] . "'> EN DOMICILIO </a><a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'>En SALA</a>";
+                } else {
+
+                $dato["disponibilidad"] = "disponibleSala";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'> SALA </a>";
+                }
+
+                $respuesta[$i] = $dato;
+
+                $i++;
+            }
+        
+
+        return $respuesta;
+    }
+    
+        public function codigoEjemplarPrestamo($codigo_material){
+        
+        return $this->escalar(" SELECT ce.codigo_ejem
+                                FROM ejemplar_material AS ce
+                                WHERE ce.codigo_material=$codigo_material AND ce.codigo_ejem
+                                      NOT IN (  SELECT ejemplar_material.codigo_ejem
+                                                FROM ejemplar_material INNER JOIN prestamos
+                                                ON ejemplar_material.codigo_ejem =prestamos.codigo_ejem
+                                                WHERE codigo_material=$codigo_material AND cod_est=1 AND
+                                                fecha_devolucion IS NULL)");
+        
+    }
+    }
 ?>
