@@ -12,7 +12,7 @@ session_start();
     
     $dato2=$admin->codigoEjemplar($dato["codigo_material"]);
     $_SESSION["ci"]=$dato["ci"];
-    $_SESSION["codigo"] = $dato2[0];
+    $_SESSION["codigo"] = $dato2;
     $_SESSION["ci"]=$_GET["c"];
     if (file_exists("../../presentacion/imagenes/fotousuario/" . $_GET["c"] . ".jpg")) {
         $_SESSION["foto"] = $_GET["c"] . ".jpg";

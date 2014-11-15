@@ -250,7 +250,7 @@ class Bibliotecologo extends Conexion {
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($documento,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+                            VALUES($documento,$codigo_conservacion,$codigoEjemplar,'si',current,'$fecha') ");
         $this->cambiarEstadoEjemplar($codigo_ejemplar, 4); //4 EN PRESTAMO
     }
 
@@ -450,10 +450,17 @@ class Bibliotecologo extends Conexion {
     //Me dan el codigo material, buscamos el primer codigo ejemplar disponible
 
     public function codigoEjemplar($codigo_material) {
-
-        return $this->escalar(" SELECT codigo_ejem
+        return $this->escalar(" SELECT ce.codigo_ejem
+                                FROM ejemplar_material AS ce
+                                WHERE ce.codigo_material=$codigo_material AND ce.codigo_ejem
+                                      NOT IN (  SELECT ejemplar_material.codigo_ejem
+                                                FROM ejemplar_material INNER JOIN prestamos
+                                                ON ejemplar_material.codigo_ejem =prestamos.codigo_ejem
+                                                WHERE codigo_material=$codigo_material AND cod_est=1 AND
+                                                fecha_devolucion IS NULL)");
+        /*return $this->escalar(" SELECT codigo_ejem
                                 FROM ejemplar_material
-                                WHERE codigo_material=$codigo_material AND cod_est=1");
+                                WHERE codigo_material=$codigo_material AND cod_est=1");*/
     }
 
     public function listarPrestamos() {
