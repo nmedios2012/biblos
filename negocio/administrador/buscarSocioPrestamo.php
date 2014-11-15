@@ -10,9 +10,9 @@
         $resultado=$admin->buscar($documento);//Devuelve un usuario del documento dado. Sino existe devuelve null
         $_SESSION["resultado"]= $resultado;//El resultado se guarda en una session
         if($documento!=null){
-            if($admin->cantidadLibros($documento)<3){
+            if($admin->cantidadLibros($documento,$codigo)<3){
                 $telefono=$admin->buscarTelefono($documento);
-                echo $admin->cantidadLibros($documento);
+               
                if(isset($telefono[0]))
                     $_SESSION["telefono"]=$telefono[0];
                

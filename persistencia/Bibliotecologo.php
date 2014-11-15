@@ -698,5 +698,13 @@ ORDER BY mantiene.fecha_inicio ASC");
     }
     
     
+ 
+    
+    public function existeUsuario($ci,$email){
+        $esta=$this->escalar("SELECT COUNT(*) FROM usuario WHERE ci=$ci OR e_mail='$email'");
+        $esta2=$this->escalar("SELECT COUNT(*) FROM usuarios WHERE usuario='$email'");
+        return ($esta>0 || $esta2>0);
     }
+    
+       }
 ?>

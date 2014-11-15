@@ -4,10 +4,14 @@
         include "../../persistencia/conexion.php";
         include "../imagenes.php";
         include "../../persistencia/Bibliotecologo.php";
+        
         $admin=new Bibliotecologo();
         extract($_POST); //Trae los valores de la variable
         $foto=$_FILES["foto"];
         $insertado=false;
+        
+        
+        if (!$admin->existeUsuario($documento,$mail)){
         if($foto!=NULL){ //Controlamos si el usuario sube foto o no
             $array=Array("jpg","gif","png","bmp"); //Autorización de los formatos de imágen
             $archivo=new uploadImagen($foto,$array,1048576); // Creamos el objeto que administrará nuestra foto
@@ -47,8 +51,11 @@
             $_SESSION["mensaje"]="Se ingreso correctamente";
             
         
-       header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s")
-        
+       header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=a_s");
+         }
+     else{
+          header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=usuario_repetido");
+     }
               
 ?>
 

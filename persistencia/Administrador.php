@@ -15,12 +15,19 @@ class Administrador extends Conexion {
 
     //Se guarda en la tabla usuario los datos
     public function agregarUsuario($ci, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
-        $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
-                                numero_apartamento,numero_puerta,e_mail,estado_logico)
-                                VALUES ($ci,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
-                                ");
-
-        return true;
+        
+        $esta=$this->escalar("SELECT COUNT(*) FROM usuario WHERE ci=$ci OR e_mail='$email'");
+        if($esta==0){
+            $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
+                              numero_apartamento,numero_puerta,e_mail,estado_logico)
+                              VALUES ($ci,'$nombre','$apellido','   ','$ciudad','$calle',$nro_apto,$nro_puerta,'$email','si')
+                                    ");
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
 
     //Me dan el codigo material, buscamos el primer codigo ejemplar disponible
@@ -245,7 +252,7 @@ class Administrador extends Conexion {
             $cantidadPrestado=0;
         $cantidadReserva=$this->escalar("   SELECT COUNT(*) 
                                             FROM reserva
-                                            WHERE ci=$ci AND fecha_fin>TODAY AND codigo_material NOT IN (SELECT codigo_material
+                                            WHERE ci=$ci AND fecha_fin>current AND codigo_material NOT IN (SELECT codigo_material
                                                                                                       FROM ejemplar_material
                                                                                                       WHERE codigo_ejem=$codigo_ejemplar)");
         
@@ -266,7 +273,7 @@ class Administrador extends Conexion {
 
         $cantidad=$this->escalar("   SELECT COUNT(*) 
                                     FROM reserva INNER JOIN ejemplar_material ON reserva.codigo_material=ejemplar_material.codigo_material 
-                                    WHERE codigo_ejem=$codigoEjemplar AND reserva.ci=$ci AND reserva.fecha_fin>=today");
+                                    WHERE codigo_ejem=$codigoEjemplar AND reserva.ci=$ci AND reserva.fecha_fin>=current");
        
         if($cantidad>0){
              $this->consultar("  UPDATE reserva
@@ -274,12 +281,12 @@ class Administrador extends Conexion {
                                     fecha_fin=current
                                  WHERE reserva.codigo_material IN ( SELECT ejemplar_material.codigo_material
                                                             FROM ejemplar_material
-                                                            WHERE codigo_ejem=$codigoEjemplar  AND reserva.ci=$ci AND reserva.fecha_fin>=today)");
+                                                            WHERE codigo_ejem=$codigoEjemplar  AND reserva.ci=$ci AND reserva.fecha_fin>=current)");
             
         }
         
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
-                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',current,'$fecha') ");
 
     }
     public function agregarSala($ci,$codigoEjemplar){
@@ -340,6 +347,11 @@ class Administrador extends Conexion {
         return ($respuesta>0);
     }
     
+    public function existeUsuario($ci,$email){
+        $esta=$this->escalar("SELECT COUNT(*) FROM usuario WHERE ci=$ci OR e_mail='$email'");
+        $esta2=$this->escalar("SELECT COUNT(*) FROM usuarios WHERE usuario='$email'");
+        return ($esta>0 || $esta2>0);
+    }
     
 
 }
