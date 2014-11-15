@@ -643,7 +643,7 @@ ORDER BY mantiene.fecha_inicio ASC");
             
             if ($cantidadReserva > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
-                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamobiblo.php?codigo=" . $fila[4] . "'> EN DOMICILIO </a><a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'>En SALA</a>";
+                $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamobiblo.php?codigo=" . $fila[4] . "'> EN DOMICILIO </a></br><a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'>EN SALA</a>";
                 } else {
 
                 $dato["disponibilidad"] = "disponibleSala";
@@ -671,5 +671,32 @@ ORDER BY mantiene.fecha_inicio ASC");
                                                 fecha_devolucion IS NULL)");
         
     }
+        public function agregarPrestamoAdmin($ci,$codigoEjemplar,$fecha){
+        
+
+        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
+                            FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+                            WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
+
+        $cantidad=$this->escalar("   SELECT COUNT(*) 
+                                    FROM reserva INNER JOIN ejemplar_material ON reserva.codigo_material=ejemplar_material.codigo_material 
+                                    WHERE codigo_ejem=$codigoEjemplar AND reserva.ci=$ci AND reserva.fecha_fin>=today");
+       
+        if($cantidad>0){
+             $this->consultar("  UPDATE reserva
+                                 SET
+                                    fecha_fin=current
+                                 WHERE reserva.codigo_material IN ( SELECT ejemplar_material.codigo_material
+                                                            FROM ejemplar_material
+                                                            WHERE codigo_ejem=$codigoEjemplar  AND reserva.ci=$ci AND reserva.fecha_fin>=today)");
+            
+        }
+        
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
+                            VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+
+    }
+    
+    
     }
 ?>

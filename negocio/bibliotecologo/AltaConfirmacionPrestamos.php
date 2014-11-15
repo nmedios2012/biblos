@@ -10,7 +10,8 @@
         $documento=$_SESSION["ci"];
         $codigoEjemplar=$_SESSION["codigo"];
 
-        $admin->agregarPrestamo($documento, $codigoEjemplar, $fecha);
+//        $admin->agregarPrestamo($documento, $codigoEjemplar, $fecha);
+        $admin->agregarPrestamoAdmin($documento, $codigoEjemplar, $fecha);        
         //Falta actualizar el estadoi en ejemplar
         $libro=$admin->buscarLibro($codigoEjemplar);
         

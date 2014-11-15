@@ -6,7 +6,7 @@ session_start();
     include "../../persistencia/Bibliotecologo.php";
     $admin=new Bibliotecologo();
     
-    $codigoReserva=$_GET["m"];
+    $codigoReserva=$_GET["r"];
     
     $dato=$admin->obtenerReservar($codigoReserva);
     

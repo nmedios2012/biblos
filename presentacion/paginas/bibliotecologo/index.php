@@ -147,8 +147,8 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                 <address>
                     Contenido de dirección
                     <?php
-                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
-                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
+//                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
+//                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
                     ?>
                 </address>
             </footer>

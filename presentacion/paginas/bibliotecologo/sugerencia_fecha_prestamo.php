@@ -71,14 +71,14 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
-<form name="input" action="../../../negocio/bibliotecologo/buscarSocioPrestamo.php" method="post" id="frmBuscar">
+<!--<form name="input" action="../../../negocio/bibliotecologo/buscarSocioPrestamo.php" method="post" id="frmBuscar">
     <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
     <input type="hidden" name="pagina" value="alta_prestamo" />
 </form>
 <div id="mensaje">
     
-</div>
+</div>-->
 <div>
     <div id="usuarioprestamo">
     <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
@@ -93,11 +93,11 @@ $codigoEjemplar=$_SESSION["codigo"];
     <script>
     $( "#datepicker" ).datepicker();
     $( "#datepicker" ).datepicker( "setDate", new Date( <?php echo $anio;?>, <?php echo $mes;?>, <?php echo $dia;?>) );
-    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ] );
+    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ]  );
     $( "#datepicker" ).datepicker( "option", "firstDay", 1 );
     $( "#datepicker" ).datepicker("option", "minDate", new Date() );
     $( "#datepicker" ).datepicker( "option", "maxDate", "+1m" );
-    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Novviembre", "Diciembre"]);
+    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"]);
     
 </script>
 </div>
@@ -111,11 +111,11 @@ $codigoEjemplar=$_SESSION["codigo"];
     <script>
     $( "#datepicker" ).datepicker();
     $( "#datepicker" ).datepicker( "setDate", new Date( <?php echo $anio;?>, <?php echo $mes;?>, <?php echo $dia;?>) );
-    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ] );
+    $( "#datepicker" ).datepicker( "option","dayNamesShort",[ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ] );
     $( "#datepicker" ).datepicker( "option", "firstDay", 1 );
     $( "#datepicker" ).datepicker("option", "minDate", new Date() );
     $( "#datepicker" ).datepicker( "option", "maxDate", "+1m" );
-    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Novviembre", "Diciembre"]);
+    $( "#datepicker" ).datepicker("option", "monthNames", ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"]);
     $('#datepicker').datepicker({
     onSelect: function(dateText, inst) { 
         alert("vxcvcxv");

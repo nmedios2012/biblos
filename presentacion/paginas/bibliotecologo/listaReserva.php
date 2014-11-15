@@ -66,7 +66,8 @@
                 echo "<td>" . $resultado[$i]["nro_reserva"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_inicio"] . "</td>";
                 echo "<td>" . $resultado[$i]["fecha_fin"] . "</td>";
-                echo "<td><a href='../../../negocio/bibliotecologo/altaprestamoporreserva.php?m=".  $resultado[$i]["codigo_material"] . "&r=".  $resultado[$i]["nro_reserva"] . "&c=" . $resultado[$i]["ci"] . "'>Prestar</a></td>";
+//                echo "<td><a href='../../../negocio/bibliotecologo/altaprestamoporreserva.php?m=".  $resultado[$i]["codigo_material"] . "&r=".  $resultado[$i]["nro_reserva"] . "&c=" . $resultado[$i]["ci"] . "'>Prestar</a></td>";
+                echo "<td><a href='../../../negocio/bibliotecologo/altaprestamoporreserva.php?r=".  $resultado[$i]["nro_reserva"] . "&c=" . $resultado[$i]["ci"] . "'>Prestar</a></td>";    
                 echo "</tr>";
             }
             ?>

@@ -1,4 +1,4 @@
-<?php
+agregarPrestamo<?php
 
 class Administrador extends Conexion {
 

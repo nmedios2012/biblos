@@ -13,7 +13,7 @@ if (isset($_SESSION["editar"]) && $_SESSION["editar"] != NULL) {
     <p>Nombre <input type="text" name="nombre" size="15" maxlength="15" value="<?php echo $nombre; ?>">
         &nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15" value="<?php echo $apellido; ?>"></p>
 
-    <p>Documento <input type="text" name="documento" size="11" maxlength="11"value="<?php echo $documento; ?>"></p></br>
+    <p>Documento <input type="text" name="documento" size="11" maxlength="11"value="<?php echo $ci; ?>"></p></br>
     <p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60"value="<?php echo $calle; ?>">
         &nbsp; Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4" value="<?php echo $numero_puerta; ?>">
         &nbsp; Nro Apartamento <input type="text" name="nro_apto" size="3" maxlength="3" value="<?php echo $numero_apartamento; ?>">
