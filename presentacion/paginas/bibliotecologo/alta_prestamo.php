@@ -15,6 +15,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     $documento = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
+    $ci="";
     
     
     
