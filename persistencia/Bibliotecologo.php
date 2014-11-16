@@ -13,7 +13,7 @@ class Bibliotecologo extends Conexion {
         return true;
     }
 
-    //Se guarda en la tabla usuario los datos
+    //Se guarda en la tabla usuario los datos para fredddy
     public function agregarUsuario($documento, $nombre, $apellido, $ciudad, $calle, $nro_apto, $nro_puerta, $email) {
         $this->consultar("INSERT INTO usuario (ci,nombre,apellido,link_foto,ciudad,calle,
                                 numero_apartamento,numero_puerta,e_mail,estado_logico)
