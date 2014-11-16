@@ -53,7 +53,7 @@ $codigoEjemplar=$_SESSION["codigo"];
 
 <p>ADMINISTRACI&Oacute;N DE PRESTAMO - DOMICILIO</p>
 <form name="input" action="../../../negocio/bibliotecologo/buscarSocioPrestamo.php" method="post" id="frmBuscar">
-    <p>Documento <input type="text" id="documento" name="documento" size="11" maxlength="11">
+    <p>Documento <input type="number" id="documento" name="documento" min="8" max="8">
         &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" id="buscar" value="Buscar"></p>
     <input type="hidden" name="pagina" value="alta_prestamo" />
 </form>

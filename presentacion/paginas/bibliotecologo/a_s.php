@@ -3,12 +3,12 @@
     <legend>ADMINISTRACI&Oacute;N DE SOCIOS - ALTA DE SOCIOS:</legend>
 
     <form name="input" action="../../../negocio/bibliotecologo/altausuario.php" enctype="multipart/form-data" method="post">
-    <p>Nombre <input type="text" name="nombre" size="15" maxlength="15">
-        &nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15"></p>
-        
-    <p>Documento <input type="text" name="documento" size="11" maxlength="11"></p></br>
-    <p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60">
-        &nbsp; Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4">
+    <p>Nombre <input type="text" name="nombre" size="15" maxlength="15"required>
+        &nbsp; Apellido <input type="text" name="apellido" size="15" maxlength="15" required></p>
+         
+    <p>Documento <input type="number" name="documento" min="8" max="8" required></p></br>
+    <p>Direcci&oacute;n <input type="text" name="direccion" size="50" maxlength="60" required>
+        &nbsp; Nro Puerta <input type="text" name="nro_puerta" size="4" maxlength="4" required>
         &nbsp; Nro Apartamento <input type="text" name="nro_apto" size="3" maxlength="3">
         
     <p>Departamento <select name="ciudad" id="ciudad">
@@ -34,9 +34,9 @@
 
             </select>
         </p><br/>
-    <p>Tel&eacute;fono <input type="text" name="telefono" size="11" maxlength="11">
-        &nbsp; Celular <input type="text" name="celular" size="9" maxlength="9"></p><br/>
-        &nbsp; Mail <input type="text" name="mail" size="30" maxlength="30"></p><br/>
+    <p>Tel&eacute;fono <input type="number" name="telefono" min="6" max="11"required>
+        &nbsp; Celular <input type="number" name="celular" size="9" maxlength="9"></p><br/>
+        &nbsp; Mail <input type="text" name="mail" size="30" maxlength="30" required></p><br/>
 
     <p>Agregar foto <input type="file" name="foto" />
     </p>
@@ -46,7 +46,7 @@
         }
         
         ?>
-    &nbsp;&nbsp; <input type="submit" value="Aceptar"> 
+    &nbsp;&nbsp; <input type="submit" value="Enviar"> 
     &nbsp;&nbsp; <input type="reset" value="Limpiar"> <!--Borra el formulario pero no la base de datos-->
     </form>
 
