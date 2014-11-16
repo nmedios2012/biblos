@@ -400,6 +400,24 @@ class Bibliotecologo extends Conexion {
         return $respuesta;
     }
 
+    public function cargarEstadosConservacion() {
+
+        $stmt = $this->consultar("select * from conservacion;");
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo_conservacion'] = $fila[0];
+            $dato['nombre'] = $fila[1];
+            $dato['estado_logico'] = $fila[2];
+            $dato['fecha_borrado'] = $fila[3];
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
+    }
+
     public function listarMateriales() {
 
         $stmt = $this->consultar("select * from material;");
@@ -458,9 +476,9 @@ class Bibliotecologo extends Conexion {
                                                 ON ejemplar_material.codigo_ejem =prestamos.codigo_ejem
                                                 WHERE codigo_material=$codigo_material AND cod_est=1 AND
                                                 fecha_devolucion IS NULL)");
-        /*return $this->escalar(" SELECT codigo_ejem
-                                FROM ejemplar_material
-                                WHERE codigo_material=$codigo_material AND cod_est=1");*/
+        /* return $this->escalar(" SELECT codigo_ejem
+          FROM ejemplar_material
+          WHERE codigo_material=$codigo_material AND cod_est=1"); */
     }
 
     public function listarPrestamos() {
@@ -536,7 +554,7 @@ class Bibliotecologo extends Conexion {
         $fecha = date("d-m-Y");
         $fechafin = date("d-m-Y", strtotime($fecha . ' + 10 days'));
 
-        $caca = $this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
+        $this->consultar("INSERT INTO sufre(codigo_material,ci,codigo,codigo_curso,codigo_conservacion,codigo_ejem,fecha_inicio,fecha_fin)
 VALUES(" . $respuesta['codigo_material'] . ",$ci,$codigoPenalizacion,$codigoCurso," . $respuesta["cod_est"] . "," . $respuesta['codigo_ejem'] . ",'$fecha','$fechafin')");
 
         return "Sancion agregada con exito fecha finalizacion: $fechafin";
@@ -583,17 +601,17 @@ VALUES(" . $respuesta['codigo_material'] . ",$ci,$codigoPenalizacion,$codigoCurs
     public function estadoConservacion($ejemplar, $estadoConservacion) {
         $fecha_hoy = date("d-m-Y");
 
-            $fechaEstadoAnterior = $this->consultar("SELECT mantiene.fecha_inicio
+        $fechaEstadoAnterior = $this->consultar("SELECT mantiene.fecha_inicio
  FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
  WHERE mantiene.codigo_ejem=$ejemplar AND mantiene.fecha_final is null
 ORDER BY mantiene.fecha_inicio ASC");
-            $row = $fechaEstadoAnterior->fetch(PDO::FETCH_NUM);
+        $row = $fechaEstadoAnterior->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
-            $fechaEstadoAnterior= $row[0];
+            $fechaEstadoAnterior = $row[0];
         } else {
-            $fechaEstadoAnterior= null;
+            $fechaEstadoAnterior = null;
         }
-       
+
         if (isset($fechaEstadoAnterior)) {
             //Ponemos la fecha de devolucion como la fecha de finalizacion de ese estado de ejemplar
             $this->consultar("UPDATE mantiene SET fecha_final='$fecha_hoy' 
@@ -613,10 +631,7 @@ ORDER BY mantiene.fecha_inicio ASC");
         return "Estado de conservacion actualizado Correctamente!!! ";
     }
 
-
 //***********************************************************************************************************************
-
-
     //Se devuelve la lista de materiales
     public function listadoEjemplarMaterialPrestamo() {
         $stmt = $this->consultar("  SELECT nombre,anio,comentario_general,COUNT(*)- (SELECT COUNT(*)
@@ -631,43 +646,42 @@ ORDER BY mantiene.fecha_inicio ASC");
                                     GROUP BY ejemplar_material.codigo_material,nombre,anio,comentario_general,material.codigo_material");
         $respuesta = array();
 
-            $i = 0;
-            foreach ($stmt as $fila) {
-                $dato = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
             $dato["nombre"] = $fila[0];
             $dato["anio"] = $fila[1];
             $dato["descripcion"] = $fila[2];
-            
-            $numero=$this->escalar("SELECT COUNT(*) 
+
+            $numero = $this->escalar("SELECT COUNT(*) 
                                     FROM reserva 
-                                    WHERE reserva.codigo_material=".$fila[4]
-                                          
-                    );
-            
+                                    WHERE reserva.codigo_material=" . $fila[4]
+            );
+
             //$cantidadReserva= $fila[3];
 
-            $cantidadReserva= $fila[3]-$numero;
-            
+            $cantidadReserva = $fila[3] - $numero;
+
             if ($cantidadReserva > 1) {
                 $dato["disponibilidad"] = "disponibleCasa";
                 $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamobiblo.php?codigo=" . $fila[4] . "'> EN DOMICILIO </a></br><a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'>EN SALA</a>";
-                } else {
+            } else {
 
                 $dato["disponibilidad"] = "disponibleSala";
                 $dato["mostrardisponibilidad"] = "<a href='../../../negocio/bibliotecologo/altaprestamo_sala.php?codigo=" . $fila[4] . "'> SALA </a>";
-                }
-
-                $respuesta[$i] = $dato;
-
-                $i++;
             }
-        
+
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+
 
         return $respuesta;
     }
-    
-        public function codigoEjemplarPrestamo($codigo_material){
-        
+
+    public function codigoEjemplarPrestamo($codigo_material) {
+
         return $this->escalar(" SELECT ce.codigo_ejem
                                 FROM ejemplar_material AS ce
                                 WHERE ce.codigo_material=$codigo_material AND ce.codigo_ejem
@@ -676,42 +690,106 @@ ORDER BY mantiene.fecha_inicio ASC");
                                                 ON ejemplar_material.codigo_ejem =prestamos.codigo_ejem
                                                 WHERE codigo_material=$codigo_material AND cod_est=1 AND
                                                 fecha_devolucion IS NULL)");
-        
     }
-        public function agregarPrestamoAdmin($ci,$codigoEjemplar,$fecha){
-        
 
-        $codigo_conservacion=$this->escalar("  SELECT first 1 mantiene.codigo_conservacion
+    public function agregarPrestamoAdmin($ci, $codigoEjemplar, $fecha) {
+
+
+        $codigo_conservacion = $this->escalar("  SELECT first 1 mantiene.codigo_conservacion
                             FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
                             WHERE mantiene.codigo_ejem=$codigoEjemplar ORDER BY mantiene.fecha_inicio ASC");
 
-        $cantidad=$this->escalar("   SELECT COUNT(*) 
+        $cantidad = $this->escalar("   SELECT COUNT(*) 
                                     FROM reserva INNER JOIN ejemplar_material ON reserva.codigo_material=ejemplar_material.codigo_material 
                                     WHERE codigo_ejem=$codigoEjemplar AND reserva.ci=$ci AND reserva.fecha_fin>=today");
-       
-        if($cantidad>0){
-             $this->consultar("  UPDATE reserva
+
+        if ($cantidad > 0) {
+            $this->consultar("  UPDATE reserva
                                  SET
                                     fecha_fin=current
                                  WHERE reserva.codigo_material IN ( SELECT ejemplar_material.codigo_material
                                                             FROM ejemplar_material
                                                             WHERE codigo_ejem=$codigoEjemplar  AND reserva.ci=$ci AND reserva.fecha_fin>=today)");
-            
         }
-        
+
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,fecha_inicio,fecha_fin)     
                             VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si',today,'$fecha') ");
+    }
 
+    public function existeUsuario($ci, $email) {
+        $esta = $this->escalar("SELECT COUNT(*) FROM usuario WHERE ci=$ci OR e_mail='$email'");
+        $esta2 = $this->escalar("SELECT COUNT(*) FROM usuarios WHERE usuario='$email'");
+        return ($esta > 0 || $esta2 > 0);
     }
-    
-    
- 
-    
-    public function existeUsuario($ci,$email){
-        $esta=$this->escalar("SELECT COUNT(*) FROM usuario WHERE ci=$ci OR e_mail='$email'");
-        $esta2=$this->escalar("SELECT COUNT(*) FROM usuarios WHERE usuario='$email'");
-        return ($esta>0 || $esta2>0);
+
+    //*************************************************JAVIER NUEVO PRESTAMO DIRECTO
+
+    public function listadoLibros() {
+
+        $stmt = $this->consultar("
+                                SELECT
+                                m.codigo_material
+                                ,m.nombre
+                                ,m.anio
+                                ,COUNT(ej.cod_est)
+                                ,e.estado_anterior
+                                FROM material m ,ejemplar_material ej ,estado e
+                                WHERE e.cod_est=ej.cod_est
+                                and ej.codigo_material= m.codigo_material 
+                                GROUP BY m.codigo_material,m.nombre,m.anio,
+                                e.estado_anterior");
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['m.codigo_material'] = $fila[0];
+            $dato['m.nombre'] = $fila[1];
+            $dato['m.anio'] = $fila[2];
+            $dato['cantidadEjemplares'] = $fila[3];
+            $dato['e.estado_anterior'] = $fila[4];
+
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
     }
-    
-       }
+
+    public function prestamoDirectoNuevo($ci, $codigo_material, $codigo_conservacion) {
+        $fecha = date("d-m-Y");
+        $fechafin = date("d-m-Y", strtotime($fecha . ' + 5 days'));
+
+        $codigoEjemplar = $this->obtPriEjemSegunCodMatYEst($codigo_material, 1); //1 = disponible
+
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,
+        fecha_inicio,fecha_fin)     
+        VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si','$fecha','$fechafin') ");
+
+        $this->agregarEstadoConservacion($codigoEjemplar, $codigo_conservacion);
+        $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //2 = EN PRESTAMO
+
+        return "CodigoEJEMPLAR return " . $codigoEjemplar . "     " . $fechafin;
+    }
+
+    public function obtPriEjemSegunCodMatYEst($codigo_material, $cod_estado) {
+
+        $stmt = $this->consultar("select codigo_ejem from ejemplar_material where codigo_material=$codigo_material
+                                  and cod_est=$cod_estado");
+
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        } else {
+            return "CODIGO DE EJEMPLAR NO ENCONTRADO";
+        }
+    }
+
+    public function agregarEstadoConservacion($ejemplar, $codEstadoConservacion) {
+        $fecha_hoy = date("d-m-Y");
+        $this->consultar("INSERT INTO mantiene(codigo_ejem,codigo_conservacion,fecha_inicio) 
+                VALUES($ejemplar,$codEstadoConservacion,'$fecha_hoy')");
+    }
+
+}
+
 ?>

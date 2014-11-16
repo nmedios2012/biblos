@@ -104,6 +104,9 @@ if ($_SESSION["tipo"] != "bibliotecologo")
                                 <a href="../../../negocio/bibliotecologo/listadoMaterialesPrestamo.php">Prestar</a>
                             </li>
                             <li>
+                                <a href="../../../negocio/bibliotecologo/prestamoDirectoNuevo.php">Prestar JAVI NUEVO</a>
+                            </li>                            
+                            <li>
                                 <a href="../../../negocio/bibliotecologo/listadoReserva.php">Listar Reservas</a>
                             </li>   
                             <li>
