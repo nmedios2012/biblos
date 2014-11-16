@@ -23,13 +23,14 @@
 //        alert("Index: " + y[x].value);
         if (y[x].value == 1) {
             if (confirm('Enviar solicitud con codigo de estado Nuevo?')) {
-                // Save it!
+                // Manda solicitud
                 document.forms["formConfPrest"].submit();
             } else {
-                // Do nothing!
+                // Se queda en la pagina
             }
+        } else {
+            document.forms["formConfPrest"].submit();
         }
-//        document.forms["formConfPrest"].submit();
     }
 
     function seleccionarMaterial(valorEjemplarCodigo, valorEjemplarNombre) {

@@ -602,7 +602,8 @@ VALUES(" . $respuesta['codigo_material'] . ",$ci,$codigoPenalizacion,$codigoCurs
         $fecha_hoy = date("d-m-Y");
 
         $fechaEstadoAnterior = $this->consultar("SELECT mantiene.fecha_inicio
- FROM mantiene INNER JOIN ejemplar_material ON mantiene.codigo_ejem=ejemplar_material.codigo_ejem
+ FROM mantiene INNER JOIN ejemplar_material ON 
+ mantiene.codigo_ejem=ejemplar_material.codigo_ejem
  WHERE mantiene.codigo_ejem=$ejemplar AND mantiene.fecha_final is null
 ORDER BY mantiene.fecha_inicio ASC");
         $row = $fechaEstadoAnterior->fetch(PDO::FETCH_NUM);
@@ -790,6 +791,36 @@ ORDER BY mantiene.fecha_inicio ASC");
                 VALUES($ejemplar,$codEstadoConservacion,'$fecha_hoy')");
     }
 
+    public function reservasActivas($ciSocio) {
+       
+        $stmt = $this->consultar("select count(ci) from reserva where ci=$ciSocio and fecha_fin >=today");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        }
+        return $row[0];
+    }
+
+    public function prestamosActivos($ciSocio) {
+      
+        $stmt = $this->consultar("select count(ci) from prestamos where ci=$ciSocio and fecha_devolucion is null");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        }
+        return $row[0];
+    }
+    
+    public function sancionesActivas($ciSocio){
+    
+        $stmt = $this->consultar("select count(ci) from sufre where ci=$ciSocio and fecha_fin >=today");
+        $row = $stmt->fetch(PDO::FETCH_NUM);
+        if ($row != NULL) {
+            return $row[0];
+        }
+        return $row[0];
+    }
+ 
 }
 
 ?>
