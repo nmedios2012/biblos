@@ -8,10 +8,11 @@ $admin = new Bibliotecologo();
 
 extract($_POST);
 
-//echo $_POST['codigoMat'];
-//echo"";
-//echo $_POST['codigoEstado'];
+echo $_POST['codigoMat'];
+echo"";
+echo $_POST['codigoEstado'];
 $resultado = $admin->nuevoEjemplar($_POST['codigoMat'], $_POST['codigoEstado']);
+echo $resultado;
 ?>
 <!--<script>
     function ingresoSatisfactorio() {

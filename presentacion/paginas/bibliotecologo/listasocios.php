@@ -63,30 +63,33 @@
                 echo "<td>" . $resultado[$i]["ci"] . "</td>";
                 echo "<td>" . $resultado[$i]["ciudad"] . "</td>";
                 echo "<td>";
-                echo "<input type='button' value='Seleccionar' onclick='seleccionarSocio(cedula" . $i . ",nombre" . $i . ",apellido" . $i . ")'/>";
-                echo "<input type='hidden' id='cedula" . $i . "' value='" . $resultado[$i]["ci"] . "'/>";
-                echo "<input type='hidden' id='nombre" . $i . "' value='" . $resultado[$i]["nombre"] . "'/>";
-                echo "<input type='hidden' id='apellido" . $i . "' value='" . $resultado[$i]["apellido"] . "'/>";
+//                echo "<input type='button' value='Seleccionar' onclick='seleccionarSocio(cedula" . $i . ",nombre" . $i . ",apellido" . $i . ")'/>";
+//                echo "<input type='hidden' id='cedula" . $i . "' value='" . $resultado[$i]["ci"] . "'/>";
+//                echo "<input type='hidden' id='nombre" . $i . "' value='" . $resultado[$i]["nombre"] . "'/>";
+//                echo "<input type='hidden' id='apellido" . $i . "' value='" . $resultado[$i]["apellido"] . "'/>";
+                echo "<form name='input' action='../../../negocio/bibliotecologo/buscar.php' method='post' id='frmBuscar'>
+                    <input type='submit' value='Modificar/Eliminar' /><input type='hidden' name='documento' value='" . $resultado[$i]["ci"] . "'/>
+                </form>";
                 echo "</td>";
                 echo "</tr>";
             }
             echo "  </tbody></table>";
             echo" </fieldset>";
             ?>
-<!--        <fieldset>-->
+            <!--        <fieldset>-->
 
 
-<!--
-<table border="1">
-    <tr>
-        <td></td>
-        <td>Nombre</td>
-        <td>Apellido</td>
-        <td>Cedula</td>
-        <td>Ciudad</td>
-        <td>Ir</td>
-    </tr>   
-<?php
+            <!--
+            <table border="1">
+                <tr>
+                    <td></td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Cedula</td>
+                    <td>Ciudad</td>
+                    <td>Ir</td>
+                </tr>   
+            <?php
 //include_once('../../../negocio/bibliotecologo/listadoUsuario.php');
 //        
 //$resultado=unserialize($_SESSION["probando"]);
@@ -118,5 +121,5 @@
 //    }
 //            
 //
-?>    
-</table>-->
+            ?>    
+            </table>-->

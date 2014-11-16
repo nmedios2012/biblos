@@ -11,7 +11,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
 } else {
     $nombre = "";
     $apellido = "";
-    $documento = "";
+    $ci = "";
     $activar = " disabled='disabled' ";
     $mensaje="";
 }
@@ -52,7 +52,7 @@ if (isset($_SESSION["resultado"]) && $_SESSION["resultado"] != NULL) {
     
 </div>
 <img src="../../imagenes/fotousuario/<?php echo $foto; ?>" width="150" height="150"/>
-<p>CI : <label><?php echo $documento; ?></label><br/>
+<p>CI : <label><?php echo $ci; ?></label><br/>
 <p>Nombre : <label><?php echo $nombre; ?></label><br/>
     &nbsp; Apellido : <label><?php echo $apellido; ?></label>
     <br />

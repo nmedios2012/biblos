@@ -1,5 +1,6 @@
 <?php
 	//Configuracion de la pagina
+//        define("RUTA","http://192.168.10.129/biblos/");
         define("RUTA","http://localhost/biblos/");
 
         //Configuracion de la base de datos

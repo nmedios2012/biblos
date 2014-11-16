@@ -48,5 +48,5 @@ function controlar(){
 }
 function pintar(){
     
-    $(this).css("background","green");
+//    $(this).css("background","green");
 }

@@ -10,13 +10,12 @@ if ($_SESSION["tipo"] != "bibliotecologo")
 ?>
 
 <!doctype html>
-<html>
+<html style="overflow-x: hidden">
     <head>
         <meta charset="utf-8">
         <title>Biblos Administracion</title>
         <link 
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <link href="../../css/admin.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="../../js/jquery.js"></script>
         <script type="text/javascript" src="../../js/bibliotecologo.js"></script>
@@ -48,16 +47,23 @@ if ($_SESSION["tipo"] != "bibliotecologo")
 
         <div class="container">
             <header>
-                <a href="#">
-                    <img src="../../../presentacion/imagenes/logo.jpg" alt="" width="180" height="90" id="Insert_logo" style="background-color: #FFF580; display:block;" />
-                </a>                
-                <?php
-                if ($_SESSION['tipo']) { //Si hay un usuario lo mostramos
-                    echo" <strong>USUARIO: " . $_SESSION['usuario'] . "<BR/>   ROL: " . $_SESSION['tipo'] . "</strong><br />";
-                }
-                echo date("d/m/Y");
-                ?>
-                <div id="clock" align="right"/>
+                <div>
+                    
+                        <a href="#">
+                            <img src="../../../presentacion/imagenes/logo.jpg" alt="" width="180" height="90" id="Insert_logo" style="background-color: #FFF580; float:none;" />
+                        </a>  
+                    <div style="float: right;">
+                        <?php
+                        if ($_SESSION['tipo']) { //Si hay un usuario lo mostramos
+                            echo" <strong>USUARIO: " . $_SESSION['usuario'] . "</br>   ROL: " . $_SESSION['tipo'] . "</strong></br>"  .date("d/m/Y")." - <a id='clock' align='right'></a>";
+                            
+                            
+                        }
+//                        echo date("d/m/Y");
+                        ?>
+<!--                        <div id="clock" align="right"></div>-->
+                    </div>
+                </div>
 
             </header>
             <div id='flyout_menu' class="sidebar1">
@@ -145,10 +151,10 @@ if ($_SESSION["tipo"] != "bibliotecologo")
             <footer>
                 <p></p>
                 <address>
-                    Contenido de dirección
+<!--                    Contenido de dirección-->
                     <?php
-//                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
-//                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
+                    print '<pre>' . htmlspecialchars(print_r(get_defined_vars(), true)) . '</pre>';
+                    print '<pre>' . htmlspecialchars(print_r($_SERVER, true)) . '</pre>';
                     ?>
                 </address>
             </footer>
