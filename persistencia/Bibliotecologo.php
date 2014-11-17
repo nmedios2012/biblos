@@ -331,7 +331,7 @@ class Bibliotecologo extends Conexion {
                 res.codigo_material 
                 FROM reserva res 
                 LEFT OUTER JOIN material mate ON mate.codigo_material = res.codigo_material
-                WHERE res.fecha_fin>=current");
+                WHERE res.fecha_fin>=current AND res.fecha_borrado is null");
 
 //        if ($stmt->fetchColumn() > 0) {
 
@@ -593,6 +593,17 @@ VALUES(" . $respuesta['codigo_material'] . ",$ci,$codigoPenalizacion,$codigoCurs
         return "Se realizo la devolucion correctamente: " . $retornoEC . "  " . $retornoEE;
     }
 
+    /**
+     *        1 DISPONIBLE           si
+      2 PRESTAMO EN SALA     si
+      3 RESERVADO            si
+      4 EN PRESTAMO          si
+      5 EXTRAVIADO           si
+      6 FUERA DE USO         si
+     * @param type $codigo_ejemplar
+     * @param type $nuevo_estado
+     * @return string
+     */
     public function cambiarEstadoEjemplar($codigo_ejemplar, $nuevo_estado) {
         $this->consultar("UPDATE ejemplar_material SET cod_est=$nuevo_estado WHERE codigo_ejem=$codigo_ejemplar");
         return "Modificando Disponibilidad del ejemplar";
@@ -770,12 +781,26 @@ ORDER BY mantiene.fecha_inicio ASC");
         VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si','$fecha','$fechafin') ");
 
         $this->agregarEstadoConservacion($codigoEjemplar, $codigo_conservacion);
-         if ($prestamoSala) {
-              $this->cambiarEstadoEjemplar($codigoEjemplar, 2);//2 = EN SALA 
+        if ($prestamoSala) {
+            $this->cambiarEstadoEjemplar($codigoEjemplar, 2); //2 = EN SALA 
         } else {
-             $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //4 = EN PRESTAMO
+            $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //4 = EN PRESTAMO
         }
-       
+
+
+        return "Codigo ejemplar a prestar: " . $codigoEjemplar . " fecha fin de prestamo: " . $fechafin;
+    }
+
+    public function prestamoDeReservaNuevo($ci, $codigoEjemplar, $codigo_conservacion, $prestamoSala) {
+        $fecha = date("d-m-Y");
+        $fechafin = date("d-m-Y", strtotime($fecha . ' + 5 days'));
+
+        $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,
+        fecha_inicio,fecha_fin)     
+        VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si','$fecha','$fechafin') ");
+
+        $this->agregarEstadoConservacion($codigoEjemplar, $codigo_conservacion);
+        $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //4 = EN PRESTAMO
 
         return "Codigo ejemplar a prestar: " . $codigoEjemplar . " fecha fin de prestamo: " . $fechafin;
     }
@@ -791,6 +816,23 @@ ORDER BY mantiene.fecha_inicio ASC");
         } else {
             return "CODIGO DE EJEMPLAR NO ENCONTRADO";
         }
+    }
+
+    public function obtTodosEjemSegunCodMatYEst($codigo_material, $cod_estado) {
+
+        $stmt = $this->consultar("select codigo_ejem from ejemplar_material where codigo_material=$codigo_material
+                                  and cod_est=$cod_estado");
+
+        $respuesta = array();
+        $i = 0;
+        foreach ($stmt as $fila) {
+            $dato = array();
+            $dato['codigo_ejem'] = $fila[0];
+            $respuesta[$i] = $dato;
+
+            $i++;
+        }
+        return $respuesta;
     }
 
     public function agregarEstadoConservacion($ejemplar, $codEstadoConservacion) {
@@ -827,6 +869,13 @@ ORDER BY mantiene.fecha_inicio ASC");
             return $row[0];
         }
         return $row[0];
+    }
+
+    public function bajaReserva($nro_reserva) {
+        $fecha = date("Y-m-d H:i");
+        $this->consultar("UPDATE reserva SET fecha_borrado=$fecha WHERE nro_reserva=$nro_reserva");
+
+        return "Baja reserva Correcto";
     }
 
 }
