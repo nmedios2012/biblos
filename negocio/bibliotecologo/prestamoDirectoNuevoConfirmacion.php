@@ -23,7 +23,7 @@ echo "    PRESTAMO:";
 echo $conPrestamo;
 echo "   SANCION:";
 echo $conSanciones;
-
+echo $_POST["prestamoSala"];
 //
 if ($conSanciones >= 1) {
     $resultado="Usuario Sancionado prestamos deshabilitados";
@@ -31,7 +31,7 @@ if ($conSanciones >= 1) {
     $resultado="Usuario con mas de 3 prestamos o reservas";
     } else {
 //si no esta sancionado habilitado a llevarse el libro
-    $resultado = $admin->prestamoDirectoNuevo($_POST["cedula"], $_POST["ejemplarCodigo"] ,$_POST["selectcodConservacion"]);
+    $resultado = $admin->prestamoDirectoNuevo($_POST["cedula"], $_POST["ejemplarCodigo"] ,$_POST["selectcodConservacion"],$_POST["prestamoSala"]);
 //header("Location: ../../presentacion/paginas/bibliotecologo/index.php?pag=prestamoDirectoNuevoConfirmacion&resultado=$resultado");
     }
 

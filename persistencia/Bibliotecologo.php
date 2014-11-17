@@ -756,10 +756,13 @@ ORDER BY mantiene.fecha_inicio ASC");
         return $respuesta;
     }
 
-    public function prestamoDirectoNuevo($ci, $codigo_material, $codigo_conservacion) {
+    public function prestamoDirectoNuevo($ci, $codigo_material, $codigo_conservacion, $prestamoSala) {
         $fecha = date("d-m-Y");
-        $fechafin = date("d-m-Y", strtotime($fecha . ' + 5 days'));
-
+        if ($prestamoSala) {
+            $fechafin = date("d-m-Y");
+        } else {
+            $fechafin = date("d-m-Y", strtotime($fecha . ' + 5 days'));
+        }
         $codigoEjemplar = $this->obtPriEjemSegunCodMatYEst($codigo_material, 1); //1 = disponible
 
         $this->consultar("  INSERT INTO prestamos(ci,codigo_conservacion,codigo_ejem,estado_logico,
@@ -767,9 +770,14 @@ ORDER BY mantiene.fecha_inicio ASC");
         VALUES($ci,$codigo_conservacion,$codigoEjemplar,'si','$fecha','$fechafin') ");
 
         $this->agregarEstadoConservacion($codigoEjemplar, $codigo_conservacion);
-        $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //2 = EN PRESTAMO
+         if ($prestamoSala) {
+              $this->cambiarEstadoEjemplar($codigoEjemplar, 2);//2 = EN SALA 
+        } else {
+             $this->cambiarEstadoEjemplar($codigoEjemplar, 4); //4 = EN PRESTAMO
+        }
+       
 
-        return "CodigoEJEMPLAR return " . $codigoEjemplar . "     " . $fechafin;
+        return "Codigo ejemplar a prestar: " . $codigoEjemplar . " fecha fin de prestamo: " . $fechafin;
     }
 
     public function obtPriEjemSegunCodMatYEst($codigo_material, $cod_estado) {
@@ -792,7 +800,7 @@ ORDER BY mantiene.fecha_inicio ASC");
     }
 
     public function reservasActivas($ciSocio) {
-       
+
         $stmt = $this->consultar("select count(ci) from reserva where ci=$ciSocio and fecha_fin >=today");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
@@ -802,7 +810,7 @@ ORDER BY mantiene.fecha_inicio ASC");
     }
 
     public function prestamosActivos($ciSocio) {
-      
+
         $stmt = $this->consultar("select count(ci) from prestamos where ci=$ciSocio and fecha_devolucion is null");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
@@ -810,9 +818,9 @@ ORDER BY mantiene.fecha_inicio ASC");
         }
         return $row[0];
     }
-    
-    public function sancionesActivas($ciSocio){
-    
+
+    public function sancionesActivas($ciSocio) {
+
         $stmt = $this->consultar("select count(ci) from sufre where ci=$ciSocio and fecha_fin >=today");
         $row = $stmt->fetch(PDO::FETCH_NUM);
         if ($row != NULL) {
@@ -820,7 +828,7 @@ ORDER BY mantiene.fecha_inicio ASC");
         }
         return $row[0];
     }
- 
+
 }
 
 ?>

@@ -21,6 +21,13 @@
         var x = document.getElementById("selectcodConservacion").selectedIndex;
         var y = document.getElementById("selectcodConservacion").options;
 //        alert("Index: " + y[x].value);
+        
+        if (document.getElementById('chkprestamoSala').checked) {
+            prestamoSala.value = "true";
+        } else {
+//            prestamoSala.value = false;
+        }
+
         if (y[x].value == 1) {
             if (confirm('Enviar solicitud con codigo de estado Nuevo?')) {
                 // Manda solicitud
@@ -230,6 +237,9 @@
 
                                     echo "</select></br>";
                                     ?>
+                                    Tipo de prestamo:
+                                    <input type="checkbox" id="chkprestamoSala" name="chkprestamoSala" value="true"> Prestamo en sala?<br>
+                                    <input type="hidden" id="prestamoSala" name="prestamoSala">
                                     <input type='button' value='Enviar Solicitud' onclick='enviarForm()'/>
                                                                         <!--<input type="button" value="Prestar" />-->
                                     <input type="button" onclick="reiniciar();" value="Limpiar"/>
